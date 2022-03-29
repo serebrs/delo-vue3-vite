@@ -10,9 +10,3 @@
   </div>
   <div class="bg-gray-600 mt-8 w-8 h-[0.1rem] mx-auto"></div>
 </template>
-
-<script>
-export default {
-
-}
-</script>

@@ -1,3 +1,14 @@
+<script>
+import { XIcon } from "@heroicons/vue/solid"
+
+export default {
+  emits: [
+    'modalClose'
+  ],
+  components: { XIcon }
+}
+</script>
+
 <template>
   <transition name="fade">
     <div
@@ -19,23 +30,14 @@
           <p>Контент</p>
           <p>Контент</p>
           <p>Контент</p>
-          <button class="p-2 w-32 text-gray-700 bg-gray-100 hover:bg-gray-200 shadow-sm rounded-md mt-4">Да</button>
+          <button
+            class="p-2 w-32 text-gray-700 bg-gray-100 hover:bg-gray-200 shadow-sm rounded-md mt-4"
+          >Да</button>
         </div>
       </div>
     </div>
   </transition>
 </template>
-
-<script>
-import { XIcon } from "@heroicons/vue/solid"
-
-export default {
-  emits: [
-    'modalClose'
-  ],
-  components: { XIcon }
-}
-</script>
 
 <style scoped>
 .fade-enter-active,

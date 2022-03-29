@@ -1,3 +1,40 @@
+<script>
+import { InboxInIcon, ExternalLinkIcon, DocumentTextIcon, DocumentDuplicateIcon, DocumentIcon, PencilIcon, SwitchVerticalIcon, TrashIcon } from "@heroicons/vue/solid";
+import HintBox from "@/components/utils/HintBox.vue";
+
+export default {
+  props: {
+    item: Object
+  },
+  data() {
+    return {
+
+    }
+  },
+  computed: {
+    itemMeta() {
+      switch (this.item.type) {
+        case "in":
+          return { hintText: "Входящий", icon: "InboxInIcon" };
+        case "out":
+          return { hintText: "Исходящий", icon: "ExternalLinkIcon" };
+        case "norm":
+          return { hintText: "Нормативный", icon: "DocumentTextIcon" };
+        case "konkurs":
+          return { hintText: "Конкурсная", icon: "DocumentDuplicateIcon" };
+        case "dogovor":
+          return { hintText: "Договор", icon: "DocumentDuplicateIcon" };
+        default:
+          return { hintText: "Иной", icon: "DocumentIcon" };
+      }
+    }
+  },
+  components: {
+    InboxInIcon, ExternalLinkIcon, DocumentTextIcon, DocumentDuplicateIcon, DocumentIcon, PencilIcon, SwitchVerticalIcon, TrashIcon, HintBox
+  }
+}
+</script>
+
 <template>
   <tr
     class="odd:bg-white even:bg-slate-50 hover:bg-sky-50 hover:ring-1 hover:ring-inset hover:ring-sky-100"
@@ -30,48 +67,3 @@
     </td>
   </tr>
 </template>
-
-<script>
-import { InboxInIcon, ExternalLinkIcon, DocumentTextIcon, DocumentDuplicateIcon, DocumentIcon, PencilIcon, SwitchVerticalIcon, TrashIcon } from "@heroicons/vue/solid";
-import HintBox from "@/components/utils/HintBox.vue";
-
-export default {
-  props: {
-    item: Object
-  },
-  data() {
-    return {
-      
-    }
-  },
-  computed: {
-    itemMeta() {
-      switch (this.item.type) {
-        case "in":
-          return { hintText: "Входящий", icon: "InboxInIcon" };
-        case "out":
-          return { hintText: "Исходящий", icon: "ExternalLinkIcon" };
-        case "norm":
-          return { hintText: "Нормативный", icon: "DocumentTextIcon" };
-        case "konkurs":
-          return { hintText: "Конкурсная", icon: "DocumentDuplicateIcon" };
-        case "dogovor":
-          return { hintText: "Договор", icon: "DocumentDuplicateIcon" };
-        default:
-          return { hintText: "Иной", icon: "DocumentIcon" };
-      }
-    }
-  },
-  components: {
-    InboxInIcon,
-    ExternalLinkIcon,
-    DocumentTextIcon,
-    DocumentDuplicateIcon,
-    DocumentIcon,
-    PencilIcon,
-    SwitchVerticalIcon,
-    TrashIcon,
-    HintBox
-  }
-}
-</script>

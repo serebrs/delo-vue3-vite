@@ -1,3 +1,24 @@
+<script>
+import { MenuIcon, PlusIcon, ChevronDownIcon } from "@heroicons/vue/solid";
+import DropdownMenu from "./utils/DropdownMenu.vue";
+
+export default {
+  emits: [
+    "navMenuOpen",
+    "modalOpen"
+  ],
+  props: {
+    title: String
+  },
+  components: {
+    MenuIcon,
+    PlusIcon,
+    ChevronDownIcon,
+    DropdownMenu
+  }
+}
+</script>
+
 <template>
   <header class="w-full mt-1 mb-4 h-16 z-40 flex items-center justify-between px-6">
     <div class="flex mr-6">
@@ -39,25 +60,3 @@
     </div>
   </header>
 </template>
-
-<script>
-
-import { MenuIcon, PlusIcon, ChevronDownIcon } from "@heroicons/vue/solid";
-import DropdownMenu from "./utils/DropdownMenu.vue";
-
-export default {
-  emits: [
-    "navMenuOpen",
-    "modalOpen"
-  ],
-  props: {
-    title: String
-  },
-  components: {
-    MenuIcon,
-    PlusIcon,
-    ChevronDownIcon,
-    DropdownMenu
-  }
-}
-</script>

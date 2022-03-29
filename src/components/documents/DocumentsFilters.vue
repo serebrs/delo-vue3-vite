@@ -1,3 +1,33 @@
+<script>
+export default {
+  emits: ["filtersUpdate"],
+  data() {
+    return {
+      filters: {
+        type: "all",
+        dateFrom: (new Date()).toLocaleDateString('ru-RU').split('.').reverse().join('-'),
+        dateTo: (new Date()).toLocaleDateString('ru-RU').split('.').reverse().join('-'),
+        title: "",
+        person: "all",
+      }
+    }
+  },
+  methods: {
+    send() {
+      this.$emit("filtersUpdate", this.filters);
+    }
+  },
+  watch: {
+    filters: {
+      handler() {
+        this.$emit("filtersUpdate", this.filters);
+      },
+      deep: true
+    }
+  }
+}
+</script>
+
 <template>
   <div
     class="w-[54rem] flex flex-row justify-start items-center space-x-4 px-4 pt-2 pb-4 mb-6 overflow-hidden shadow-sm shadow-slate-300 bg-slate-200 rounded-lg"
@@ -68,33 +98,3 @@
     </label>
   </div>
 </template>
-
-<script>
-export default {
-  emits: ["filtersUpdate"],
-  data() {
-    return {
-      filters: {
-        type: "all",
-        dateFrom: (new Date()).toLocaleDateString('ru-RU').split('.').reverse().join('-'),
-        dateTo: (new Date()).toLocaleDateString('ru-RU').split('.').reverse().join('-'),
-        title: "",
-        person: "all",
-      }
-    }
-  },
-  methods: {
-    send() {
-      this.$emit("filtersUpdate", this.filters);
-    }
-  },
-  watch: {
-    filters: {
-      handler() {
-        this.$emit("filtersUpdate", this.filters);
-      },
-      deep: true
-    }
-  }
-}
-</script>

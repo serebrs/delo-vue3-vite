@@ -1,3 +1,33 @@
+<script>
+import NavigationMenu from "@/components/NavigationMenu.vue";
+import HeaderBar from "@/components/HeaderBar.vue";
+import LogoImage from "@/components/LogoImage.vue";
+import { XIcon } from "@heroicons/vue/solid"; // TODO сделать импорт всех иконок глобально: Solid и Outline
+import ModalBox from "@/components/utils/ModalBox.vue";
+
+export default {
+  data() {
+    return {
+      navLinks: [
+        { id: "1", title: "Документы", url: "/documents", icon: { type: "solid", name: "DocumentTextIcon" } },
+        { id: "2", title: "Задачи", url: "/tasks", icon: { type: "solid", name: "ClipboardCheckIcon" } },
+        { id: "3", title: "Статистика", url: "/stats", icon: { type: "solid", name: "ChartSquareBarIcon" } },
+      ],
+      isNavigationActive: false,
+      isModalActive: false
+    }
+  },
+  computed: {
+    title() {
+      return this.$route.meta.title || "";
+    }
+  },
+  components: {
+    NavigationMenu, HeaderBar, LogoImage, XIcon, ModalBox
+  }
+}
+</script>
+
 <template>
   <div
     class="bg-gray-100 dark:bg-gray-800 h-screen overflow-y-hidden overflow-x-auto relative flex items-start justify-start flex-nowrap"
@@ -34,42 +64,12 @@
         @navMenuOpen="isNavigationActive = true"
         @modalOpen="isModalActive = true"
       />
-      <router-view />
+      <RouterView />
     </div>
   </div>
 
   <ModalBox v-if="isModalActive" @modalClose="isModalActive = false" />
 </template>
-
-<script>
-import NavigationMenu from "@/components/NavigationMenu.vue";
-import HeaderBar from "@/components/HeaderBar.vue";
-import LogoImage from "@/components/LogoImage.vue";
-import { XIcon } from "@heroicons/vue/solid"; // TODO сделать импорт всех иконок глобально: Solid и Outline
-import ModalBox from "@/components/utils/ModalBox.vue";
-
-export default {
-  data() {
-    return {
-      navLinks: [
-        { id: "1", title: "Документы", url: "/documents", icon: { type: "solid", name: "DocumentTextIcon" } },
-        { id: "2", title: "Задачи", url: "/tasks", icon: { type: "solid", name: "ClipboardCheckIcon" } },
-        { id: "3", title: "Статистика", url: "/stats", icon: { type: "solid", name: "ChartSquareBarIcon" } },
-      ],
-      isNavigationActive: false,
-      isModalActive: false
-    }
-  },
-  computed: {
-    title() {
-      return this.$route.meta.title || "";
-    }
-  },
-  components: {
-    NavigationMenu, HeaderBar, LogoImage, XIcon, ModalBox
-  }
-}
-</script>
 
 <style>
 .navigation-enter-active,

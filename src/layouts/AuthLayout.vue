@@ -12,13 +12,7 @@
           </span>
         </div>
       </div>
-      <router-view />
+      <RouterView />
     </div>
   </div>
 </template>
-
-<script>
-export default {
-  
-}
-</script>

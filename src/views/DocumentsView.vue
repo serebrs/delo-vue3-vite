@@ -1,11 +1,3 @@
-<template>
-  <main class="overflow-auto h-screen pb-24 px-6">
-    <DocumentsFilters @filtersUpdate="updateDocumentsList" />
-    <div>{{ filtersContent }}</div>
-    <DocumentsList />
-  </main>
-</template>
-
 <script>
 import DocumentsList from "@/components/documents/DocumentsList.vue";
 import DocumentsFilters from "@/components/documents/DocumentsFilters.vue";
@@ -24,3 +16,11 @@ export default {
   components: { DocumentsList, DocumentsFilters }
 }
 </script>
+
+<template>
+  <main class="overflow-auto h-screen pb-24 px-6">
+    <DocumentsFilters @filtersUpdate="updateDocumentsList" />
+    <div>{{ filtersContent }}</div>
+    <DocumentsList />
+  </main>
+</template>

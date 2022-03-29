@@ -1,5 +1,21 @@
+<script>
+import { UserIcon } from "@heroicons/vue/solid";
+import { LogoutIcon } from "@heroicons/vue/outline";
+
+export default {
+  data() {
+    return {
+      isActive: false
+    }
+  },
+  components: {
+    UserIcon, LogoutIcon
+  }
+}
+</script>
+
 <template>
-  <div class="relative py-1" @click="isActive=true" @mouseleave="isActive=false">
+  <div class="relative py-1" @click="isActive = true" @mouseleave="isActive = false">
     <slot />
     <transition name="drop">
       <div
@@ -38,22 +54,6 @@
     </transition>
   </div>
 </template>
-
-<script>
-import { UserIcon } from "@heroicons/vue/solid";
-import { LogoutIcon } from "@heroicons/vue/outline";
-
-export default {
-  data() {
-    return {
-      isActive: false
-    }
-  },
-  components: {
-    UserIcon, LogoutIcon
-  }
-}
-</script>
 
 <style scoped>
 .drop-enter-active,

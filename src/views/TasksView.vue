@@ -1,3 +1,9 @@
+<script>
+export default {
+
+}
+</script>
+
 <template>
   <main class="overflow-auto h-screen pb-24 px-6">
     <!-- Блок с таблицей документов //min-w-[54rem]// -->
@@ -185,9 +191,3 @@
     </div>
   </main>
 </template>
-
-<script>
-export default {
-
-}
-</script>
