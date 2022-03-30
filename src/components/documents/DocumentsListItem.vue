@@ -78,17 +78,14 @@ export default {
         >
           <TrashIcon class="h-5 w-5" />
         </button>
-        
-        <!-- <transition name="fade"> -->
-          <DialogBox
-            v-if="isDeleteDialogActive"
-            @dialogClosed="isDeleteDialogActive = false"
-            @dialogAnswered="deleteDocument"
-            title="Запрос на удаление"
-            question="Вы действительно хотите удалить элемент?"
-          />
-        <!-- </transition> -->
-        
+
+        <DialogBox
+          v-if="isDeleteDialogActive"
+          @dialogClosed="isDeleteDialogActive = false"
+          @dialogAnswered="deleteDocument"
+          title="Запрос на удаление"
+          question="Вы действительно хотите удалить элемент?"
+        />
 
         <!-- <DialogBoxButton
           title="Запрос на удаление"
@@ -102,15 +99,3 @@ export default {
     </td>
   </tr>
 </template>
-
-<style>
-.fade-enter-active,
-.fade-leave-active {
-  transition: opacity 0.3s ease;
-}
-
-.fade-enter-from,
-.fade-leave-to {
-  opacity: 0;
-}
-</style>
