@@ -5,7 +5,7 @@ import DocumentsFilters from "@/components/documents/DocumentsFilters.vue";
 export default {
   data() {
     return {
-      filtersContent: "before"
+      filtersContent: ''
     }
   },
   methods: {

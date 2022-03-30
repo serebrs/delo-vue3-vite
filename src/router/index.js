@@ -3,9 +3,14 @@ import { createRouter, createWebHistory } from 'vue-router'
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
-      // route level code-splitting
-      // this generates a separate chunk (About.[hash].js) for this route
-      // which is lazy-loaded when the route is visited.
+    // route level code-splitting
+    // this generates a separate chunk (About.[hash].js) for this route
+    // which is lazy-loaded when the route is visited.
+    {
+      path: "/",
+      name: "home",
+      redirect: "/documents",
+    },
     {
       path: "/login",
       name: "login",
@@ -13,7 +18,7 @@ const router = createRouter({
       component: () => import("../views/LoginView.vue"),
     },
     {
-      path: "/",
+      path: "/documents",
       name: "documents",
       meta: { layout: "Main", title: "Документы" },
       component: () => import("../views/DocumentsView.vue"),

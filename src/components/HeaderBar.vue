@@ -11,10 +11,7 @@ export default {
     title: String
   },
   components: {
-    MenuIcon,
-    PlusIcon,
-    ChevronDownIcon,
-    DropdownMenu
+    MenuIcon, PlusIcon, ChevronDownIcon, DropdownMenu
   }
 }
 </script>

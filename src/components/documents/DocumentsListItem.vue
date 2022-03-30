@@ -1,6 +1,7 @@
 <script>
 import { InboxInIcon, ExternalLinkIcon, DocumentTextIcon, DocumentDuplicateIcon, DocumentIcon, PencilIcon, SwitchVerticalIcon, TrashIcon } from "@heroicons/vue/solid";
 import HintBox from "@/components/utils/HintBox.vue";
+import DialogBoxButton from "@/components/utils/DialogBoxButton.vue";
 
 export default {
   props: {
@@ -8,7 +9,7 @@ export default {
   },
   data() {
     return {
-
+      answer: ''
     }
   },
   computed: {
@@ -30,7 +31,7 @@ export default {
     }
   },
   components: {
-    InboxInIcon, ExternalLinkIcon, DocumentTextIcon, DocumentDuplicateIcon, DocumentIcon, PencilIcon, SwitchVerticalIcon, TrashIcon, HintBox
+    InboxInIcon, ExternalLinkIcon, DocumentTextIcon, DocumentDuplicateIcon, DocumentIcon, PencilIcon, SwitchVerticalIcon, TrashIcon, HintBox, DialogBoxButton
   }
 }
 </script>
@@ -60,9 +61,14 @@ export default {
         <a href="#" class="p-1 hover:text-amber-600 hover:bg-sky-200 rounded-md">
           <PencilIcon class="h-5 w-5" />
         </a>
-        <a href="#" class="p-1 hover:text-red-600 hover:bg-sky-200 rounded-md">
-          <TrashIcon class="h-5 w-5" />
-        </a>
+
+        <DialogBoxButton
+          question="Хотите удалить элемент?"
+          @getAnswer="answer = 'X'"
+          class="p-1 hover:text-red-600 hover:bg-sky-200 rounded-md"
+        >
+          <TrashIcon class="h-5 w-5" /> {{ answer }}
+        </DialogBoxButton>
       </div>
     </td>
   </tr>

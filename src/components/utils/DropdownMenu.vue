@@ -25,9 +25,8 @@ export default {
         aria-labelledby="options-menu"
         v-show="isActive"
       >
-        <RouterLink to="/login">
-        <a
-          href="#"
+        <RouterLink
+          to="/login"
           class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900"
           role="menuitem"
         >
@@ -37,12 +36,10 @@ export default {
             </div>
             <div class="grow">Профиль</div>
           </div>
-        </a>
         </RouterLink>
 
-        <RouterLink to="/logout">
-          <a
-          href="#"
+        <RouterLink
+          to="/logout"
           class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900"
           role="menuitem"
         >
@@ -52,7 +49,6 @@ export default {
             </div>
             <div class="grow">Выйти</div>
           </div>
-        </a>
         </RouterLink>
       </div>
     </transition>
