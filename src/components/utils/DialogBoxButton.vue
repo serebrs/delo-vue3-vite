@@ -3,9 +3,10 @@ import { XIcon } from "@heroicons/vue/solid"
 
 export default {
   emits: [
-    "getModalAnswer"
+    "getDialogAnswer"
   ],
   props: {
+    title: String,
     question: String
   },
   data() {
@@ -30,25 +31,27 @@ export default {
         @click.self="isDialogBoxActive = false"
         class="absolute z-40 inset-y-0 inset-x-0 flex justify-center items-center space-x-0 space-y-0 h-screen bg-slate-700 bg-opacity-50 overflow-hidden backdrop-blur-sm"
       >
-        <div
-          class="flex flex-col justify-center items-center w-96 rounded-md shadow-md bg-white border border-gray-100"
-        >
+        <div class="relative w-96 p-6 rounded-md shadow-md bg-white border border-gray-100">
           <button
             @click="isDialogBoxActive = false"
-            class="p-1 m-1 text-gray-600 bg-gray-100 hover:bg-gray-200 rounded-md justify-self-start self-end"
+            class="absolute right-0 top-0 p-1 m-1 text-gray-600 bg-gray-100 hover:bg-gray-200 rounded-md justify-self-start self-end"
           >
             <XIcon class="h-5 w-5" />
           </button>
-          <div class="p-5">
-            <p class="p-3">{{ question }}</p>
-            <button
-              @click="isDialogBoxActive = false; $emit('getModalAnswer')"
-              class="p-2 m-2 w-32 text-gray-700 bg-gray-100 hover:bg-gray-200 shadow-sm rounded-md mt-4"
-            >Да</button>
-            <button
-              @click="isDialogBoxActive = false"
-              class="p-2 m-2 w-32 text-gray-700 bg-gray-100 hover:bg-gray-200 shadow-sm rounded-md mt-4"
-            >Отмена</button>
+
+          <div class="flex flex-col justify-start items-start space-y-5">
+            <h1 class="text-2xl text-slate-800 font-semibold">{{ title }}</h1>
+            <div>{{ question }}</div>
+            <div class="self-center">
+              <button
+                @click="isDialogBoxActive = false; $emit('getDialogAnswer')"
+                class="p-2 mr-5 mt-5 w-32 text-gray-700 bg-gray-100 hover:bg-gray-200 shadow-sm rounded-md"
+              >Да</button>
+              <button
+                @click="isDialogBoxActive = false"
+                class="p-2 mt-5 w-32 text-gray-700 bg-gray-100 hover:bg-gray-200 shadow-sm rounded-md"
+              >Отмена</button>
+            </div>
           </div>
         </div>
       </div>

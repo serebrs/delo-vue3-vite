@@ -37,9 +37,9 @@ export default {
 
     <div class="mx-4 h-16 flex items-center justify-end space-x-4">
       <ModalBoxButton
-        title="Заголовок формы"
+        title="Создать"
         content="Содержимое формы"
-        @getAnswer="modalAnswer = 'X'"
+        @getModalAnswer="modalAnswer = 'X'"
         class="flex p-2 items-center rounded-full text-gray-400 hover:text-green-700 bg-white shadow text-md active:translate-y-[1px]"
       >
         <PlusIcon class="w-5 h-5" />
