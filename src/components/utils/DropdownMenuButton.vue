@@ -5,9 +5,10 @@ import { LogoutIcon } from "@heroicons/vue/outline";
 export default {
   data() {
     return {
-      isActive: false
+      isDropdownMenuActive: false
     }
   },
+  inheritAttrs: false,
   components: {
     UserIcon, LogoutIcon
   }
@@ -15,15 +16,17 @@ export default {
 </script>
 
 <template>
-  <div class="relative py-1" @click="isActive = true" @mouseleave="isActive = false">
-    <slot />
+  <div class="relative py-1" @mouseleave="isDropdownMenuActive = false">
+    <button @click="isDropdownMenuActive = true" v-bind="$attrs">
+      <slot />
+    </button>
     <transition name="drop">
       <div
         class="absolute z-50 origin-top-right right-0 py-1 mt-1 w-32 rounded-md shadow-md bg-white ring-1 ring-black ring-opacity-5"
         role="menu"
         aria-orientation="vertical"
         aria-labelledby="options-menu"
-        v-show="isActive"
+        v-show="isDropdownMenuActive"
       >
         <RouterLink
           to="/login"

@@ -1,6 +1,6 @@
 <script>
 import { MenuIcon, PlusIcon, ChevronDownIcon } from "@heroicons/vue/solid";
-import DropdownMenu from "./utils/DropdownMenu.vue";
+import DropdownMenuButton from "./utils/DropdownMenuButton.vue";
 import ModalBoxButton from "./utils/ModalBoxButton.vue";
 
 export default {
@@ -16,7 +16,7 @@ export default {
     }
   },
   components: {
-    MenuIcon, PlusIcon, ChevronDownIcon, DropdownMenu, ModalBoxButton
+    MenuIcon, PlusIcon, ChevronDownIcon, DropdownMenuButton, ModalBoxButton
   }
 }
 </script>
@@ -54,14 +54,12 @@ export default {
         class="object-cover rounded-full h-9 w-9"
       />
 
-      <DropdownMenu>
-        <button
-          class="text-gray-500 hover:text-black text-sm px-5 py-2 rounded-full bg-white shadow active:translate-y-[1px]"
-        >
-          Админ
-          <ChevronDownIcon class="w-5 h-5 inline-block" />
-        </button>
-      </DropdownMenu>
+      <DropdownMenuButton
+        class="text-gray-500 hover:text-black text-sm px-5 py-2 rounded-full bg-white shadow active:translate-y-[1px]"
+      >
+        Админ
+        <ChevronDownIcon class="w-5 h-5 inline-block" />
+      </DropdownMenuButton>
     </div>
   </header>
 </template>
