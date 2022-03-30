@@ -14,9 +14,20 @@ export default {
       if (e.code === 'Escape') { this.$emit('dialogClosed') }
     }
   },
+  data() {
+    return {
+      isVisible: false
+    }
+  },
   mounted() {
     console.log('in component');
+    this.isVisible = true;
     window.addEventListener('keyup', this.keyup)
+  },
+  beforeUnmount() {
+    console.log('before destroy');
+    this.isVisible = false;
+    // (new Promise(resolve => setTimeout(resolve, 1000)))
   },
   unmounted() {
     console.log('destroy component');
@@ -30,6 +41,7 @@ export default {
   <teleport to="body">
     <transition name="fade">
       <div
+        v-show="isVisible"
         @click.self="$emit('dialogClosed')"
         class="absolute z-40 inset-y-0 inset-x-0 flex justify-center items-center space-x-0 space-y-0 h-screen bg-slate-700 bg-opacity-50 overflow-hidden backdrop-blur-sm"
       >
