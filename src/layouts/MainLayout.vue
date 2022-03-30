@@ -3,7 +3,6 @@ import NavigationMenu from "@/components/NavigationMenu.vue";
 import HeaderBar from "@/components/HeaderBar.vue";
 import LogoImage from "@/components/LogoImage.vue";
 import { XIcon } from "@heroicons/vue/solid"; // TODO сделать импорт всех иконок глобально: Solid и Outline
-import ModalBox from "@/components/utils/ModalBox.vue";
 
 export default {
   data() {
@@ -13,8 +12,7 @@ export default {
         { id: "2", title: "Задачи", url: "/tasks", icon: { type: "solid", name: "ClipboardCheckIcon" } },
         { id: "3", title: "Статистика", url: "/stats", icon: { type: "solid", name: "ChartSquareBarIcon" } },
       ],
-      isNavigationActive: false,
-      isModalActive: false
+      isNavigationActive: false
     }
   },
   computed: {
@@ -23,7 +21,7 @@ export default {
     }
   },
   components: {
-    NavigationMenu, HeaderBar, LogoImage, XIcon, ModalBox
+    NavigationMenu, HeaderBar, LogoImage, XIcon
   }
 }
 </script>
@@ -62,13 +60,10 @@ export default {
       <HeaderBar
         :title="title"
         @navMenuOpen="isNavigationActive = true"
-        @modalOpen="isModalActive = true"
       />
       <RouterView />
     </div>
   </div>
-
-  <ModalBox v-if="isModalActive" @modalClose="isModalActive = false" />
 </template>
 
 <style>

@@ -1,17 +1,22 @@
 <script>
 import { MenuIcon, PlusIcon, ChevronDownIcon } from "@heroicons/vue/solid";
 import DropdownMenu from "./utils/DropdownMenu.vue";
+import ModalBoxButton from "./utils/ModalBoxButton.vue";
 
 export default {
   emits: [
-    "navMenuOpen",
-    "modalOpen"
+    "navMenuOpen"
   ],
   props: {
     title: String
   },
+  data() {
+    return {
+      modalAnswer: ''
+    }
+  },
   components: {
-    MenuIcon, PlusIcon, ChevronDownIcon, DropdownMenu
+    MenuIcon, PlusIcon, ChevronDownIcon, DropdownMenu, ModalBoxButton
   }
 }
 </script>
@@ -31,12 +36,15 @@ export default {
     </div>
 
     <div class="mx-4 h-16 flex items-center justify-end space-x-4">
-      <button
-        @click="$emit('modalOpen')"
+      <ModalBoxButton
+        title="Заголовок формы"
+        content="Содержимое формы"
+        @getAnswer="modalAnswer = 'X'"
         class="flex p-2 items-center rounded-full text-gray-400 hover:text-green-700 bg-white shadow text-md active:translate-y-[1px]"
       >
         <PlusIcon class="w-5 h-5" />
-      </button>
+        {{ modalAnswer }}
+      </ModalBoxButton>
 
       <span class="w-1 h-8 rounded-lg bg-gray-200"></span>
 

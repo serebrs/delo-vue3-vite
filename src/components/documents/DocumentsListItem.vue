@@ -9,7 +9,7 @@ export default {
   },
   data() {
     return {
-      answer: ''
+      modalAnswer: ''
     }
   },
   computed: {
@@ -64,10 +64,10 @@ export default {
 
         <DialogBoxButton
           question="Хотите удалить элемент?"
-          @getAnswer="answer = 'X'"
+          @getModalAnswer="modalAnswer = 'X'"
           class="p-1 hover:text-red-600 hover:bg-sky-200 rounded-md"
         >
-          <TrashIcon class="h-5 w-5" /> {{ answer }}
+          <TrashIcon class="h-5 w-5" /> {{ modalAnswer }}
         </DialogBoxButton>
       </div>
     </td>

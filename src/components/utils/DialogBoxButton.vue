@@ -3,7 +3,7 @@ import { XIcon } from "@heroicons/vue/solid"
 
 export default {
   emits: [
-    "getAnswer"
+    "getModalAnswer"
   ],
   props: {
     question: String
@@ -42,7 +42,7 @@ export default {
           <div class="p-5">
             <p class="p-3">{{ question }}</p>
             <button
-              @click="isDialogBoxActive = false; $emit('getAnswer')"
+              @click="isDialogBoxActive = false; $emit('getModalAnswer')"
               class="p-2 m-2 w-32 text-gray-700 bg-gray-100 hover:bg-gray-200 shadow-sm rounded-md mt-4"
             >Да</button>
             <button
