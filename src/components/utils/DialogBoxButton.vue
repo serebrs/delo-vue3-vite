@@ -19,7 +19,7 @@ export default {
       if (e.code === 'Escape') { this.isDialogBoxActive = false }
     }
   },
-  mounted() { //TODO устанавливатся скорее всего куча одинаковых обработчиков, т.к. один и тот же компонент грузится много раз
+  mounted() { //TODO устанавливатся куча одинаковых обработчиков, т.к. один и тот же компонент грузится много раз
     window.addEventListener('keyup', this.keyup)
   },
   destroyed() {
