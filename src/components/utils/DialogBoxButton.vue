@@ -3,7 +3,7 @@ import { XIcon } from "@heroicons/vue/solid"
 
 export default {
   emits: [
-    "getDialogAnswer"
+    "dialogAnswered"
   ],
   props: {
     title: String,
@@ -19,7 +19,7 @@ export default {
       if (e.code === 'Escape') { this.isDialogBoxActive = false }
     }
   },
-  mounted() { //TODO устанавливатся куча одинаковых обработчиков, т.к. один и тот же компонент грузится много раз
+  mounted() { 
     window.addEventListener('keyup', this.keyup)
   },
   destroyed() {
@@ -38,7 +38,7 @@ export default {
   <teleport to="body">
     <transition name="fade">
       <div
-        v-if="isDialogBoxActive"
+        v-show="isDialogBoxActive"
         @click.self="isDialogBoxActive = false"
         class="absolute z-40 inset-y-0 inset-x-0 flex justify-center items-center space-x-0 space-y-0 h-screen bg-slate-700 bg-opacity-50 overflow-hidden backdrop-blur-sm"
       >
@@ -55,7 +55,7 @@ export default {
             <div>{{ question }}</div>
             <div class="self-center">
               <button
-                @click="isDialogBoxActive = false; $emit('getDialogAnswer')"
+                @click="isDialogBoxActive = false; $emit('dialogAnswered')"
                 class="p-2 mr-5 mt-5 w-32 text-gray-700 bg-gray-100 hover:bg-gray-200 shadow-sm rounded-md"
               >Да</button>
               <button

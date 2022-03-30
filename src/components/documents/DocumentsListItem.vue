@@ -1,7 +1,7 @@
 <script>
 import { InboxInIcon, ExternalLinkIcon, DocumentTextIcon, DocumentDuplicateIcon, DocumentIcon, PencilIcon, SwitchVerticalIcon, TrashIcon } from "@heroicons/vue/solid";
 import HintBox from "@/components/utils/HintBox.vue";
-import DialogBoxButton from "@/components/utils/DialogBoxButton.vue";
+//import DialogBoxButton from "@/components/utils/DialogBoxButton.vue";
 
 export default {
   props: {
@@ -9,7 +9,7 @@ export default {
   },
   data() {
     return {
-      dialogAnswer: ''
+      isDeleteDialogActive: false
     }
   },
   computed: {
@@ -33,10 +33,13 @@ export default {
   methods: {
     openDocument() {
       console.log(`Open document ${this.item.id} in popup`)
+    },
+    deleteDocument() {
+      console.log(`Delete document ${this.item.id}`)
     }
   },
   components: {
-    InboxInIcon, ExternalLinkIcon, DocumentTextIcon, DocumentDuplicateIcon, DocumentIcon, PencilIcon, SwitchVerticalIcon, TrashIcon, HintBox, DialogBoxButton
+    InboxInIcon, ExternalLinkIcon, DocumentTextIcon, DocumentDuplicateIcon, DocumentIcon, PencilIcon, SwitchVerticalIcon, TrashIcon, HintBox /*, DialogBoxButton*/
   }
 }
 </script>
@@ -61,22 +64,53 @@ export default {
     </td>
     <td class="px-3 py-2 whitespace-nowrap text-sm text-slate-500">
       <div class="flex flex-row justify-between items-center">
-        <a href="#" class="p-1 hover:text-blue-600 hover:bg-sky-200 rounded-md">
+        <button class="p-1 hover:text-blue-600 hover:bg-sky-200 rounded-md">
           <SwitchVerticalIcon class="h-5 w-5" />
-        </a>
-        <a href="#" class="p-1 hover:text-amber-600 hover:bg-sky-200 rounded-md">
-          <PencilIcon class="h-5 w-5" />
-        </a>
+        </button>
 
-        <DialogBoxButton
-          title="Запрос на удаление"
-          question="Вы действительно хотите удалить элемент?"
-          @getDialogAnswer ="dialogAnswer = 'X'"
+        <button class="p-1 hover:text-amber-600 hover:bg-sky-200 rounded-md">
+          <PencilIcon class="h-5 w-5" />
+        </button>
+
+        <button
+          @click.stop="isDeleteDialogActive = true"
           class="p-1 hover:text-red-600 hover:bg-sky-200 rounded-md"
         >
-          <TrashIcon class="h-5 w-5" /> {{ dialogAnswer }}
-        </DialogBoxButton>
+          <TrashIcon class="h-5 w-5" />
+        </button>
+        
+        <!-- <transition name="fade"> -->
+          <DialogBox
+            v-if="isDeleteDialogActive"
+            @dialogClosed="isDeleteDialogActive = false"
+            @dialogAnswered="deleteDocument"
+            title="Запрос на удаление"
+            question="Вы действительно хотите удалить элемент?"
+          />
+        <!-- </transition> -->
+        
+
+        <!-- <DialogBoxButton
+          title="Запрос на удаление"
+          question="Вы действительно хотите удалить элемент?"
+          @dialogAnswered="deleteDocument"
+          class="p-1 hover:text-red-600 hover:bg-sky-200 rounded-md"
+        >
+          <TrashIcon class="h-5 w-5" />
+        </DialogBoxButton>-->
       </div>
     </td>
   </tr>
 </template>
+
+<style>
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.3s ease;
+}
+
+.fade-enter-from,
+.fade-leave-to {
+  opacity: 0;
+}
+</style>

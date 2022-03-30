@@ -1,5 +1,6 @@
 import { createApp } from 'vue'
 import { createPinia } from 'pinia'
+import { defineAsyncComponent } from 'vue'
 
 import App from './App.vue'
 import router from './router'
@@ -13,5 +14,6 @@ app.use(createPinia())
 app.use(router)
 
 app.component('HintBox', HintBox)
+app.component('DialogBox', defineAsyncComponent(() => import('@/components/utils/DialogBox.vue')))
 
 app.mount('#app')
