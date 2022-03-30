@@ -14,13 +14,24 @@ export default {
       isDialogBoxActive: false
     }
   },
+  methods: {
+    keyup(e) {
+      if (e.code === 'Escape') { this.isDialogBoxActive = false }
+    }
+  },
+  mounted() { //TODO устанавливатся скорее всего куча одинаковых обработчиков, т.к. один и тот же компонент грузится много раз
+    window.addEventListener('keyup', this.keyup)
+  },
+  destroyed() {
+    window.removeEventListener('keyup', this.keyup)
+  },
   inheritAttrs: false,
   components: { XIcon }
 }
 </script>
 
 <template>
-  <button @click="isDialogBoxActive = true" v-bind="$attrs">
+  <button @click.stop="isDialogBoxActive = true" v-bind="$attrs">
     <slot />
   </button>
 
