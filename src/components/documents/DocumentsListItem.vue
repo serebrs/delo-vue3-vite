@@ -78,7 +78,6 @@ export default {
         >
           <TrashIcon class="h-5 w-5" />
         </button>
-
         <DialogBox
           v-if="isDeleteDialogActive"
           @dialogClosed="isDeleteDialogActive = false"
