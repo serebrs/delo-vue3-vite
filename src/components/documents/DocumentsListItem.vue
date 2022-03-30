@@ -81,7 +81,7 @@ export default {
         <DialogBox
           v-if="isDeleteDialogActive"
           @dialogClosed="isDeleteDialogActive = false"
-          @dialogAnswered="deleteDocument"
+          @dialogAnswered="isDeleteDialogActive = false; deleteDocument()"
           title="Запрос на удаление"
           question="Вы действительно хотите удалить элемент?"
         />

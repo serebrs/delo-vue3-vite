@@ -11,7 +11,17 @@ export default {
   },
   methods: {
     keyup(e) {
-      if (e.code === 'Escape') { this.$emit('dialogClosed') }
+      if (e.code === 'Escape') { this.close() }
+    },
+    async close() {
+      this.isVisible = false;
+      await (new Promise(resolve => setTimeout(resolve, 300)));
+      this.$emit('dialogClosed')
+    },
+    async answer() {
+      this.isVisible = false;
+      await (new Promise(resolve => setTimeout(resolve, 300)));
+      this.$emit('dialogAnswered')
     }
   },
   data() {
@@ -23,11 +33,6 @@ export default {
     console.log('in component');
     this.isVisible = true;
     window.addEventListener('keyup', this.keyup)
-  },
-  beforeUnmount() {
-    console.log('before destroy');
-    this.isVisible = false;
-    // (new Promise(resolve => setTimeout(resolve, 1000)))
   },
   unmounted() {
     console.log('destroy component');
@@ -42,12 +47,12 @@ export default {
     <transition name="fade">
       <div
         v-show="isVisible"
-        @click.self="$emit('dialogClosed')"
+        @click.self="close"
         class="absolute z-40 inset-y-0 inset-x-0 flex justify-center items-center space-x-0 space-y-0 h-screen bg-slate-700 bg-opacity-50 overflow-hidden backdrop-blur-sm"
       >
         <div class="relative w-96 p-6 rounded-md shadow-md bg-white border border-gray-100">
           <button
-            @click="$emit('dialogClosed')"
+            @click="close"
             class="absolute right-0 top-0 p-1 m-1 text-gray-600 bg-gray-100 hover:bg-gray-200 rounded-md justify-self-start self-end"
           >
             <XIcon class="h-5 w-5" />
@@ -58,11 +63,11 @@ export default {
             <div>{{ question }}</div>
             <div class="self-center">
               <button
-                @click="$emit('dialogClosed'); $emit('dialogAnswered')"
+                @click="answer"
                 class="p-2 mr-5 mt-5 w-32 text-gray-700 bg-gray-100 hover:bg-gray-200 shadow-sm rounded-md"
               >Да</button>
               <button
-                @click="$emit('dialogClosed')"
+                @click="close"
                 class="p-2 mt-5 w-32 text-gray-700 bg-gray-100 hover:bg-gray-200 shadow-sm rounded-md"
               >Отмена</button>
             </div>
