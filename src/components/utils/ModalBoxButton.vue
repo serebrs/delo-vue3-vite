@@ -9,11 +9,7 @@ export default {
   props: {
     title: String,
     info: String,
-    innerComponentName: {
-      type: String,
-      required: true
-    },
-    innerComponentFamily: {
+    componentPath: {
       type: String,
       required: true
     }
@@ -31,7 +27,7 @@ export default {
   },
   computed: {
     innerComponent() {
-      return defineAsyncComponent(() => import(`../${this.innerComponentFamily}/${this.innerComponentName}.vue`))
+      return defineAsyncComponent(() => import(`../${this.componentPath}.vue`))
     }
   },
   watch: {
