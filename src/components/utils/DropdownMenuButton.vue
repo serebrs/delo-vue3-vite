@@ -22,11 +22,11 @@ export default {
     </button>
     <transition name="drop">
       <div
+        v-show="isDropdownMenuActive"
         class="absolute z-50 origin-top-right right-0 py-1 mt-1 w-32 rounded-md shadow-md bg-white ring-1 ring-black ring-opacity-5"
         role="menu"
         aria-orientation="vertical"
         aria-labelledby="options-menu"
-        v-show="isDropdownMenuActive"
       >
         <RouterLink
           to="/login"

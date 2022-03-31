@@ -12,7 +12,12 @@ export default {
   },
   data() {
     return {
-      modalAnswer: ''
+
+    }
+  },
+  methods: {
+    modalAction(e) {
+      console.log(`returned from modal ${e.input}`);
     }
   },
   components: {
@@ -37,13 +42,12 @@ export default {
 
     <div class="mx-4 h-16 flex items-center justify-end space-x-4">
       <ModalBoxButton
-        title="Создать"
-        content="Содержимое формы"
-        @getModalAnswer="modalAnswer = 'X'"
+        title="Добавить элемент"
+        content="Содержимое формы Содержимое формы "
+        @modalAnswered="modalAction"
         class="flex p-2 items-center rounded-full text-gray-400 hover:text-green-700 bg-white shadow text-md active:translate-y-[1px]"
       >
         <PlusIcon class="w-5 h-5" />
-        {{ modalAnswer }}
       </ModalBoxButton>
 
       <span class="w-1 h-8 rounded-lg bg-gray-200"></span>
