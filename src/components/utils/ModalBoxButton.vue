@@ -46,10 +46,10 @@ export default {
       <div
         v-if="isModalBoxActive"
         @click.self="isModalBoxActive = false"
-        class="absolute z-40 inset-y-0 inset-x-0 flex flex-col justify-start items-center space-x-0 space-y-0 h-screen bg-slate-700 bg-opacity-50 overflow-hidden backdrop-blur-sm"
+        class="absolute overflow-y-scroll z-40 inset-y-0 inset-x-0 flex flex-col justify-start items-center space-x-0 space-y-0 h-screen bg-slate-700 bg-opacity-50 overflow-hidden backdrop-blur-sm"
       >
         <div
-          class="relative w-5/6 p-10 rounded-md translate-y-1/4 shadow-md bg-white border border-gray-100"
+          class="relative w-5/6 p-10 rounded-md my-10 shadow-md bg-white border border-gray-100"
         >
           <button
             @click="isModalBoxActive = false"
