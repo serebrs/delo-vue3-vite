@@ -42,9 +42,9 @@ export default {
 
     <div class="mx-4 h-16 flex items-center justify-end space-x-4">
       <ModalBoxButton
-        title="Добавить элемент"
+        title="Добавить новую запись"
+        info="Дополнительная информация"
         componentPath="documents/DocumentsAddForm"
-        info="Информация о форме добавления элемента"
         @modalAnswered="modalAction"
         class="flex p-2 items-center rounded-full text-gray-400 hover:text-green-700 bg-white shadow text-md active:translate-y-[1px]"
       >
