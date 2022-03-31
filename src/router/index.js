@@ -41,7 +41,8 @@ const router = createRouter({
       meta: { layout: "Main", title: "Статистика" },
       component: () => import("../views/StatsView.vue"),
     }
-  ]
+  ],
+  //strict: true
 })
 
 export default router
