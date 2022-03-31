@@ -1,4 +1,5 @@
 <script>
+import { defineAsyncComponent } from 'vue'
 import { XIcon } from "@heroicons/vue/solid"
 
 export default {
@@ -7,16 +8,30 @@ export default {
   ],
   props: {
     title: String,
-    content: String
+    info: String,
+    innerComponentName: {
+      type: String,
+      required: true
+    },
+    innerComponentFamily: {
+      type: String,
+      required: true
+    }
   },
   data() {
     return {
-      isModalBoxActive: false
+      isModalBoxActive: false,
+      formData: {}
     }
   },
   methods: {
     keydown(e) { // TODO отключить нажатия клавиш под модальным окном
       if (e.code === 'Escape') this.isModalBoxActive = false;
+    }
+  },
+  computed: {
+    innerComponent() {
+      return defineAsyncComponent(() => import(`../${this.innerComponentFamily}/${this.innerComponentName}.vue`))
     }
   },
   watch: {
@@ -32,7 +47,10 @@ export default {
     }
   },
   inheritAttrs: false,
-  components: { XIcon }
+  components: {
+    XIcon,
+    //DocumentsAddForm: defineAsyncComponent(() => import('@/components/documents/DocumentsAddForm.vue')), // можно так, но тогда <component :is="innerComponentName">
+  }
 }
 </script>
 
@@ -46,11 +64,9 @@ export default {
       <div
         v-if="isModalBoxActive"
         @click.self="isModalBoxActive = false"
-        class="absolute overflow-y-scroll z-40 inset-y-0 inset-x-0 flex flex-col justify-start items-center space-x-0 space-y-0 h-screen bg-slate-700 bg-opacity-50 overflow-hidden backdrop-blur-sm"
+        class="absolute overflow-y-auto z-40 inset-y-0 inset-x-0 flex flex-col justify-start items-center space-x-0 space-y-0 h-screen bg-slate-700 bg-opacity-50 overflow-hidden backdrop-blur-sm"
       >
-        <div
-          class="relative w-5/6 p-10 rounded-md my-10 shadow-md bg-white border border-gray-100"
-        >
+        <div class="relative w-5/6 p-10 rounded-md my-10 shadow-md bg-white border border-gray-100">
           <button
             @click="isModalBoxActive = false"
             class="absolute right-0 top-0 p-1 m-1 text-gray-600 bg-gray-100 hover:bg-gray-200 rounded-md"
@@ -60,10 +76,13 @@ export default {
 
           <div class="flex flex-col justify-start items-start space-y-8">
             <h1 class="text-2xl text-slate-800 font-semibold">{{ title }}</h1>
-            <div>{{ content }}</div>
+            <div>{{ info }}</div>
+            <div>
+              <component :is="innerComponent" />
+            </div>
             <div>
               <button
-                @click="isModalBoxActive = false; $emit('modalAnswered', 'объект из модальной формы')"
+                @click="isModalBoxActive = false; $emit('modalAnswered', formData)"
                 class="p-2 mr-5 mt-5 w-32 text-gray-700 bg-gray-100 hover:bg-gray-200 shadow-sm rounded-md"
               >Сохранить</button>
               <button

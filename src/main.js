@@ -15,5 +15,6 @@ app.use(router)
 
 app.component('HintBox', HintBox)
 //app.component('DialogBox', defineAsyncComponent(() => import('@/components/utils/DialogBox.vue')))
+//app.component('DocumentsAddForm', defineAsyncComponent(() => import('@/components/documents/DocumentsAddForm.vue')))
 
 app.mount('#app')
