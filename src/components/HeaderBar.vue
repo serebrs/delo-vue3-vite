@@ -45,7 +45,7 @@ export default {
         title="Добавить новую запись"
         info="Дополнительная информация"
         componentPath="documents/DocumentsAddForm"
-        @modalAnswered="modalAction"
+        @modalResponse="modalAction"
         class="flex p-2 items-center rounded-full text-gray-400 hover:text-green-700 bg-white shadow text-md active:translate-y-[1px]"
       >
         <PlusIcon class="w-5 h-5" />

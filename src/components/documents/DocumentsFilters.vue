@@ -39,9 +39,9 @@ export default {
         v-model="filters.type"
       >
         <option selected value="all">Все</option>
-        <option value="norm">Норм. акт</option>
         <option value="in">Входящий</option>
         <option value="out">Исходящий</option>
+        <option value="norm">Норм. акт</option>
         <option value="dogovor">Договор</option>
         <option value="konkurs">Конкурсная</option>
         <option value="other">Иной</option>
