@@ -10,7 +10,7 @@ export default {
     question: String
   },
   methods: {
-    keyup(e) {
+    keydown(e) { // TODO отключить нажатия клавиш под модальным окном
       if (e.code === 'Escape') { this.close() }
     },
     async close() {
@@ -32,11 +32,11 @@ export default {
   mounted() {
     console.log('in component');
     this.isVisible = true;
-    window.addEventListener('keyup', this.keyup)
+    window.addEventListener('keydown', this.keydown)
   },
   unmounted() {
     console.log('destroy component');
-    window.removeEventListener('keyup', this.keyup)
+    window.removeEventListener('keydown', this.keydown)
   },
   components: { XIcon }
 }

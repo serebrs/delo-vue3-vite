@@ -1,7 +1,7 @@
 <script>
 import { InboxInIcon, ExternalLinkIcon, DocumentTextIcon, DocumentDuplicateIcon, DocumentIcon, PencilIcon, SwitchVerticalIcon, TrashIcon } from "@heroicons/vue/solid";
 import HintBox from "@/components/utils/HintBox.vue";
-//import DialogBoxButton from "@/components/utils/DialogBoxButton.vue";
+import DialogBoxButton from "@/components/utils/DialogBoxButton.vue";
 
 export default {
   props: {
@@ -9,7 +9,7 @@ export default {
   },
   data() {
     return {
-      isDeleteDialogActive: false
+      //isDeleteDialogActive: false
     }
   },
   computed: {
@@ -35,11 +35,11 @@ export default {
       console.log(`Open document ${this.item.id} in popup`)
     },
     deleteDocument() {
-      console.log(`Delete document ${this.item.id}`)
+      console.log(`Delete document ${this.item.id} from popup`)
     }
   },
   components: {
-    InboxInIcon, ExternalLinkIcon, DocumentTextIcon, DocumentDuplicateIcon, DocumentIcon, PencilIcon, SwitchVerticalIcon, TrashIcon, HintBox /*, DialogBoxButton*/
+    InboxInIcon, ExternalLinkIcon, DocumentTextIcon, DocumentDuplicateIcon, DocumentIcon, PencilIcon, SwitchVerticalIcon, TrashIcon, HintBox, DialogBoxButton
   }
 }
 </script>
@@ -72,7 +72,7 @@ export default {
           <PencilIcon class="h-5 w-5" />
         </button>
 
-        <button
+        <!-- <button
           @click.stop="isDeleteDialogActive = true"
           class="p-1 hover:text-red-600 hover:bg-sky-200 rounded-md"
         >
@@ -84,16 +84,16 @@ export default {
           @dialogAnswered="isDeleteDialogActive = false; deleteDocument()"
           title="Запрос на удаление"
           question="Вы действительно хотите удалить элемент?"
-        />
+        /> -->
 
-        <!-- <DialogBoxButton
+        <DialogBoxButton
           title="Запрос на удаление"
           question="Вы действительно хотите удалить элемент?"
           @dialogAnswered="deleteDocument"
           class="p-1 hover:text-red-600 hover:bg-sky-200 rounded-md"
         >
           <TrashIcon class="h-5 w-5" />
-        </DialogBoxButton>-->
+        </DialogBoxButton>
       </div>
     </td>
   </tr>

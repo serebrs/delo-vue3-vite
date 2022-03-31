@@ -15,15 +15,21 @@ export default {
     }
   },
   methods: {
-    keyup(e) {
-      if (e.code === 'Escape') { this.isDialogBoxActive = false }
+    keydown(e) { // TODO отключить нажатия клавиш под модальным окном
+      if (e.code === 'Escape') this.isDialogBoxActive = false;
     }
   },
-  mounted() { 
-    window.addEventListener('keyup', this.keyup)
-  },
-  destroyed() {
-    window.removeEventListener('keyup', this.keyup)
+  watch: {
+    isDialogBoxActive(newVal, oldVal) {
+      if (newVal) {
+        console.log('show');
+        window.addEventListener('keydown', this.keydown)
+      }
+      else {
+        console.log('hide');
+        window.removeEventListener('keydown', this.keydown)
+      }
+    }
   },
   inheritAttrs: false,
   components: { XIcon }
@@ -38,7 +44,7 @@ export default {
   <teleport to="body">
     <transition name="fade">
       <div
-        v-show="isDialogBoxActive"
+        v-if="isDialogBoxActive"
         @click.self="isDialogBoxActive = false"
         class="absolute z-40 inset-y-0 inset-x-0 flex justify-center items-center space-x-0 space-y-0 h-screen bg-slate-700 bg-opacity-50 overflow-hidden backdrop-blur-sm"
       >
