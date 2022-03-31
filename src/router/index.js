@@ -8,30 +8,36 @@ const router = createRouter({
     // which is lazy-loaded when the route is visited.
     {
       path: "/",
-      name: "home",
+      name: "Home",
       redirect: "/documents",
     },
     {
+      path: "/:pathMatch(.*)*",
+      name: "NotFound",
+      meta: { layout: "Empty" },
+      component: () => import("../views/NotFoundView.vue"),
+    },
+    {
       path: "/login",
-      name: "login",
+      name: "Login",
       meta: { layout: "Auth" },
       component: () => import("../views/LoginView.vue"),
     },
     {
       path: "/documents",
-      name: "documents",
+      name: "Documents",
       meta: { layout: "Main", title: "Документы" },
       component: () => import("../views/DocumentsView.vue"),
     },
     {
       path: "/tasks",
-      name: "tasks",
+      name: "Tasks",
       meta: { layout: "Main", title: "Задачи" },
       component: () => import("../views/TasksView.vue"),
     },
     {
       path: "/stats",
-      name: "stats",
+      name: "Stats",
       meta: { layout: "Main", title: "Статистика" },
       component: () => import("../views/StatsView.vue"),
     }
