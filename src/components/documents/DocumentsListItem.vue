@@ -33,6 +33,9 @@ export default {
   methods: {
     openDocument() {
       console.log(`Open document ${this.item.id} in popup`)
+      // 1) ++ открыть через роут SEO!!!  2) -- открыть в динамически подгруженном компоненте модального окна
+      //this.$router.push({ name: 'Docs', params: { id: `${this.item.id}` } })
+      //
     },
     deleteDocument() {
       console.log(`Delete document ${this.item.id} from popup`)

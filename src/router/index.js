@@ -9,7 +9,7 @@ const router = createRouter({
     {
       path: "/",
       name: "Home",
-      redirect: "/documents",
+      redirect: "/docs",
     },
     {
       path: "/:pathMatch(.*)*",
@@ -24,10 +24,14 @@ const router = createRouter({
       component: () => import("../views/LoginView.vue"),
     },
     {
-      path: "/documents",
-      name: "Documents",
+      path: "/docs",
+      name: "Docs",
       meta: { layout: "Main", title: "Документы" },
       component: () => import("../views/DocumentsView.vue"),
+      /*children: {
+        path: "/docs/:id",
+        component: () => import("../views/LoginView.vue"), // отрисовывается внутри второго router-view в компоненте Docs!
+      }*/
     },
     {
       path: "/tasks",

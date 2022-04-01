@@ -19,7 +19,7 @@ export default {
     <RouterLink
       v-for="link in navLinks"
       :key="link.id"
-      :to="link.url"
+      :to="{ name: link.to.name }"
       active-class="nav-menu-active"
     >
       <button

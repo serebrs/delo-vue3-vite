@@ -8,9 +8,9 @@ export default {
   data() {
     return {
       navLinks: [
-        { id: "1", title: "Документы", url: "/documents", icon: { type: "solid", name: "DocumentTextIcon" } },
-        { id: "2", title: "Задачи", url: "/tasks", icon: { type: "solid", name: "ClipboardCheckIcon" } },
-        { id: "3", title: "Статистика", url: "/stats", icon: { type: "solid", name: "ChartSquareBarIcon" } },
+        { id: "1", title: "Документы", to: { name: "Docs" }, icon: { type: "solid", name: "DocumentTextIcon" } },
+        { id: "2", title: "Задачи", to: { name: "Tasks" }, icon: { type: "solid", name: "ClipboardCheckIcon" } },
+        { id: "3", title: "Статистика", to: { name: "Stats" }, icon: { type: "solid", name: "ChartSquareBarIcon" } },
       ],
       isNavigationActive: false
     }
