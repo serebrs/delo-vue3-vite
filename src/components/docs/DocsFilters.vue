@@ -2,7 +2,7 @@
 export default {
   emits: ["filtersUpdate"],
   data() {
-    return {
+    return { // TODO брать фильтры из query
       filters: {
         type: "all",
         dateFrom: (new Date()).toLocaleDateString('ru-RU').split('.').reverse().join('-'),
@@ -14,13 +14,13 @@ export default {
   },
   methods: {
     send() {
-      this.$emit("filtersUpdate", this.filters);
+      this.$emit("filtersUpdate", this.filters); // TODO вместо emita делать router.push вместе с сериализованными фильтрами в query
     }
   },
   watch: {
     filters: {
       handler() {
-        this.$emit("filtersUpdate", this.filters);
+        this.$emit("filtersUpdate", this.filters); // TODO вместо emita делать router.push вместе с сериализованными фильтрами в query
       },
       deep: true
     }

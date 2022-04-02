@@ -1,5 +1,6 @@
 <script>
-import DocumentsListItem from "@/components/documents/DocumentsListItem.vue";
+import DocumentsListItem from "@/components/docs/DocsListItem.vue";
+
 export default {
   data() {
     return {
@@ -24,6 +25,7 @@ export default {
       ]
     }
   },
+  // TODO onMounted() асинхронно получать документы учитывая фильтры в query -> then обновить this.documents
   components: { DocumentsListItem }
 }
 </script>
@@ -63,5 +65,7 @@ export default {
         <DocumentsListItem v-for="item in documents" :item="item" :key="item.id" />
       </tbody>
     </table>
+
+
   </div>
 </template>

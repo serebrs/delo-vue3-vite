@@ -44,7 +44,7 @@ export default {
       <ModalBoxButton
         title="Добавить новую запись"
         info="Дополнительная информация"
-        componentPath="documents/DocumentsAddForm"
+        componentPath="docs/DocAddModalForm"
         @modalResponse="modalAction"
         class="flex p-2 items-center rounded-full text-gray-400 hover:text-green-700 bg-white shadow text-md active:translate-y-[1px]"
       >

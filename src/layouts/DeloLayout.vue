@@ -8,9 +8,9 @@ export default {
   data() {
     return {
       navLinks: [
-        { id: "1", title: "Документы", to: { name: "Docs" }, icon: { type: "solid", name: "DocumentTextIcon" } },
-        { id: "2", title: "Задачи", to: { name: "Tasks" }, icon: { type: "solid", name: "ClipboardCheckIcon" } },
-        { id: "3", title: "Статистика", to: { name: "Stats" }, icon: { type: "solid", name: "ChartSquareBarIcon" } },
+        { id: "1", title: "Документы", to: { name: "docs" }, icon: { type: "solid", name: "DocumentTextIcon" } },
+        { id: "2", title: "Задачи", to: { name: "tasks" }, icon: { type: "solid", name: "ClipboardCheckIcon" } },
+        { id: "3", title: "Статистика", to: { name: "stats" }, icon: { type: "solid", name: "ChartSquareBarIcon" } },
       ],
       isNavigationActive: false
     }
@@ -61,12 +61,13 @@ export default {
         :title="title"
         @navMenuOpen="isNavigationActive = true"
       />
+      
       <RouterView />
     </div>
   </div>
 </template>
 
-<style>
+<style scoped>
 .navigation-enter-active,
 .navigation-leave-active {
   transition: opacity 0.3s ease;

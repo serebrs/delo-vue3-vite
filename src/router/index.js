@@ -3,48 +3,72 @@ import { createRouter, createWebHistory } from 'vue-router'
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
-    // route level code-splitting
-    // this generates a separate chunk (About.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    {
-      path: "/",
-      name: "Home",
-      redirect: "/docs",
-    },
     {
       path: "/:pathMatch(.*)*",
-      name: "NotFound",
-      meta: { layout: "Empty" },
-      component: () => import("../views/NotFoundView.vue"),
+      name: "notfound",
+      component: () => import("../views/NotFoundView.vue"), // страница 404
     },
     {
-      path: "/login",
-      name: "Login",
-      meta: { layout: "Auth" },
-      component: () => import("../views/LoginView.vue"),
+      path: '/auth',
+      redirect: '/login',
+      component: () => import("../layouts/AuthLayout.vue"), // пустой Layout для форм логина и регистрации
+      children: [
+        {
+          path: '/login',
+          name: 'login',
+          component: () => import("../views/LoginView.vue"),
+        },
+        {
+          path: '/logout',
+          name: 'logout',
+          component: () => import("../views/LogoutView.vue"),
+        }
+      ],
     },
     {
-      path: "/docs",
-      name: "Docs",
-      meta: { layout: "Main", title: "Документы" },
-      component: () => import("../views/DocumentsView.vue"),
-      /*children: {
-        path: "/docs/:id",
-        component: () => import("../views/LoginView.vue"), // отрисовывается внутри второго router-view в компоненте Docs!
-      }*/
+      path: '/delo',
+      alias: '/',
+      redirect: '/docs',
+      component: () => import("../layouts/DeloLayout.vue"), // пустой Layout для Docs, Tasks и Stats
+      children: [
+        {
+          path: '/docs',
+          name: 'docs',
+          meta: { title: 'Документы' },
+          // alias: '/docs',
+          component: () => import("../views/DocsView.vue"),
+          children: [
+            {
+              path: ':id(\\d+)',
+              name: 'docDetails',
+              component: () => import("../components/docs/DocDetail.vue"),
+            },
+            {
+              path: ':id(\\d+)/edit',
+              name: 'docEdit',
+              component: () => import("../components/docs/DocEdit.vue"),
+            },
+            {
+              path: 'new',
+              name: 'docNew',
+              component: () => import("../components/docs/DocNew.vue"),
+            },
+          ],
+        },
+        {
+          path: '/tasks',
+          name: 'tasks',
+          meta: { title: 'Задачи' },
+          component: () => import("../views/TasksView.vue"),
+        },
+        {
+          path: '/stats',
+          name: 'stats',
+          meta: { title: 'Статистика' },
+          component: () => import("../views/StatsView.vue"),
+        },
+      ],
     },
-    {
-      path: "/tasks",
-      name: "Tasks",
-      meta: { layout: "Main", title: "Задачи" },
-      component: () => import("../views/TasksView.vue"),
-    },
-    {
-      path: "/stats",
-      name: "Stats",
-      meta: { layout: "Main", title: "Статистика" },
-      component: () => import("../views/StatsView.vue"),
-    }
   ],
   //strict: true
 })

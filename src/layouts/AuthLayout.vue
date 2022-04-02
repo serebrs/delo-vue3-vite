@@ -12,7 +12,8 @@
           </span>
         </div>
       </div>
-      <RouterView />
+      
+      <router-view />
     </div>
   </div>
 </template>

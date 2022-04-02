@@ -1,5 +1,6 @@
 <script>
 import { InboxInIcon, ExternalLinkIcon, DocumentTextIcon, DocumentDuplicateIcon, DocumentIcon, PencilIcon, SwitchVerticalIcon, TrashIcon } from "@heroicons/vue/solid";
+// TODO придумать, как компоненты иконок асинхронно подгружать | или в App.vue их все сразу подключить?
 import HintBox from "@/components/utils/HintBox.vue";
 import DialogBoxButton from "@/components/utils/DialogBoxButton.vue";
 
@@ -32,17 +33,23 @@ export default {
   },
   methods: {
     openDocument() {
-      console.log(`Open document ${this.item.id} in popup`)
-      // 1) ++ открыть через роут SEO!!!  2) -- открыть в динамически подгруженном компоненте модального окна
-      //this.$router.push({ name: 'Docs', params: { id: `${this.item.id}` } })
-      //
+      // console.log(`Open document ${this.item.id} in popup`)
+      this.$router.push({ name: 'docDetails', params: { id: this.item.id }, query: this.$route.query })
     },
-    deleteDocument() {
+    editDocument() {
+      // console.log(`Edit document ${this.item.id} in popup`)
+      this.$router.push({ name: 'docEdit', params: { id: this.item.id }, query: this.$route.query })
+    },
+    deleteDocument() { // TODO Удалять здесь? Или вынести в отдельный роут и компонент?
       console.log(`Delete document ${this.item.id} from popup`)
+    },
+    extraDocument() {
+      console.log(`Extra document ${this.item.id} from popup`)
     }
   },
   components: {
     InboxInIcon, ExternalLinkIcon, DocumentTextIcon, DocumentDuplicateIcon, DocumentIcon, PencilIcon, SwitchVerticalIcon, TrashIcon, HintBox, DialogBoxButton
+    // TODO придумать, как компоненты иконок асинхронно подгружать | или в App.vue их все сразу подключить?
   }
 }
 </script>
@@ -67,11 +74,17 @@ export default {
     </td>
     <td class="px-3 py-2 whitespace-nowrap text-sm text-slate-500">
       <div class="flex flex-row justify-between items-center">
-        <button class="p-1 hover:text-blue-600 hover:bg-sky-200 rounded-md">
+        <button
+          @click.stop="extraDocument"
+          class="p-1 hover:text-blue-600 hover:bg-sky-200 rounded-md"
+        >
           <SwitchVerticalIcon class="h-5 w-5" />
         </button>
 
-        <button class="p-1 hover:text-amber-600 hover:bg-sky-200 rounded-md">
+        <button
+          @click.stop="editDocument"
+          class="p-1 hover:text-amber-600 hover:bg-sky-200 rounded-md"
+        >
           <PencilIcon class="h-5 w-5" />
         </button>
 
@@ -87,7 +100,7 @@ export default {
           @dialogAnswered="isDeleteDialogActive = false; deleteDocument()"
           title="Запрос на удаление"
           question="Вы действительно хотите удалить элемент?"
-        /> -->
+        />-->
 
         <DialogBoxButton
           title="Запрос на удаление"
