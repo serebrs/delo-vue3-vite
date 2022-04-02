@@ -91,7 +91,7 @@ export default {
   transform: translateY(-20px);
 }
 .fade-delo-leave-to {
-  opacity: 0;
+  display: none;
   transform: translateY(20px);
 }
 </style>

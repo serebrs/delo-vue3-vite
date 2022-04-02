@@ -37,7 +37,10 @@ export default {
           <MenuIcon class="w-5 h-5" />
         </button>
       </div>
-      <h1 class="text-gray-600 text-2xl font-semibold">{{ title }}</h1>
+
+      <Transition name="fade-title">
+        <h1 class="inline-block text-gray-600 text-2xl font-semibold" :key="title">{{ title }}</h1>
+      </Transition>
     </div>
 
     <div class="mx-4 h-16 flex items-center justify-end space-x-4">
@@ -68,3 +71,20 @@ export default {
     </div>
   </header>
 </template>
+
+
+<style>
+.fade-title-enter-active,
+.fade-title-leave-active {
+  transition: all 0.25s ease;
+}
+
+.fade-title-enter-from {
+  opacity: 0;
+  transform: translateY(-20px); /* 30px */
+}
+.fade-title-leave-to {
+  display:none;
+  transform: translateY(20px); /* -30px */
+}
+</style>
