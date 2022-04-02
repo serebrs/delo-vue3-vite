@@ -42,16 +42,19 @@ const router = createRouter({
               path: ':id(\\d+)',
               name: 'docDetails',
               component: () => import("../components/docs/DocDetail.vue"),
+              props: true
             },
             {
               path: ':id(\\d+)/edit',
               name: 'docEdit',
               component: () => import("../components/docs/DocEdit.vue"),
+              props: true
             },
             {
               path: ':id(\\d+)/delete',
               name: 'docDelete',
               component: () => import("../components/docs/DocDelete.vue"),
+              props: true
             },
             {
               path: 'new',

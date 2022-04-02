@@ -2,10 +2,11 @@
 import ModalBox from "@/components/utils/ModalBox.vue"; // TODO вынести ModalBox наружу. Как?
 
 export default {
+  props: ['id'],  // $route.params.id
   methods: {
     deleteDoc() {
       // delete Promise.then(goBack);
-      console.log(`Удаление документа № ${this.$route.params.id}`); // TODO Удалять промисом -> then закрывать окно
+      console.log(`Удаление документа № ${this.id}`); // TODO Удалять промисом -> then закрывать окно
       this.$router.push({ name: 'docs', query: this.$route.query, replace: true })
     },
     goBack() {
@@ -18,7 +19,7 @@ export default {
 
 <template>
   <ModalBox width="sm" title="Удаление документа">
-    <p>Id: {{ $route.params.id }}</p>
+    <p>Id: {{ id }}</p>
 
     <div>
       <button
