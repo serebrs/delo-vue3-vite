@@ -6,8 +6,15 @@ export default {
     title: String,
     width: String
   },
+  data() {
+    return {
+      isVisible: false  // чтобы Transition отработал
+    }
+  },
   methods: {
-    closeModal() {
+    async closeModal() {
+      this.isVisible = false; // чтобы Transition отработал
+      await (new Promise(resolve => setTimeout(resolve, 300))); // чтобы Transition отработал
       this.$router.go(-1)
     },
     keydown(e) { // TODO отключить нажатия клавиш под модальным окном
@@ -20,6 +27,7 @@ export default {
     }
   },
   mounted() {
+    this.isVisible = true; // чтобы Transition отработал
     console.log('Modal addEscListener');
     window.addEventListener('keydown', this.keydown)
   },
@@ -33,8 +41,9 @@ export default {
 
 <template>
   <teleport to="body">
-    <transition name="fade">
+    <transition name="fade-modal">
       <div
+        v-show="isVisible"
         @click.self="closeModal"
         class="absolute overflow-y-auto z-40 inset-y-0 inset-x-0 flex flex-col justify-start items-center space-x-0 space-y-0 h-screen bg-slate-700 bg-opacity-50 overflow-hidden backdrop-blur-sm"
       >
@@ -60,13 +69,13 @@ export default {
 </template>
 
 <style scoped>
-.fade-enter-active,
-.fade-leave-active {
+.fade-modal-enter-active,
+.fade-modal-leave-active {
   transition: opacity 0.3s ease;
 }
 
-.fade-enter-from,
-.fade-leave-to {
+.fade-modal-enter-from,
+.fade-modal-leave-to {
   opacity: 0;
 }
 </style>
