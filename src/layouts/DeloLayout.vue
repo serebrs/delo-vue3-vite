@@ -57,12 +57,13 @@ export default {
 
     <!-- Основной блок справа с заголовком и основным контентом -->
     <div class="flex-grow shrink-0 w-[58rem]">
-      <HeaderBar
-        :title="title"
-        @navMenuOpen="isNavigationActive = true"
-      />
-      
-      <RouterView />
+      <HeaderBar :title="title" @navMenuOpen="isNavigationActive = true" />
+
+      <router-view v-slot="{ Component }">
+        <transition name="fade-delo">
+          <component :is="Component" />
+        </transition>
+      </router-view>
     </div>
   </div>
 </template>
@@ -78,5 +79,19 @@ export default {
 .navigation-leave-to {
   opacity: 0;
   transform: translateX(-200px);
+}
+
+.fade-delo-enter-active,
+.fade-delo-leave-active {
+  transition: all 0.25s ease;
+}
+
+.fade-delo-enter-from {
+  opacity: 0;
+  transform: translateY(-20px);
+}
+.fade-delo-leave-to {
+  opacity: 0;
+  transform: translateY(20px);
 }
 </style>
