@@ -33,7 +33,7 @@ export default {
 <template>
   <div class="overflow-clip shadow-sm shadow-slate-200 rounded-lg">
     <table>
-      <thead class="bg-slate-200 sticky top-0 shadow-sm shadow-slate-300">
+      <thead class="bg-slate-200 sticky top-0 z-20 shadow-sm shadow-slate-300">
         <tr>
           <th
             scope="col"
