@@ -3,7 +3,7 @@ import ModalBox from "@/components/utils/ModalBox.vue"; // TODO вынести M
 
 export default {
   methods: {
-    close() {
+    goBack() {
       this.$router.push({ name: 'docs', query: this.$route.query })
     }
   },
@@ -14,6 +14,6 @@ export default {
 <template>
   <ModalBox>
     <p>Просмотр документа с Id: {{ $route.params.id }}</p>
-    <button @click="close">Х Закрыть</button>
+    <button @click="goBack">Х Закрыть</button>
   </ModalBox>
 </template>

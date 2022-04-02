@@ -3,9 +3,9 @@ import ModalBox from "@/components/utils/ModalBox.vue"; // TODO вынести M
 
 export default {
   methods: {
-    saveDoc() {
-      // save Promise.then(goBack);
-      console.log(`Сохранение отредактированного документа № ${this.$route.params.id}`); // TODO Сохранять промисом -> then закрывать окно
+    deleteDoc() {
+      // delete Promise.then(goBack);
+      console.log(`Удаление документа № ${this.$route.params.id}`); // TODO Удалять промисом -> then закрывать окно
       this.goBack();
     },
     goBack() {
@@ -18,8 +18,8 @@ export default {
 
 <template>
   <ModalBox>
-    <p>Редактирование документа с Id: {{ $route.params.id }}</p>
-    <button @click="saveDoc">Сохранить</button>
+    <p>Удаление документа с Id: {{ $route.params.id }}</p>
+    <button @click="deleteDoc">Удалить</button>
     <button @click="goBack">Х Закрыть</button>
   </ModalBox>
 </template>

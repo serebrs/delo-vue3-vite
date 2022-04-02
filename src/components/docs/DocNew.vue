@@ -3,11 +3,11 @@ import ModalBox from "@/components/utils/ModalBox.vue"; // TODO вынести M
 
 export default {
   methods: {
-    save() {
-      // saveDataPromise.then(close); // TODO Сохранить данные через промис, потом закрыть
-      this.close();
+    saveDoc() {
+      // save Promise.then(goBack); // TODO Сохранить через промис, потом закрыть
+      this.goBack();
     },
-    close() {
+    goBack() {
       this.$router.push({ name: 'docs', query: this.$route.query })
     }
   },
@@ -18,7 +18,7 @@ export default {
 <template>
   <ModalBox>
     <p>Создание документа</p>
-    <button @click="save">Сохранить</button>
-    <button @click="close">Х Закрыть</button>
+    <button @click="saveDoc">Сохранить</button>
+    <button @click="goBack">Х Закрыть</button>
   </ModalBox>
 </template>

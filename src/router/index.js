@@ -49,6 +49,11 @@ const router = createRouter({
               component: () => import("../components/docs/DocEdit.vue"),
             },
             {
+              path: ':id(\\d+)/delete',
+              name: 'docDelete',
+              component: () => import("../components/docs/DocDelete.vue"),
+            },
+            {
               path: 'new',
               name: 'docNew',
               component: () => import("../components/docs/DocNew.vue"),

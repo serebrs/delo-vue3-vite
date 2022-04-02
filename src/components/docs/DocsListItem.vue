@@ -41,7 +41,8 @@ export default {
       this.$router.push({ name: 'docEdit', params: { id: this.item.id }, query: this.$route.query })
     },
     deleteDocument() { // TODO Удалять здесь? Или вынести в отдельный роут и компонент?
-      console.log(`Delete document ${this.item.id} from popup`)
+      // console.log(`Delete document ${this.item.id} from popup`)
+      this.$router.push({ name: 'docDelete', params: { id: this.item.id }, query: this.$route.query })
     },
     extraDocument() {
       console.log(`Extra document ${this.item.id} from popup`)
@@ -87,6 +88,13 @@ export default {
         >
           <PencilIcon class="h-5 w-5" />
         </button>
+        
+        <button
+          @click.stop="deleteDocument"
+          class="p-1 hover:text-red-600 hover:bg-sky-200 rounded-md"
+        >
+          <TrashIcon class="h-5 w-5" />
+        </button>
 
         <!-- <button
           @click.stop="isDeleteDialogActive = true"
@@ -102,14 +110,14 @@ export default {
           question="Вы действительно хотите удалить элемент?"
         />-->
 
-        <DialogBoxButton
+        <!-- <DialogBoxButton
           title="Запрос на удаление"
           question="Вы действительно хотите удалить элемент?"
           @dialogAnswered="deleteDocument"
           class="p-1 hover:text-red-600 hover:bg-sky-200 rounded-md"
         >
           <TrashIcon class="h-5 w-5" />
-        </DialogBoxButton>
+        </DialogBoxButton> -->
       </div>
     </td>
   </tr>
