@@ -17,6 +17,25 @@ export default {
   <main class="overflow-auto h-screen pb-24 px-6">
     <DocsFilters @filtersUpdate="updateDocumentsList" />
     <DocsList />
-    <RouterView />
+
+    <teleport to="body">
+      <router-view v-slot="{ Component }">
+        <transition name="fade-modal">
+          <component :is="Component" />
+        </transition>
+      </router-view>
+    </teleport>
   </main>
 </template>
+
+<style scoped>
+.fade-modal-enter-active,
+.fade-modal-leave-active {
+  transition: opacity 0.3s ease;
+}
+
+.fade-modal-enter-from,
+.fade-modal-leave-to {
+  opacity: 0;
+}
+</style>

@@ -6,15 +6,8 @@ export default {
     title: String,
     width: String
   },
-  data() {
-    return {
-      isVisible: false  // чтобы Transition отработал
-    }
-  },
   methods: {
-    async closeModal() {
-      this.isVisible = false; // чтобы Transition отработал
-      await (new Promise(resolve => setTimeout(resolve, 300))); // чтобы Transition отработал
+    closeModal() {
       this.$router.go(-1)
     },
     keydown(e) { // TODO отключить нажатия клавиш под модальным окном
@@ -27,7 +20,6 @@ export default {
     }
   },
   mounted() {
-    this.isVisible = true; // чтобы Transition отработал
     console.log('Modal addEscListener');
     window.addEventListener('keydown', this.keydown)
   },
@@ -40,42 +32,25 @@ export default {
 </script>
 
 <template>
-  <teleport to="body">
-    <transition name="fade-modal">
-      <div
-        v-show="isVisible"
-        @click.self="closeModal"
-        class="absolute overflow-y-auto z-40 inset-y-0 inset-x-0 flex flex-col justify-start items-center space-x-0 space-y-0 h-screen bg-slate-700 bg-opacity-50 overflow-hidden backdrop-blur-sm"
+  <div
+    @click.self="closeModal"
+    class="absolute overflow-y-auto z-40 inset-y-0 inset-x-0 flex flex-col justify-start items-center space-x-0 space-y-0 h-screen bg-slate-700 bg-opacity-50 overflow-hidden backdrop-blur-sm"
+  >
+    <div
+      class="relative p-5 sm:p-10 rounded-md my-10 shadow-md bg-white border border-gray-100"
+      :class="widthClass"
+    >
+      <button
+        @click="closeModal"
+        class="absolute right-0 top-0 p-1 m-1 text-gray-600 bg-gray-100 hover:bg-gray-200 rounded-md"
       >
-        <div
-          class="relative p-5 sm:p-10 rounded-md my-10 shadow-md bg-white border border-gray-100"
-          :class="widthClass"
-        >
-          <button
-            @click="closeModal"
-            class="absolute right-0 top-0 p-1 m-1 text-gray-600 bg-gray-100 hover:bg-gray-200 rounded-md"
-          >
-            <XIcon class="h-5 w-5" />
-          </button>
+        <XIcon class="h-5 w-5" />
+      </button>
 
-          <div class="flex flex-col justify-start items-start space-y-8">
-            <h1 class="text-2xl text-slate-800 font-semibold">{{ title }}</h1>
-            <slot />
-          </div>
-        </div>
+      <div class="flex flex-col justify-start items-start space-y-8">
+        <h1 class="text-2xl text-slate-800 font-semibold">{{ title }}</h1>
+        <slot />
       </div>
-    </transition>
-  </teleport>
+    </div>
+  </div>
 </template>
-
-<style scoped>
-.fade-modal-enter-active,
-.fade-modal-leave-active {
-  transition: opacity 0.3s ease;
-}
-
-.fade-modal-enter-from,
-.fade-modal-leave-to {
-  opacity: 0;
-}
-</style>
