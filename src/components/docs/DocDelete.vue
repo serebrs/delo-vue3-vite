@@ -17,7 +17,7 @@ export default {
 </script>
 
 <template>
-  <ModalBox>
+  <ModalBox width="sm">
     <p>Удаление документа с Id: {{ $route.params.id }}</p>
     <button @click="deleteDoc">Удалить</button>
     <button @click="goBack">Х Закрыть</button>

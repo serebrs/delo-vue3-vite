@@ -2,12 +2,20 @@
 import { XIcon } from "@heroicons/vue/solid"
 
 export default { // TODO добавить входной параметр: "размер окна"
+  props: {
+    width: String
+  },
   methods: {
     closeModal() {
       this.$router.go(-1)
     },
     keydown(e) { // TODO отключить нажатия клавиш под модальным окном
       if (e.code === 'Escape') this.closeModal();
+    }
+  },
+  computed: {
+    widthClass() {
+      return (this.width === 'sm') ? 'w-[32rem]' : 'w-[32rem] sm:w-full sm:max-w-3xl';
     }
   },
   mounted() {
@@ -30,7 +38,8 @@ export default { // TODO добавить входной параметр: "ра
         class="absolute overflow-y-auto z-40 inset-y-0 inset-x-0 flex flex-col justify-start items-center space-x-0 space-y-0 h-screen bg-slate-700 bg-opacity-50 overflow-hidden backdrop-blur-sm"
       >
         <div
-          class="relative w-[32rem] sm:w-full sm:max-w-3xl p-5 sm:p-10 rounded-md my-10 shadow-md bg-white border border-gray-100"
+          class="relative p-5 sm:p-10 rounded-md my-10 shadow-md bg-white border border-gray-100"
+          :class="widthClass"
         >
           <button
             @click="closeModal"

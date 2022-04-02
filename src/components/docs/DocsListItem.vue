@@ -2,7 +2,7 @@
 import { InboxInIcon, ExternalLinkIcon, DocumentTextIcon, DocumentDuplicateIcon, DocumentIcon, PencilIcon, SwitchVerticalIcon, TrashIcon } from "@heroicons/vue/solid";
 // TODO придумать, как компоненты иконок асинхронно подгружать | или в App.vue их все сразу подключить?
 import HintBox from "@/components/utils/HintBox.vue";
-import DialogBoxButton from "@/components/utils/DialogBoxButton.vue";
+//import DialogBoxButton from "@/components/utils/DialogBoxButton.vue";
 
 export default {
   props: {
@@ -40,7 +40,7 @@ export default {
       // console.log(`Edit document ${this.item.id} in popup`)
       this.$router.push({ name: 'docEdit', params: { id: this.item.id }, query: this.$route.query })
     },
-    deleteDocument() { // TODO Удалять здесь? Или вынести в отдельный роут и компонент?
+    deleteDocument() { // TODO Может удалять прямо здесь и не выносить в отдельный роут и компонент?
       // console.log(`Delete document ${this.item.id} from popup`)
       this.$router.push({ name: 'docDelete', params: { id: this.item.id }, query: this.$route.query })
     },
@@ -49,7 +49,8 @@ export default {
     }
   },
   components: {
-    InboxInIcon, ExternalLinkIcon, DocumentTextIcon, DocumentDuplicateIcon, DocumentIcon, PencilIcon, SwitchVerticalIcon, TrashIcon, HintBox, DialogBoxButton
+    InboxInIcon, ExternalLinkIcon, DocumentTextIcon, DocumentDuplicateIcon, DocumentIcon, PencilIcon, SwitchVerticalIcon, TrashIcon, HintBox, 
+    //DialogBoxButton
     // TODO придумать, как компоненты иконок асинхронно подгружать | или в App.vue их все сразу подключить?
   }
 }
