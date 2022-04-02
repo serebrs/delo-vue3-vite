@@ -1,8 +1,9 @@
 <script>
 import { XIcon } from "@heroicons/vue/solid"
 
-export default { // TODO добавить входной параметр: "размер окна"
+export default {
   props: {
+    title: String,
     width: String
   },
   methods: {
@@ -14,7 +15,7 @@ export default { // TODO добавить входной параметр: "ра
     }
   },
   computed: {
-    widthClass() {
+    widthClass() { // TODO добавить еще большой размер для просмотра документа
       return (this.width === 'sm') ? 'w-[32rem]' : 'w-[32rem] sm:w-full sm:max-w-3xl';
     }
   },
@@ -49,6 +50,7 @@ export default { // TODO добавить входной параметр: "ра
           </button>
 
           <div class="flex flex-col justify-start items-start space-y-8">
+            <h1 class="text-2xl text-slate-800 font-semibold">{{ title }}</h1>
             <slot />
           </div>
         </div>
