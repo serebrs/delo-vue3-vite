@@ -35,8 +35,11 @@ const router = createRouter({
           path: '/docs',
           name: 'docs',
           meta: { title: 'Документы' },
-          // alias: '/docs',
-          component: () => import("../views/DocsView.vue"),
+          // component: () => import("../views/DocsView.vue"),
+          components: {
+            default: () => import("../views/DocsView.vue"),
+            createButton: () => import("../components/buttons/AddButton.vue") // кнопка добавления нового материала в header
+          },
           children: [
             {
               path: ':id(\\d+)',
@@ -57,9 +60,9 @@ const router = createRouter({
               props: true
             },
             {
-              path: 'new',
-              name: 'docNew',
-              component: () => import("../components/docs/DocNew.vue"),
+              path: 'add',
+              // name: 'docAdd',
+              component: () => import("../components/docs/DocAdd.vue"),
             },
           ],
         },
@@ -67,7 +70,11 @@ const router = createRouter({
           path: '/tasks',
           name: 'tasks',
           meta: { title: 'Задачи' },
-          component: () => import("../views/TasksView.vue"),
+          // component: () => import("../views/TasksView.vue"),
+          components: {
+            default: () => import("../views/TasksView.vue"),
+            createButton: () => import("../components/buttons/AddButton.vue") // кнопка добавления нового материала в header
+          },
         },
         {
           path: '/stats',
