@@ -1,5 +1,5 @@
 <script>
-import { XIcon } from "@heroicons/vue/solid"
+// import { XIcon } from "@heroicons/vue/solid"
 
 export default {
   emits: [
@@ -32,7 +32,7 @@ export default {
     }
   },
   inheritAttrs: false,
-  components: { XIcon }
+  // components: { XIcon }
 }
 </script>
 

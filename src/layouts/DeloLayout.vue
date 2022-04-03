@@ -2,7 +2,7 @@
 import NavigationMenu from "@/components/NavigationMenu.vue";
 import HeaderBar from "@/components/HeaderBar.vue";
 import LogoImage from "@/components/LogoImage.vue";
-import { XIcon } from "@heroicons/vue/solid"; // TODO сделать импорт всех иконок глобально: Solid и Outline
+//import { XIcon } from "@heroicons/vue/solid"; // TODO сделать импорт всех иконок глобально: Solid и Outline
 
 export default {
   data() {
@@ -21,7 +21,8 @@ export default {
     }
   },
   components: {
-    NavigationMenu, HeaderBar, LogoImage, XIcon
+    NavigationMenu, HeaderBar, LogoImage, 
+    // XIcon
   }
 }
 </script>
@@ -42,7 +43,7 @@ export default {
       <div
         v-show="isNavigationActive"
         @mouseleave="isNavigationActive = false"
-        class="absolute z-20 left-0 top-0 h-screen w-28 flex flex-col shadow-lg bg-gray-700 shadow-gray-500 select-none"
+        class="absolute z-30 left-0 top-0 h-screen w-28 flex flex-col shadow-lg bg-gray-700 shadow-gray-500 select-none"
       >
         <a
           href="#"

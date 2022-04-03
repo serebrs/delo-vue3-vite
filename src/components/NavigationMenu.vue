@@ -1,5 +1,5 @@
 <script>
-import { ChartSquareBarIcon, ClipboardCheckIcon, DocumentTextIcon } from "@heroicons/vue/solid"; // TODO сделать импорт всех иконок глобально: Solid и Outline
+// import { ChartSquareBarIcon, ClipboardCheckIcon, DocumentTextIcon } from "@heroicons/vue/solid"; // TODO сделать импорт всех иконок глобально: Solid и Outline
 
 export default {
   emits: [
@@ -8,9 +8,7 @@ export default {
   props: {
     navLinks: Array
   },
-  components: {
-    ChartSquareBarIcon, ClipboardCheckIcon, DocumentTextIcon
-  }
+  // components: { ChartSquareBarIcon, ClipboardCheckIcon, DocumentTextIcon }
 }
 </script>
 

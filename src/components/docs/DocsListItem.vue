@@ -1,6 +1,5 @@
 <script>
-import { InboxInIcon, ExternalLinkIcon, DocumentTextIcon, DocumentDuplicateIcon, DocumentIcon, PencilIcon, SwitchVerticalIcon, TrashIcon } from "@heroicons/vue/solid";
-// TODO придумать, как компоненты иконок асинхронно подгружать | или в App.vue их все сразу подключить?
+// import { InboxInIcon, ExternalLinkIcon, DocumentTextIcon, DocumentDuplicateIcon, DocumentIcon, PencilIcon, SwitchVerticalIcon, TrashIcon } from "@heroicons/vue/solid";
 import HintBox from "@/components/utils/HintBox.vue";
 //import DialogBoxButton from "@/components/utils/DialogBoxButton.vue";
 
@@ -49,9 +48,8 @@ export default {
     }
   },
   components: {
-    InboxInIcon, ExternalLinkIcon, DocumentTextIcon, DocumentDuplicateIcon, DocumentIcon, PencilIcon, SwitchVerticalIcon, TrashIcon, HintBox, 
-    //DialogBoxButton
-    // TODO придумать, как компоненты иконок асинхронно подгружать | или в App.vue их все сразу подключить?
+    // InboxInIcon, ExternalLinkIcon, DocumentTextIcon, DocumentDuplicateIcon, DocumentIcon, PencilIcon, SwitchVerticalIcon, TrashIcon, 
+    HintBox, //DialogBoxButton
   }
 }
 </script>

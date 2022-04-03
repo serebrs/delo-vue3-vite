@@ -1,12 +1,12 @@
 <script>
-import { PlusIcon } from "@heroicons/vue/solid";
+// import { PlusIcon } from "@heroicons/vue/solid";
 export default {
   methods: {
     add() {
       this.$router.push({ path: this.$route.path + '/add', query: this.$route.query })
     }
   },
-  components: { PlusIcon }
+  // components: { PlusIcon }
 }
 </script>
 <template>

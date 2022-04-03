@@ -1,6 +1,6 @@
 <script>
-import { UserIcon } from "@heroicons/vue/solid";
-import { LogoutIcon } from "@heroicons/vue/outline";
+// import { UserIcon } from "@heroicons/vue/solid";
+// import { LogoutIcon } from "@heroicons/vue/outline";
 
 export default {
   data() {
@@ -9,9 +9,7 @@ export default {
     }
   },
   inheritAttrs: false,
-  components: {
-    UserIcon, LogoutIcon
-  }
+  // components: { UserIcon, LogoutIcon }
 }
 </script>
 

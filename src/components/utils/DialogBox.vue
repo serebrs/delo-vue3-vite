@@ -1,5 +1,5 @@
 <script>
-import { XIcon } from "@heroicons/vue/solid"
+// import { XIcon } from "@heroicons/vue/solid"
 
 export default {
   emits: [
@@ -38,7 +38,7 @@ export default {
     console.log('destroy component');
     window.removeEventListener('keydown', this.keydown)
   },
-  components: { XIcon }
+  // components: { XIcon }
 }
 </script>
 
