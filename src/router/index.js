@@ -28,6 +28,7 @@ const router = createRouter({
     {
       path: '/delo',
       alias: '/',
+      name: 'home',
       redirect: '/docs',
       component: () => import("../layouts/DeloLayout.vue"), // пустой Layout для Docs, Tasks и Stats
       children: [

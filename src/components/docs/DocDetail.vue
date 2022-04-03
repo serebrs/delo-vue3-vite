@@ -5,8 +5,8 @@ export default {
   props: ['id'],  // $route.params.id
   methods: {
     goBack() {
-      //this.$router.push({ name: 'docs', query: this.$route.query, replace: true })
-      this.$router.go(-1)
+      this.$router.push({ name: 'docs', query: this.$route.query, replace: true })
+      // this.$router.go(-1)
     }
   },
   components: { ModalBox } // TODO вынести ModalBox наружу. Как?
@@ -14,7 +14,7 @@ export default {
 </script>
 
 <template>
-  <ModalBox title="Просмотр документа">
+  <ModalBox title="Просмотр документа" backRouteName="docs">
     <p>Id: {{ id }}</p>
     <div>
       <button

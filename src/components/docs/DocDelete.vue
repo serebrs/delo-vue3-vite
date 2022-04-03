@@ -7,10 +7,11 @@ export default {
     deleteDoc() {
       // delete Promise.then(goBack);
       console.log(`Удаление документа № ${this.id}`); // TODO Удалять промисом -> then закрывать окно
-      this.$router.push({ name: 'docs', query: this.$route.query, replace: true })
+      this.goBack();
     },
     goBack() {
-      this.$router.go(-1)
+      // this.$router.go(-1)
+      this.$router.push({ name: 'docs', query: this.$route.query, replace: true })
     }
   },
   components: { ModalBox } // TODO вынести ModalBox наружу. Как?
@@ -18,7 +19,7 @@ export default {
 </script>
 
 <template>
-  <ModalBox width="sm" title="Удаление документа">
+  <ModalBox width="sm" title="Удаление документа" backRouteName="docs">
     <p>Id: {{ id }}</p>
 
     <div>

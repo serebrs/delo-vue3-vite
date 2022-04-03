@@ -16,10 +16,11 @@ export default {
   methods: {
     saveDoc() {
       console.log('Создан новый документ'); // TODO Сохранять промисом -> then закрывать окно  // save formData Promise.then(goBack);
-      this.$router.push({ name: 'docs', query: this.$route.query, replace: true })
+      this.goBack();
     },
     goBack() {
-      this.$router.go(-1)
+      // this.$router.go(-1)
+      this.$router.push({ name: 'docs', query: this.$route.query, replace: true })
     }
   },
   components: { ModalBox } // TODO вынести ModalBox наружу. Как?
@@ -27,7 +28,7 @@ export default {
 </script>
 
 <template>
-  <ModalBox title="Создание нового документа">
+  <ModalBox title="Создание нового документа" backRouteName="docs">
     <div class="flex flex-col space-y-6 w-full bg-gray-100 rounded-md p-5">
       <div class="flex flex-row space-x-3 sm:space-x-8">
         <label class="w-96 sm:w-full">
