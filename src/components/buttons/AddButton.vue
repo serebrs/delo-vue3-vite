@@ -6,9 +6,7 @@ export default {
       this.$router.push({ path: this.$route.path + '/add', query: this.$route.query })
     }
   },
-  components: {
-    PlusIcon
-  }
+  components: { PlusIcon }
 }
 </script>
 <template>
