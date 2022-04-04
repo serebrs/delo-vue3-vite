@@ -1,5 +1,4 @@
 <script>
-// import { InboxInIcon, ExternalLinkIcon, DocumentTextIcon, DocumentDuplicateIcon, DocumentIcon, PencilIcon, SwitchVerticalIcon, TrashIcon } from "@heroicons/vue/solid";
 import HintBox from "@/components/utils/HintBox.vue";
 //import DialogBoxButton from "@/components/utils/DialogBoxButton.vue";
 
@@ -48,7 +47,6 @@ export default {
     }
   },
   components: {
-    // InboxInIcon, ExternalLinkIcon, DocumentTextIcon, DocumentDuplicateIcon, DocumentIcon, PencilIcon, SwitchVerticalIcon, TrashIcon, 
     HintBox, //DialogBoxButton
   }
 }

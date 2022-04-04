@@ -1,6 +1,4 @@
 <script>
-// import { XIcon } from "@heroicons/vue/solid"
-
 export default {
   emits: [
     "dialogAnswered", "dialogClosed"
@@ -37,8 +35,7 @@ export default {
   unmounted() {
     console.log('destroy component');
     window.removeEventListener('keydown', this.keydown)
-  },
-  // components: { XIcon }
+  }
 }
 </script>
 

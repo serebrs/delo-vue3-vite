@@ -1,6 +1,4 @@
 <script>
-// import { XIcon } from "@heroicons/vue/solid"
-
 export default {
   emits: [
     "dialogAnswered"
@@ -31,8 +29,7 @@ export default {
       }
     }
   },
-  inheritAttrs: false,
-  // components: { XIcon }
+  inheritAttrs: false
 }
 </script>
 

@@ -1,6 +1,5 @@
 <script>
 import { defineAsyncComponent } from 'vue'
-// import { XIcon } from "@heroicons/vue/solid"
 
 export default {
   emits: [
@@ -51,7 +50,6 @@ export default {
   },
   inheritAttrs: false,
   components: {
-    // XIcon,
     //DocumentsAddForm: defineAsyncComponent(() => import('@/components/documents/DocumentsAddForm.vue')), // можно так, но тогда <component :is="innerComponentName">
   }
 }

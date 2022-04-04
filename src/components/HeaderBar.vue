@@ -1,5 +1,4 @@
 <script>
-//import { MenuIcon, /*PlusIcon,*/ ChevronDownIcon } from "@heroicons/vue/solid";
 // import ModalBoxButton from "./utils/ModalBoxButton.vue";
 import DropdownMenuButton from "./utils/DropdownMenuButton.vue";
 
@@ -16,7 +15,6 @@ export default {
     // }
   },
   components: {
-    // MenuIcon, PlusIcon, ChevronDownIcon, 
     DropdownMenuButton //, ModalBoxButton
   }
 }

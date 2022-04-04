@@ -1,15 +1,11 @@
 <script>
-// import { UserIcon } from "@heroicons/vue/solid";
-// import { LogoutIcon } from "@heroicons/vue/outline";
-
 export default {
   data() {
     return {
       isDropdownMenuActive: false
     }
   },
-  inheritAttrs: false,
-  // components: { UserIcon, LogoutIcon }
+  inheritAttrs: false
 }
 </script>
 

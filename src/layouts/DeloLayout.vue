@@ -2,7 +2,6 @@
 import NavigationMenu from "@/components/NavigationMenu.vue";
 import HeaderBar from "@/components/HeaderBar.vue";
 import LogoImage from "@/components/LogoImage.vue";
-//import { XIcon } from "@heroicons/vue/solid"; // TODO сделать импорт всех иконок глобально: Solid и Outline
 
 export default {
   data() {
@@ -21,8 +20,7 @@ export default {
     }
   },
   components: {
-    NavigationMenu, HeaderBar, LogoImage, 
-    // XIcon
+    NavigationMenu, HeaderBar, LogoImage
   }
 }
 </script>

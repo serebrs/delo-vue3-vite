@@ -1,6 +1,4 @@
 <script>
-// import { XIcon } from "@heroicons/vue/solid"
-
 export default {
   props: {
     title: String,
@@ -31,8 +29,7 @@ export default {
   unmounted() {
     console.log('Modal removeEscListener');
     window.removeEventListener('keydown', this.keydown)
-  },
-  // components: { XIcon }
+  }
 }
 </script>
 

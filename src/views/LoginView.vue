@@ -5,13 +5,7 @@
         <label for="username" class="block text-sm font-medium text-slate-700">Имя пользователя</label>
         <div class="mt-1 relative">
           <span class="absolute inset-y-0 left-0 flex items-center pl-2">
-            <svg class="h-5 w-5 fill-slate-300" viewBox="0 0 20 20">
-              <path
-                fill-rule="evenodd"
-                d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z"
-                clip-rule="evenodd"
-              />
-            </svg>
+            <UserIcon class="h-5 w-5 fill-slate-300" />
           </span>
           <input
             type="text"
@@ -27,13 +21,7 @@
         <label for="password" class="block text-sm font-medium text-slate-700">Пароль</label>
         <div class="mt-1 relative">
           <span class="absolute inset-y-0 left-0 flex items-center pl-2">
-            <svg class="h-5 w-5 fill-slate-300" viewBox="0 0 20 20">
-              <path
-                fill-rule="evenodd"
-                d="M18 8a6 6 0 01-7.743 5.743L10 14l-1 1-1 1H6v2H2v-4l4.257-4.257A6 6 0 1118 8zm-6-4a1 1 0 100 2 2 2 0 012 2 1 1 0 102 0 4 4 0 00-4-4z"
-                clip-rule="evenodd"
-              />
-            </svg>
+            <KeyIcon class="h-5 w-5 fill-slate-300" />
           </span>
           <input
             type="password"
@@ -50,20 +38,7 @@
           class="w-full flex items-center justify-center text-white transition duration-200 bg-sky-500 hover:bg-sky-600 hover:shadow-md active:bg-sky-700 focus:outline-none focus:ring focus:ring-sky-300 px-5 py-2.5 text-sm leading-5 rounded-lg font-semibold"
         >
           Войти
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            class="h-4 w-4 ml-2 mt-[0.15rem]"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-            stroke-width="2"
-          >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              d="M11 16l-4-4m0 0l4-4m-4 4h14m-5 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h7a3 3 0 013 3v1"
-            />
-          </svg>
+          <LoginIcon class="h-4 w-4 ml-2 mt-[0.15rem]" />
         </button>
       </div>
     </div>

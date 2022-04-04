@@ -7,9 +7,9 @@ import router from './router'
 
 import {
   MenuIcon, PlusIcon, ChevronDownIcon, ChartSquareBarIcon, ClipboardCheckIcon, DocumentTextIcon, DocumentIcon, XIcon,
-  InboxInIcon, ExternalLinkIcon, DocumentDuplicateIcon, PencilIcon, SwitchVerticalIcon, TrashIcon, UserIcon, 
+  InboxInIcon, ExternalLinkIcon, DocumentDuplicateIcon, PencilIcon, SwitchVerticalIcon, TrashIcon, UserIcon, KeyIcon
 } from "@heroicons/vue/solid";
-import { LogoutIcon, } from "@heroicons/vue/outline";
+import { LogoutIcon, LoginIcon } from "@heroicons/vue/outline";
 
 import HintBox from "./components/utils/HintBox.vue"
 import "./assets/app.css"
@@ -36,6 +36,8 @@ app.component('HintBox', HintBox)
   .component('TrashIcon', TrashIcon)
   .component('UserIcon', UserIcon)
   .component('LogoutIcon', LogoutIcon)
+  .component('LoginIcon', LoginIcon)
+  .component('KeyIcon', KeyIcon)
 
 //app.component('DialogBox', defineAsyncComponent(() => import('@/components/utils/DialogBox.vue')))
 //app.component('DocumentsAddForm', defineAsyncComponent(() => import('@/components/documents/DocumentsAddForm.vue')))

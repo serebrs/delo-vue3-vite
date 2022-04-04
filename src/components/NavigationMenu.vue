@@ -1,6 +1,4 @@
 <script>
-// import { ChartSquareBarIcon, ClipboardCheckIcon, DocumentTextIcon } from "@heroicons/vue/solid"; // TODO сделать импорт всех иконок глобально: Solid и Outline
-
 export default {
   emits: [
     "navMenuClose"
@@ -8,7 +6,6 @@ export default {
   props: {
     navLinks: Array
   },
-  // components: { ChartSquareBarIcon, ClipboardCheckIcon, DocumentTextIcon }
 }
 </script>
 
@@ -18,7 +15,8 @@ export default {
       v-for="link in navLinks"
       :key="link.id"
       :to="{ name: link.to.name }"
-      active-class="nav-menu-active"
+      class="text-gray-400 flex flex-col rounded-md items-center justify-center m-3 transition-colors duration-200 hover:text-gray-300 hover:bg-gray-600"
+      active-class="text-gray-300 bg-gray-600"
     >
       <button
         @click="$emit('navMenuClose')"
