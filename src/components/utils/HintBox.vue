@@ -17,7 +17,7 @@ export default {
     <transition name="fade-hint">
       <div
         v-show="isActive"
-        class="absolute inset-x-0 bottom-[120%] z-10 w-fit py-1 px-2 text-[0.75rem] text-center whitespace-normal leading-3 text-white bg-gray-600 shadow-md rounded-md"
+        class="absolute inset-x-0 bottom-[120%] z-30 w-fit py-1 px-2 text-[0.75rem] text-center whitespace-normal leading-3 text-white bg-gray-600 shadow-md rounded-md"
       >{{ hintText }}</div>
     </transition>
   </div>
