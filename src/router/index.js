@@ -89,4 +89,21 @@ const router = createRouter({
   //strict: true
 })
 
+
+
+// https://router.vuejs.org/guide/advanced/navigation-guards.html#global-before-guards
+// 
+// -----------------------------------------------------------------------------------
+// router.beforeEach(async (to, from) => {
+//   if ( !isAuthenticated && to.name !== 'Login' ) {
+//     return { name: 'Login' }
+//   }
+// })
+// -----------------------------------------------------------------------------------
+// router.beforeEach(async (to, from) => {
+//   const canAccess = await canUserAccess(to)
+//   if (!canAccess) return '/login'
+// })
+
+
 export default router

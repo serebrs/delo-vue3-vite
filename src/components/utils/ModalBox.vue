@@ -35,7 +35,7 @@ export default {
 <template>
   <div
     @click.self="closeModal"
-    class="absolute overflow-y-auto z-40 inset-y-0 inset-x-0 flex flex-col justify-start items-center space-x-0 space-y-0 h-screen bg-slate-700 bg-opacity-50 overflow-hidden backdrop-blur-sm"
+    class="absolute overflow-hidden overflow-y-auto z-40 inset-y-0 inset-x-0 flex flex-col justify-start items-center space-x-0 space-y-0 h-screen bg-slate-700 bg-opacity-50 backdrop-blur-sm"
   >
     <div
       class="relative p-5 sm:p-10 rounded-md my-10 shadow-md bg-white border border-gray-100"
