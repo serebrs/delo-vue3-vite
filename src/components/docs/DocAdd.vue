@@ -14,12 +14,11 @@ export default {
     }
   },
   methods: {
-    saveDoc() {
-      console.log('Создан новый документ'); // TODO Сохранять промисом -> then закрывать окно  // save formData Promise.then(goBack);
-      this.goBack();
+    async saveDoc() {
+      await console.log('Создан новый документ: ' + JSON.stringify(this.formData)); // TODO Сохранять промисом -> then закрывать окно  // save formData Promise.then(goBack);
+      this.closeModal();
     },
-    goBack() {
-      // this.$router.go(-1)
+    closeModal() {
       this.$router.push({ name: 'docs', query: this.$route.query, replace: true })
     }
   },
@@ -28,7 +27,7 @@ export default {
 </script>
 
 <template>
-  <ModalBox backRouteName="docs">
+  <ModalBox @canceled="closeModal">
     <h1 class="text-2xl text-slate-800 font-semibold">Создание нового документа</h1>
 
     <div class="flex flex-col space-y-6 w-full bg-gray-100 rounded-md p-5">
@@ -78,7 +77,7 @@ export default {
         class="p-2 mr-5 mt-5 w-32 text-gray-700 bg-gray-100 hover:bg-gray-200 shadow-sm rounded-md"
       >Сохранить</button>
       <button
-        @click="goBack"
+        @click="closeModal"
         class="p-2 mr-5 mt-5 w-32 text-gray-700 bg-gray-100 hover:bg-gray-200 shadow-sm rounded-md"
       >Отмена</button>
     </div>

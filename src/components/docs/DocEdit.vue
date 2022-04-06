@@ -3,14 +3,23 @@ import ModalBox from "@/components/utils/ModalBox.vue"; // TODO вынести M
 
 export default {
   props: ['id'],  // $route.params.id
+  data() {
+    return {
+      formData: {
+        type: "in",
+        num: "",
+        date: (new Date()).toLocaleDateString('ru-RU').split('.').reverse().join('-'),
+        title: "",
+        person: []
+      }
+    }
+  },
   methods: {
-    saveDoc() {
-      // save Promise.then(goBack);
-      console.log(`Сохранение отредактированного документа № ${this.id}`); // TODO Сохранять промисом -> then закрывать окно
-      this.goBack();
+    async saveDoc() {
+      await console.log(`Сохранение отредактированного документа № ${this.id}: ${JSON.stringify(this.formData)}`); // TODO Сохранять промисом -> then закрывать окно
+      this.closeModal();
     },
-    goBack() {
-      // this.$router.go(-1)
+    closeModal() {
       this.$router.push({ name: 'docs', query: this.$route.query, replace: true })
     }
   },
@@ -19,7 +28,7 @@ export default {
 </script>
 
 <template>
-  <ModalBox backRouteName="docs">
+  <ModalBox @canceled="closeModal">
     <h1 class="text-2xl text-slate-800 font-semibold">Редактирование документа</h1>
     <p>Id: {{ id }}</p>
 
@@ -29,7 +38,7 @@ export default {
         class="p-2 mr-5 mt-5 w-32 text-gray-700 bg-gray-100 hover:bg-gray-200 shadow-sm rounded-md"
       >Сохранить</button>
       <button
-        @click="goBack"
+        @click="closeModal"
         class="p-2 mr-5 mt-5 w-32 text-gray-700 bg-gray-100 hover:bg-gray-200 shadow-sm rounded-md"
       >Отмена</button>
     </div>
