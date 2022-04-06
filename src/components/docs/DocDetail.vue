@@ -6,7 +6,6 @@ export default {
   methods: {
     goBack() {
       this.$router.push({ name: 'docs', query: this.$route.query, replace: true })
-      // this.$router.go(-1)
     }
   },
   components: { ModalBox } // TODO вынести ModalBox наружу. Как?

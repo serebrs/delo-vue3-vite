@@ -10,7 +10,6 @@ export default {
   },
   methods: {
     closeModal() {
-      // this.$router.go(-1)
       this.$router.push({ name: this.backRouteName, query: this.$route.query, replace: true })
     },
     keydown(e) { // TODO отключить нажатия клавиш под модальным окном

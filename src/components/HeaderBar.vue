@@ -69,7 +69,7 @@ export default {
 </template>
 
 
-<style>
+<style scoped>
 .fade-title-enter-active,
 .fade-title-leave-active {
   transition: all 0.25s ease;
