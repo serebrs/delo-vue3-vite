@@ -28,7 +28,9 @@ export default {
 </script>
 
 <template>
-  <ModalBox title="Создание нового документа" backRouteName="docs">
+  <ModalBox backRouteName="docs">
+    <h1 class="text-2xl text-slate-800 font-semibold">Создание нового документа</h1>
+
     <div class="flex flex-col space-y-6 w-full bg-gray-100 rounded-md p-5">
       <div class="flex flex-row space-x-3 sm:space-x-8">
         <label class="w-96 sm:w-full">

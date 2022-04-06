@@ -1,7 +1,6 @@
 <script>
 export default {
   props: {
-    title: String,
     width: String,
     backRouteName: {
       type: String,
@@ -49,7 +48,6 @@ export default {
       </button>
 
       <div class="flex flex-col justify-start items-start space-y-8">
-        <h1 class="text-2xl text-slate-800 font-semibold">{{ title }}</h1>
         <slot />
       </div>
     </div>

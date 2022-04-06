@@ -13,7 +13,8 @@ export default {
 </script>
 
 <template>
-  <ModalBox title="Просмотр документа" backRouteName="docs">
+  <ModalBox backRouteName="docs">
+    <h1 class="text-2xl text-slate-800 font-semibold">Просмотр документа</h1>
     <p>Id: {{ id }}</p>
     <div>
       <button

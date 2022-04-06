@@ -19,7 +19,8 @@ export default {
 </script>
 
 <template>
-  <ModalBox width="sm" title="Удаление документа" backRouteName="docs">
+  <ModalBox width="sm" backRouteName="docs">
+    <h1 class="text-2xl text-slate-800 font-semibold">Удаление документа</h1>
     <p>Id: {{ id }}</p>
 
     <div>
