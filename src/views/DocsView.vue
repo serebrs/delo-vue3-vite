@@ -18,13 +18,13 @@ export default {
     <DocsFilters @filtersUpdate="updateDocumentsList" />
     <DocsList />
 
-    <teleport to="body">
-      <router-view v-slot="{ Component }">
+    <router-view v-slot="{ Component }">
+      <teleport to="body">
         <transition name="fade-modal">
           <component :is="Component" />
         </transition>
-      </router-view>
-    </teleport>
+      </teleport>
+    </router-view>
   </main>
 </template>
 
