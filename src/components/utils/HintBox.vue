@@ -11,6 +11,14 @@ export default {
 }
 </script>
 
+<script setup>
+// import { ref } from 'vue';
+// defineProps({
+//   hintText: String
+// })
+// const isActive = ref(false);
+</script>
+
 <template>
   <div class="relative" @mouseover="isActive = true" @mouseleave="isActive = false">
     <slot />
