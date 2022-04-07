@@ -1,9 +1,14 @@
 <script>
 export default {
-  emits: ["filtersUpdate"],
+  // emits: ["filtersUpdate"],
   data() {
-    return { // TODO брать фильтры из query
-      filters: {
+    return { 
+      filters: null
+    }
+  },
+  methods: {
+    clearFilters() {
+      this.filters = {
         type: "all",
         dateFrom: (new Date()).toLocaleDateString('ru-RU').split('.').reverse().join('-'),
         dateTo: (new Date()).toLocaleDateString('ru-RU').split('.').reverse().join('-'),
@@ -12,18 +17,17 @@ export default {
       }
     }
   },
-  methods: {
-    send() {
-      this.$emit("filtersUpdate", this.filters); // TODO вместо emita делать router.push вместе с сериализованными фильтрами в query
-    }
-  },
   watch: {
     filters: {
       handler() {
-        this.$emit("filtersUpdate", this.filters); // TODO вместо emita делать router.push вместе с сериализованными фильтрами в query
+        // this.$emit("filtersUpdate", this.filters);
+        this.$router.push({ name: 'docs', query: this.filters })
       },
       deep: true
     }
+  },
+  created() {
+    this.clearFilters();
   }
 }
 </script>
@@ -89,12 +93,12 @@ export default {
       </select>
     </label>
 
-    <label class="block">
+    <label class="block self-end">
       <span class="text-xs mb-1 invisible">&nbsp;</span>
       <button
-        class="text-xs leading-5 mt-1 px-3 py-1 w-full rounded-md bg-sky-600 text-white font-semibold shadow-sm focus:border-sky-300 focus:ring focus:ring-sky-200 focus:ring-opacity-50"
-        @click="send"
-      >Найти</button>
+        class="text-xs ml-1 mb-2 border-b border-dashed border-gray-500 text-gray-500"
+        @click="clearFilters"
+      >Очистить фильтры</button>
     </label>
   </div>
 </template>

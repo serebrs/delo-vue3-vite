@@ -1,4 +1,5 @@
 <script>
+import { v4 as uuidv4 } from 'uuid';
 import ModalBox from "@/components/utils/ModalBox.vue"; // TODO вынести ModalBox наружу. Как?
 
 export default {
@@ -6,6 +7,7 @@ export default {
   methods: {
     async deleteDoc() {
       await console.log(`Удаление документа № ${this.id}`); // TODO Удалять промисом -> then закрывать окно
+      this.$route.query.upd = uuidv4();
       this.closeModal();
     },
     closeModal() {

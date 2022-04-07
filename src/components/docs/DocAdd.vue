@@ -1,4 +1,5 @@
 <script>
+import { v4 as uuidv4 } from 'uuid';
 import ModalBox from "@/components/utils/ModalBox.vue"; // TODO вынести ModalBox наружу. Как?
 
 export default {
@@ -16,10 +17,11 @@ export default {
   methods: {
     async saveDoc() {
       await console.log('Создан новый документ: ' + JSON.stringify(this.formData)); // TODO Сохранять промисом -> then закрывать окно  // save formData Promise.then(goBack);
+      this.$route.query.upd = uuidv4();
       this.closeModal();
     },
     closeModal() {
-      this.$router.push({ name: 'docs', query: this.$route.query, replace: true })
+      this.$router.push({ name: 'docs', query: this.$route.query, replace: true });
     }
   },
   components: { ModalBox } // TODO вынести ModalBox наружу. Как?
