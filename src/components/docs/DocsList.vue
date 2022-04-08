@@ -6,7 +6,9 @@ export default {
     return {
       documents: null,
       dataReceived: false,
-      errorMessage: null
+      errorMessage: null,
+      isBlurred: true,
+      isLoadingFirstTime: true
     }
   },
   methods: {
@@ -14,7 +16,7 @@ export default {
     //   answer = (await res.json()).answer
     async fetchData() {
       try {
-        this.dataReceived = false;
+        this.isBlurred = true;
         await (new Promise((res, rej) => setTimeout(res, 500)));
         this.documents = [
           { id: "1", type: "in", num: Math.floor(Math.random() * 10000), date: "15.11.2021", title: "Regional Paradigm Technician Regional Paradigm Technician Regional Paradigm Technician", person: ["J. Cooper", "Васильев В.В."] },
@@ -34,6 +36,8 @@ export default {
           { id: "15", type: "dogovor", num: Math.floor(Math.random() * 10000), date: "05.12.2021", title: "Install all dependencies, including the dev dependencies", person: ["J. Cooper"] },
         ];
         this.dataReceived = true;
+        this.isBlurred = false;
+        this.isLoadingFirstTime = false;
       } catch (error) {
         this.errorMessage = 'Ошибка! Не могу загрузить данные. ' + error;
         this.dataReceived = false;
@@ -91,14 +95,12 @@ export default {
           >Операция</th>
         </tr>
       </thead>
-      <tbody :class="{ 'blur-sm': !dataReceived }" class="transition-all delay-[5ms]">
-        <!-- <TransitionGroup name="fade-table"> -->
+      <tbody :class="{ 'blur-sm': isBlurred }" class="transition-all delay-[5ms]">
         <template v-if="dataReceived">
           <DocumentsListItem v-for="item in documents" :item="item" :key="item.id" />
         </template>
-        <!-- </TransitionGroup> -->
 
-        <template v-if="!dataReceived">
+        <template v-if="isLoadingFirstTime">
           <tr v-for="index in 15" class="odd:bg-white even:bg-slate-50">
             <td class="px-3 pl-6 py-5">
               <div class="flex-1">
@@ -156,17 +158,3 @@ export default {
     </table>
   </div>
 </template>
-
-<!-- <style scoped>
-.fade-table-enter-active,
-.fade-table-leave-active {
-  transition: opacity 0.25s ease;
-  transition: transform 0.25s;
-}
-
-.fade-table-enter-from,
-.fade-table-leave-to {
-  opacity: 0;
-  transform: translateY(-100px);
-}
-</style> -->
