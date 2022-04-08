@@ -1,3 +1,25 @@
+<script>
+import { useCounterStore } from '@/stores/counter'
+
+export default {
+  setup() {
+    const counterStore = useCounterStore()
+
+    return { counterStore }
+  },
+  methods: {
+    setCounter() {
+      this.counterStore.counter++;
+    }
+  },
+  computed: {
+    counter() {
+      return this.counterStore.counter;
+    }
+  }
+}
+</script>
+
 <template>
   <form>
     <div class="bg-white shadow py-5 px-6 rounded-lg">
@@ -35,11 +57,14 @@
 
       <div class="mt-7 mb-2">
         <button
+          @click.prevent="setCounter"
           class="w-full flex items-center justify-center text-white transition duration-200 bg-sky-500 hover:bg-sky-600 hover:shadow-md active:bg-sky-700 focus:outline-none focus:ring focus:ring-sky-300 px-5 py-2.5 text-sm leading-5 rounded-lg font-semibold"
         >
           Войти
           <LoginIcon class="h-4 w-4 ml-2 mt-[0.15rem]" />
         </button>
+        {{ counter }}
+        <!-- <router-link to="/">Главная страница</router-link> -->
       </div>
     </div>
   </form>
