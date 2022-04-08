@@ -1,8 +1,10 @@
 <script>
+import debounce from 'lodash/debounce';
+
 export default {
   // emits: ["filtersUpdate"],
   data() {
-    return { 
+    return {
       filters: null
     }
   },
@@ -15,13 +17,17 @@ export default {
         title: "",
         person: "all",
       }
-    }
+    },
+    sendFilters: debounce(function () {
+      this.$router.push({ name: 'docs', query: this.filters  })
+    }, 500)
   },
   watch: {
     filters: {
       handler() {
         // this.$emit("filtersUpdate", this.filters);
-        this.$router.push({ name: 'docs', query: this.filters })
+        // this.$router.push({ name: 'docs', query: this.filters })
+        this.sendFilters();
       },
       deep: true
     }
