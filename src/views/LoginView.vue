@@ -1,15 +1,43 @@
 <script>
 import { useCounterStore } from '@/stores/counter'
+import useVuelidate from '@vuelidate/core'
+import { required, minLength, helpers } from '@vuelidate/validators'
 
 export default {
   setup() {
-    const counterStore = useCounterStore()
-
-    return { counterStore }
+    return {
+      counterStore: useCounterStore(),
+      v$: useVuelidate()
+    }
+  },
+  data() {
+    return {
+      username: '',
+      password: ''
+    }
+  },
+  validations() {
+    return {
+      username: {
+        required: helpers.withMessage('Это поле не может быть пустым.', required)
+      },
+      password: {
+        required: helpers.withMessage('Это поле не может быть пустым.', required),
+        minLength: helpers.withMessage(({ $params, $model }) =>
+          `Это поле должно быть не короче ${$params.min} символов, а вы ввели ${$model.length}`,
+          minLength(4))
+      },
+      $autoDirty: true
+    }
   },
   methods: {
     setCounter() {
       this.counterStore.counter++;
+    },
+    async onSubmit() {
+      const isFormCorrect = await this.v$.$validate()
+      if (!isFormCorrect) return
+      this.$router.push('/');
     }
   },
   computed: {
@@ -21,7 +49,7 @@ export default {
 </script>
 
 <template>
-  <form>
+  <form @submit.prevent="onSubmit">
     <div class="bg-white shadow py-5 px-6 rounded-lg">
       <div>
         <label for="username" class="block text-sm font-medium text-slate-700">Имя пользователя</label>
@@ -30,12 +58,17 @@ export default {
             <UserIcon class="h-5 w-5 fill-slate-300" />
           </span>
           <input
+            v-model.trim="username"
+            @blur="v$.username.$touch"
             type="text"
             name="username"
             id="username"
-            class="pl-9 pr-3 py-2 bg-white border shadow-sm border-slate-300 placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-sky-500 block w-full rounded-md sm:text-sm focus:ring-1 invalid:border-pink-500 invalid:text-pink-600 focus:invalid:border-pink-500 focus:invalid:ring-pink-500"
-            value
+            class="sm:text-sm w-full pl-9 pr-3 py-2"
+            :class="{ 'invalid': v$.username.$error }"
           />
+        </div>
+        <div v-if="v$.username.$error" class="text-pink-700 text-xs">
+          <span v-for="error in v$.username.$errors" class="block">{{ error.$message }}</span>
         </div>
       </div>
 
@@ -46,25 +79,32 @@ export default {
             <KeyIcon class="h-5 w-5 fill-slate-300" />
           </span>
           <input
+            v-model="password"
+            @blur="v$.password.$touch"
             type="password"
             name="password"
             id="password"
-            class="pl-9 pr-3 py-2 bg-white border shadow-sm border-slate-300 placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-sky-500 block w-full rounded-md sm:text-sm focus:ring-1 invalid:border-pink-500 invalid:text-pink-600 focus:invalid:border-pink-500 focus:invalid:ring-pink-500"
-            value
+            class="sm:text-sm w-full pl-9 pr-3 py-2"
+            :class="{ 'invalid': v$.password.$error }"
           />
         </div>
+        <div v-if="v$.password.$error" class="text-pink-700 text-xs">
+          <span v-for="error in v$.password.$errors" class="block">{{ error.$message }}</span>
+        </div>
+        <div>{{ v$.password.$params }}</div>
       </div>
 
       <div class="mt-7 mb-2">
         <button
-          @click.prevent="setCounter"
+          @click="setCounter"
           class="w-full flex items-center justify-center text-white transition duration-200 bg-sky-500 hover:bg-sky-600 hover:shadow-md active:bg-sky-700 focus:outline-none focus:ring focus:ring-sky-300 px-5 py-2.5 text-sm leading-5 rounded-lg font-semibold"
+          type="submit"
         >
           Войти
           <LoginIcon class="h-4 w-4 ml-2 mt-[0.15rem]" />
         </button>
-        {{ counter }}
-        <!-- <router-link to="/">Главная страница</router-link> -->
+        <br />
+        Число входов: {{ counter }}
       </div>
     </div>
   </form>
