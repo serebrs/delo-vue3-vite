@@ -27,3 +27,37 @@
     @apply text-sm leading-5 px-3 py-2 w-full;
   }
 }
+
+
+.animate-flyin {
+  animation: flyin 0.3s;
+  animation-fill-mode: forwards;
+}
+@keyframes flyin {
+  from {
+    transform: translateY(-50%);
+    opacity: 0;
+    animation-timing-function: ease-out;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 100%;
+    animation-timing-function: ease-in;
+  }
+}
+
+.animate-flyout {
+  animation: 0.3s flyout;
+  animation-fill-mode: forwards;
+}
+@keyframes flyout {
+  from {
+    opacity: 100%;
+    animation-timing-function: ease-in;
+  }
+  to {
+    transform: translateY(-200px);
+    opacity: 0;
+    animation-timing-function: ease-out;
+  }
+}

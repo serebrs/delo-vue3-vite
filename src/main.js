@@ -4,6 +4,8 @@ import { createPinia } from 'pinia'
 import App from './App.vue'
 import router from './router'
 
+import messagesPlugin from './plugins/messages.plugin'
+import messages from './plugins/messages'
 import {
   MenuIcon, PlusIcon, ChevronDownIcon, ChartSquareBarIcon, ClipboardCheckIcon, DocumentTextIcon, DocumentIcon, XIcon,
   InboxInIcon, ExternalLinkIcon, DocumentDuplicateIcon, PencilIcon, SwitchVerticalIcon, TrashIcon, UserIcon, KeyIcon
@@ -17,6 +19,7 @@ const app = createApp(App)
 
 app.use(createPinia())
   .use(router)
+  .use(messagesPlugin, messages)
 
 app.component('HintBox', HintBox)
   .component('MenuIcon', MenuIcon)
