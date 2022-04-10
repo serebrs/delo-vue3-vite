@@ -91,7 +91,6 @@ export default {
         <div v-if="v$.password.$error" class="text-pink-700 text-xs">
           <span v-for="error in v$.password.$errors" class="block">{{ error.$message }}</span>
         </div>
-        <div>{{ v$.password.$params }}</div>
       </div>
 
       <div class="mt-7 mb-2">
