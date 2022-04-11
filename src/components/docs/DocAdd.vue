@@ -17,7 +17,7 @@ export default {
   methods: {
     async saveDoc() {
       try {
-        await console.log('Создан новый документ: ' + JSON.stringify(this.formData)); // TODO Сохранять промисом -> then закрывать окно  // save formData Promise.then(goBack);
+        await console.log('Создан новый документ: ' + JSON.stringify(this.formData));
         this.$route.query._ = uuidv4() + uuidv4();
         // this.$route.hash = '#' + uuidv4();
         // this.closeModal();

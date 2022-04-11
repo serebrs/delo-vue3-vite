@@ -16,7 +16,7 @@ export default {
       :key="link.id"
       :to="{ name: link.to.name }"
       class="text-gray-400 flex flex-col rounded-md items-center justify-center m-3 transition-colors duration-200 hover:text-gray-300 hover:bg-gray-600"
-      active-class="text-gray-300 bg-gray-600"
+      active-class="text-gray-300 bg-gray-600 pointer-events-none"
     >
       <button
         @click="$emit('navMenuClose')"
