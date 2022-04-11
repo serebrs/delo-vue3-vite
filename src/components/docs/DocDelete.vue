@@ -6,13 +6,21 @@ export default {
   props: ['id'],  // $route.params.id
   methods: {
     async deleteDoc() {
-      await console.log(`Удаление документа № ${this.id}`); // TODO Удалять промисом -> then закрывать окно
-      this.$route.query.upd = uuidv4();
+      try {
+        await console.log(`Удаление документа № ${this.id}`);
+        this.$route.query.message = 'deleted';      
+      } catch (e) {
+        this.$route.query.message = 'err-not-deleted';
+      }
+      this.$route.query.upd = uuidv4(); // TODO добавлять не в query, а в hash!!! См. DocList
       this.closeModal();
     },
     closeModal() {
       this.$router.push({ name: 'docs', query: this.$route.query, replace: true })
     }
+  },
+  mounted() {
+    this.$route.query.message = 'delete-canceled';
   },
   components: { ModalBox } // TODO вынести ModalBox наружу. Как?
 }

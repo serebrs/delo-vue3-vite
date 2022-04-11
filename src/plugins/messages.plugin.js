@@ -2,26 +2,28 @@ export default {
   install: (app, options) => {
     app.config.globalProperties.$showMessage = (message) => {
       let div = document.createElement('div');
-      div.className = "fixed z-50 w-full flex justify-center my-5";
-      div.innerHTML = `<div class="w-64 px-4 py-3 text-sm text-white bg-gray-600 rounded-md shadow-md animate-flyin">
-                        <p>${(options.messages[message] || '---')}</p></div>`;
-      document.body.prepend(div);
-      setTimeout(() => {
-        div.innerHTML = `<div class="w-64 px-4 py-3 text-sm text-white bg-gray-600 rounded-md shadow-md animate-flyout">
-                        <p>${(options.messages[message] || '')}</p></div>`;
-        setTimeout(() => div.remove(), 500);
-      }, 3000);
-    }
+      let div2 = document.createElement('div');
+      let bgColor = "bg-gray-600";
+      
+      div.className = "fixed z-50 w-full flex justify-center my-4";
+      div2.className = "w-64 px-4 py-3 text-sm text-white rounded-md shadow-md animate-flyin";
+      
+      if (~message.indexOf("err-")) {  // проверка на отличие от -1 (трюк с побитовым сдвигом)
+        bgColor = "bg-red-600";
+        div2.innerHTML = `<p>${('[ОШИБКА:] ' + (options.errors[message] || 'Неизвестная ошибка'))}</p>`;
+      }
+      else {
+        bgColor = "bg-gray-600";
+        div2.innerHTML = `<p>${(options.messages[message] || '...')}</p>`;
+      }
 
-    app.config.globalProperties.$showError = (error) => {
-      let div = document.createElement('div');
-      div.className = "fixed z-50 w-full flex justify-center my-5";
-      div.innerHTML = `<div class="w-64 px-4 py-3 text-sm text-white bg-gray-600 rounded-md shadow-md animate-flyin">
-                        <p>${('[ОШИБКА:] ' + (options.errors[error] || '---'))}</p></div>`;
+      div2.classList.add(bgColor);
+      div.prepend(div2);
       document.body.prepend(div);
+
       setTimeout(() => {
-        div.innerHTML = `<div class="w-64 px-4 py-3 text-sm text-white bg-gray-600 rounded-md shadow-md animate-flyout">
-                        <p>${('[ОШИБКА:] ' + (options.errors[error] || 'Неизвестная ошибка'))}</p></div>`;
+        div2.classList.remove("animate-flyin");
+        div2.classList.add("animate-flyout");
         setTimeout(() => div.remove(), 500);
       }, 3000);
     }

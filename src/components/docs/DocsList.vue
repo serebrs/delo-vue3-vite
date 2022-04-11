@@ -51,12 +51,16 @@ export default {
   },
   async created() {
     this.$watch(
-      () => this.filtersQuery,
+      () => this.filtersQuery, // TODO следить не за query, а за hash!!! Потому что в query добавляется message, что приводит к ненужному обновлению
       (nv) => {
         console.log('query changed ' + nv);
-        this.fetchData()
+        if (this.$route.query.message) {
+          this.$showMessage(this.$route.query.message);
+          delete this.$route.query.message;
+        }
+        this.fetchData();
       },
-      // { immediate: true }
+      { immediate: true }
     )
   },
   components: { DocumentsListItem }
