@@ -8,19 +8,23 @@ export default {
     async deleteDoc() {
       try {
         await console.log(`Удаление документа № ${this.id}`);
-        this.$route.query.message = 'deleted';      
+        // this.$route.query.message = 'deleted';      
+        this.$route.query._ = uuidv4() + uuidv4();
+        // this.$route.hash = '#' + uuidv4();
+        // this.closeModal();
+        this.$showMessage('deleted');
+        this.$router.push({ name: 'docs', query: this.$route.query, replace: true })
       } catch (e) {
-        this.$route.query.message = 'err-not-deleted';
+        this.$showMessage('err-not-deleted');
       }
-      this.$route.query.upd = uuidv4(); // TODO добавлять не в query, а в hash!!! См. DocList
-      this.closeModal();
     },
     closeModal() {
-      this.$router.push({ name: 'docs', query: this.$route.query, replace: true })
+      this.$showMessage('delete-canceled');
+      this.$router.push({ name: 'docs', query: this.$route.query, /*hash: this.$route.hash,*/ replace: true })
     }
   },
   mounted() {
-    this.$route.query.message = 'delete-canceled';
+    // this.$route.query.message = 'delete-canceled';
   },
   components: { ModalBox } // TODO вынести ModalBox наружу. Как?
 }

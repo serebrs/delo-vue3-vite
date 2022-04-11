@@ -40,6 +40,7 @@ export default {
         this.isLoadingFirstTime = false;
       } catch (error) {
         this.errorMessage = 'Ошибка! Не могу загрузить данные. ' + error;
+        this.$showMessage('err-fetch-failed');
         this.dataReceived = false;
       }
     },
@@ -51,16 +52,16 @@ export default {
   },
   async created() {
     this.$watch(
-      () => this.filtersQuery, // TODO следить не за query, а за hash!!! Потому что в query добавляется message, что приводит к ненужному обновлению
+      () => this.filtersQuery,
       (nv) => {
         console.log('query changed ' + nv);
-        if (this.$route.query.message) {
-          this.$showMessage(this.$route.query.message);
-          delete this.$route.query.message;
-        }
+        // if (this.$route.query.message) {
+        //   this.$showMessage(this.$route.query.message);
+        //   delete this.$route.query.message;
+        // }
         this.fetchData();
       },
-      { immediate: true }
+      { immediate: true }   // TODO загружаются два раза при первой загрузке, см. DocsFilters. Если убрать immediate, то по F5 не будет загрузки, т.к. query не менялся
     )
   },
   components: { DocumentsListItem }
