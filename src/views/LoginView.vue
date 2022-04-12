@@ -46,7 +46,7 @@ export default {
     }
   },
   mounted() {
-    // this.$showMessage('login');
+    this.$showMessage('login');
   }
 }
 </script>

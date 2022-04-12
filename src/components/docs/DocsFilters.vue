@@ -40,11 +40,11 @@ export default {
       { immediate: true, deep: true }  // TODO При первой загрузке загружаются два раза, см. DocsList
     );
     
-    this.$watch(
-      () => JSON.stringify(this.$route.query),
-      (nv) => this.clearFilters(),
-      {  }
-    );
+    // this.$watch( // FIXME фильтры обновляются при изменении query, но начинаются проблемы с внешними ссылками
+    //   () => JSON.stringify(this.$route.query),
+    //   (nv) => this.clearFilters(),
+    //   {  }
+    // );
   }
 }
 </script>
