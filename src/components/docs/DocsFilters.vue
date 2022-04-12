@@ -11,11 +11,11 @@ export default {
   methods: {
     clearFilters() {
       this.filters = {
-        type: "all",
-        dateFrom: (new Date()).toLocaleDateString('ru-RU').split('.').reverse().join('-'),
-        dateTo: (new Date()).toLocaleDateString('ru-RU').split('.').reverse().join('-'),
-        title: "",
-        person: "all",
+        type: this.$route.query.type || "all",
+        dateFrom: this.$route.query.dateFrom || (new Date()).toLocaleDateString('ru-RU').split('.').reverse().join('-'),
+        dateTo: this.$route.query.dateTo || (new Date()).toLocaleDateString('ru-RU').split('.').reverse().join('-'),
+        title: this.$route.query.title || "",
+        person: this.$route.query.person || "all",
       }
     },
     sendFilters: debounce(function () {
@@ -38,6 +38,12 @@ export default {
       () => this.filters,
       (nv) => this.sendFilters(),
       { immediate: true, deep: true }  // TODO При первой загрузке загружаются два раза, см. DocsList
+    );
+    
+    this.$watch(
+      () => JSON.stringify(this.$route.query),
+      (nv) => this.clearFilters(),
+      {  }
     );
   }
 }
