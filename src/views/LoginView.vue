@@ -1,12 +1,10 @@
 <script>
-import { useCounterStore } from '@/stores/counter'
 import useVuelidate from '@vuelidate/core'
 import { required, minLength, helpers } from '@vuelidate/validators'
 
 export default {
   setup() {
     return {
-      counterStore: useCounterStore(),
       v$: useVuelidate()
     }
   },
@@ -31,18 +29,10 @@ export default {
     }
   },
   methods: {
-    setCounter() {
-      this.counterStore.counter++;
-    },
     async onSubmit() {
       const isFormCorrect = await this.v$.$validate()
       if (!isFormCorrect) return
       this.$router.push('/');
-    }
-  },
-  computed: {
-    counter() {
-      return this.counterStore.counter;
     }
   },
   mounted() {
@@ -83,14 +73,13 @@ export default {
       </div>
 
       <div class="mt-7 mb-2">
-        <button @click="setCounter"
+        <button
           class="w-full flex items-center justify-center text-white transition duration-200 bg-sky-500 hover:bg-sky-600 hover:shadow-md active:bg-sky-700 focus:outline-none focus:ring focus:ring-sky-300 px-5 py-2.5 text-sm leading-5 rounded-lg font-semibold"
           type="submit">
           Войти
           <LoginIcon class="h-4 w-4 ml-2 mt-[0.15rem]" />
         </button>
-        <br />
-        Число входов: {{ counter }}
       </div>
-    </div> </form>
+    </div>
+  </form>
 </template>
