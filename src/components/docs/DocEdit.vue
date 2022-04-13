@@ -1,8 +1,14 @@
 <script>
 import { v4 as uuidv4 } from 'uuid';
+import { useDocsFiltersStore } from '@/stores/docs.filters'
 import ModalBox from "@/components/utils/ModalBox.vue"; // TODO вынести ModalBox наружу. Как?
 
 export default {
+  setup() {
+    return {
+      filtersStore: useDocsFiltersStore(),
+    }
+  },
   props: ['id'],  // $route.params.id
   data() {
     return {
@@ -19,10 +25,9 @@ export default {
     async saveDoc() {
       try {
         await console.log(`Сохранение отредактированного документа № ${this.id}: ${JSON.stringify(this.formData)}`); // TODO Сохранять промисом -> then закрывать окно
-        this.$route.query._ = uuidv4() + uuidv4();
-        // this.closeModal();
         this.$showMessage('edited');
         this.$router.push({ name: 'docs', query: this.$route.query, replace: true })
+        this.filtersStore.hash = uuidv4() + uuidv4();
       }
       catch (e) {
         this.$showMessage('err-not-edited');
@@ -48,5 +53,5 @@ export default {
       <button @click="closeModal"
         class="p-2 mr-5 mt-5 w-32 text-gray-700 bg-gray-100 hover:bg-gray-200 shadow-sm rounded-md">Отмена</button>
     </div>
-    </ModalBox>
+  </ModalBox>
 </template>

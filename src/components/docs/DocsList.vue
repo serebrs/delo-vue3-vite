@@ -62,6 +62,7 @@ export default {
     this.filtersStore.$subscribe((mutation, state) => {
       this.fetchData(state.filters);
     })
+    console.log('DocList created');
   },
   // async created() {
   //   this.$watch(
