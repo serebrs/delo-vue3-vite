@@ -89,6 +89,10 @@ const router = createRouter({
   //strict: true
 })
 
+// router.afterEach((to, from) => {
+//   console.log(from.name);
+//   if (from.name === 'login') $showMessage('login');
+// })
 
 
 // https://router.vuejs.org/guide/advanced/navigation-guards.html#global-before-guards

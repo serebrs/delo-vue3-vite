@@ -34,9 +34,6 @@ export default {
       if (!isFormCorrect) return
       this.$router.push('/');
     }
-  },
-  mounted() {
-    this.$showMessage('login');
   }
 }
 </script>
