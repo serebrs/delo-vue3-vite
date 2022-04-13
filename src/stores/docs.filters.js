@@ -11,7 +11,7 @@ export const useDocsFiltersStore = defineStore({
       person: null,
     },
     touched: false,
-    hash: null
+    timestamp: null
   }),
   // getters: {
   //   doubleCount: (state) => state.counter * 2

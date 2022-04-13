@@ -1,5 +1,4 @@
 <script>
-import { v4 as uuidv4 } from 'uuid';
 import { useDocsFiltersStore } from '@/stores/docs.filters'
 import ModalBox from "@/components/utils/ModalBox.vue"; // TODO вынести ModalBox наружу. Как?
 
@@ -26,7 +25,7 @@ export default {
         await console.log('Создан новый документ: ' + JSON.stringify(this.formData));
         this.$showMessage('added');
         this.$router.push({ name: 'docs', query: this.$route.query, replace: true });
-        this.filtersStore.hash = uuidv4() + uuidv4();
+        this.filtersStore.timestamp = Date.now();
       }
       catch (e) {
         this.$showMessage('err-not-added');

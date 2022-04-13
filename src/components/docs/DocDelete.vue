@@ -1,5 +1,4 @@
 <script>
-import { v4 as uuidv4 } from 'uuid';
 import { useDocsFiltersStore } from '@/stores/docs.filters'
 import ModalBox from "@/components/utils/ModalBox.vue"; // TODO вынести ModalBox наружу. Как?
 
@@ -16,7 +15,7 @@ export default {
         await console.log(`Удаление документа № ${this.id}`);
         this.$showMessage('deleted');
         this.$router.push({ name: 'docs', query: this.$route.query, replace: true })
-        this.filtersStore.hash = uuidv4() + uuidv4();
+        this.filtersStore.timestamp = Date.now();
       } catch (e) {
         this.$showMessage('err-not-deleted');
       }
