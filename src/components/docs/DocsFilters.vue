@@ -1,8 +1,13 @@
 <script>
 import debounce from 'lodash/debounce';
+import { useDocFiltersStore } from '@/stores/doc.filters'
 
 export default {
-  // emits: ["filtersUpdate"],
+  setup() {
+    return {
+      filtersStore: useDocFiltersStore(),
+    }
+  },
   data() {
     return {
       filters: null
@@ -11,15 +16,30 @@ export default {
   methods: {
     clearFilters() {
       this.filters = {
-        type: this.$route.query.type || "all",
-        dateFrom: this.$route.query.dateFrom || (new Date()).toLocaleDateString('ru-RU').split('.').reverse().join('-'),
-        dateTo: this.$route.query.dateTo || (new Date()).toLocaleDateString('ru-RU').split('.').reverse().join('-'),
-        title: this.$route.query.title || "",
-        person: this.$route.query.person || "all",
+        type: "all",
+        dateFrom: (new Date()).toLocaleDateString('ru-RU').split('.').reverse().join('-'),
+        dateTo: (new Date()).toLocaleDateString('ru-RU').split('.').reverse().join('-'),
+        title: "",
+        person: "all",
       }
     },
-    sendFilters: debounce(function () {
-      this.$router.push({ name: 'docs', query: this.filters })
+    loadFilters() {
+      this.filters = {
+        // type: this.$route.query.type || "all",
+        // dateFrom: this.$route.query.dateFrom || (new Date()).toLocaleDateString('ru-RU').split('.').reverse().join('-'),
+        // dateTo: this.$route.query.dateTo || (new Date()).toLocaleDateString('ru-RU').split('.').reverse().join('-'),
+        // title: this.$route.query.title || "",
+        // person: this.$route.query.person || "all",
+        type: this.filtersStore.filters.type || "all",
+        dateFrom: this.filtersStore.filters.dateFrom || (new Date()).toLocaleDateString('ru-RU').split('.').reverse().join('-'),
+        dateTo: this.filtersStore.filters.dateTo || (new Date()).toLocaleDateString('ru-RU').split('.').reverse().join('-'),
+        title: this.filtersStore.filters.title || "",
+        person: this.filtersStore.filters.person || "all",
+      }
+    },
+    saveFilters: debounce(function (filters) {
+      this.filtersStore.saveFilters(filters);
+      // this.$router.push({ name: 'docs', query: this.filters })
     }, 500)
   },
   // watch: {
@@ -32,14 +52,14 @@ export default {
   //   }
   // },
   created() {
-    this.clearFilters();
-    
+    this.loadFilters();
+
     this.$watch(
       () => this.filters,
-      (nv) => this.sendFilters(),
-      { immediate: true, deep: true }  // TODO При первой загрузке загружаются два раза, см. DocsList
+      (nv) => this.saveFilters(nv),
+      { immediate: true, deep: true }
     );
-    
+
     // this.$watch( // FIXME фильтры обновляются при изменении query, но начинаются проблемы с внешними ссылками
     //   () => JSON.stringify(this.$route.query),
     //   (nv) => this.clearFilters(),
@@ -97,5 +117,6 @@ export default {
       <span class="text-xs mb-1 invisible">&nbsp;</span>
       <button class="text-xs ml-1 mb-2 border-b border-dashed border-gray-500 text-gray-500"
         @click="clearFilters">Очистить фильтры</button>
-    </label>  </div>
+    </label>
+  </div>
 </template>
