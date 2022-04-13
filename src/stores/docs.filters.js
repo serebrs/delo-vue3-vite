@@ -1,6 +1,6 @@
 import { defineStore } from 'pinia'
 
-export const useDocFiltersStore = defineStore({
+export const useDocsFiltersStore = defineStore({
   id: 'docFilters',
   state: () => ({
     filters: {

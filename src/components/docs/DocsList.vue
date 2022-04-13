@@ -1,11 +1,11 @@
 <script>
-import { useDocFiltersStore } from '@/stores/doc.filters'
+import { useDocsFiltersStore } from '@/stores/docs.filters'
 import DocumentsListItem from "@/components/docs/DocsListItem.vue";
 
 export default {
   setup() {
     return {
-      filtersStore: useDocFiltersStore(),
+      filtersStore: useDocsFiltersStore(),
     }
   },
   data() {

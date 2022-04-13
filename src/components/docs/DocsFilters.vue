@@ -1,11 +1,11 @@
 <script>
 import debounce from 'lodash/debounce';
-import { useDocFiltersStore } from '@/stores/doc.filters'
+import { useDocsFiltersStore } from '@/stores/docs.filters'
 
 export default {
   setup() {
     return {
-      filtersStore: useDocFiltersStore(),
+      filtersStore: useDocsFiltersStore(),
     }
   },
   data() {
