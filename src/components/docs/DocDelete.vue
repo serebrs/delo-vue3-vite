@@ -13,15 +13,15 @@ export default {
     async deleteDoc() {
       try {
         await console.log(`Удаление документа № ${this.id}`);
-        this.$showMessage('deleted');
+        this.$showMessage('docs/deleted');
         this.$router.push({ name: 'docs', query: this.$route.query, replace: true })
         this.filtersStore.timestamp = Date.now();
       } catch (e) {
-        this.$showMessage('err-not-deleted');
+        this.$showError('docs/delete-fail');
       }
     },
     closeModal() {
-      this.$showMessage('delete-canceled');
+      this.$showMessage('docs/delete-canceled');
       this.$router.push({ name: 'docs', query: this.$route.query, replace: true })
     }
   },

@@ -24,16 +24,16 @@ export default {
     async saveDoc() {
       try {
         await console.log(`Сохранение отредактированного документа № ${this.id}: ${JSON.stringify(this.formData)}`); // TODO делать Object.assing здесь и передавать в функцию копию объекта
-        this.$showMessage('edited');
+        this.$showMessage('docs/edited');
         this.$router.push({ name: 'docs', query: this.$route.query, replace: true })
         this.filtersStore.timestamp = Date.now();
       }
       catch (e) {
-        this.$showMessage('err-not-edited');
+        this.$showError('docs/edit-fail');
       }
     },
     closeModal() {
-      this.$showMessage('edit-canceled');
+      this.$showMessage('docs/edit-canceled');
       this.$router.push({ name: 'docs', query: this.$route.query, replace: true })
     }
   },

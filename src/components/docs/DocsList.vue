@@ -50,7 +50,7 @@ export default {
         this.isBlurred = false;
         this.isLoadingFirstTime = false;
       } catch (error) {
-        this.$showMessage('err-fetch-failed');
+        this.$showError('docs/fetch-failed');
         this.dataReceived = false;
       }
     },
@@ -62,7 +62,6 @@ export default {
     this.filtersStore.$subscribe((mutation, state) => {
       this.fetchData(state.filters);
     })
-    console.log('DocList created');
   },
   // async created() {
   //   this.$watch(

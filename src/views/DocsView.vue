@@ -3,11 +3,11 @@ import DocsList from "@/components/docs/DocsList.vue";
 import DocsFilters from "@/components/docs/DocsFilters.vue";
 
 export default {
-  beforeRouteEnter(to, from, next) {
-    next(vm => {
-      if (from.name === 'login') vm.$showMessage('login');
-    })
-  },
+  // beforeRouteEnter(to, from, next) {
+  //   next(vm => {
+  //     if (from.name === 'login') vm.$showMessage('auth/login');
+  //   })
+  // },
   components: { DocsList, DocsFilters }
 }
 </script>

@@ -23,16 +23,16 @@ export default {
     async saveDoc() {
       try {
         await console.log('Создан новый документ: ' + JSON.stringify(this.formData)); // TODO делать Object.assing здесь и передавать в функцию копию объекта
-        this.$showMessage('added');
+        this.$showMessage('docs/added');
         this.$router.push({ name: 'docs', query: this.$route.query, replace: true });
         this.filtersStore.timestamp = Date.now();
       }
       catch (e) {
-        this.$showMessage('err-not-added');
+        this.$showError('docs/add-fail');
       }
     },
     closeModal() {
-      this.$showMessage('add-canceled');
+      this.$showMessage('docs/add-canceled');
       this.$router.push({ name: 'docs', query: this.$route.query, replace: true });
     }
   },

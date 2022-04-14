@@ -39,8 +39,9 @@ export default {
       try {
         await this.authStore.login({ email: this.email, password: this.password });
         this.$router.push('/');
+        this.$showMessage('auth/login');
       } catch (e) {
-        this.$showMessage('err-no-auth');
+        this.$showError('auth/login-fail');
       }
     }
   }
