@@ -1,6 +1,6 @@
 <script>
 import useVuelidate from '@vuelidate/core'
-import { required, minLength, helpers } from '@vuelidate/validators'
+import { required, email, minLength, helpers } from '@vuelidate/validators'
 
 export default {
   setup() {
@@ -10,14 +10,15 @@ export default {
   },
   data() {
     return {
-      username: '',
+      email: '',
       password: ''
     }
   },
   validations() {
     return {
-      username: {
-        required: helpers.withMessage('Это поле не может быть пустым.', required)
+      email: {
+        required: helpers.withMessage('Это поле не может быть пустым.', required),
+        email: helpers.withMessage('Это поле должно содержать адрес электронной почты.', email)
       },
       password: {
         required: helpers.withMessage('Это поле не может быть пустым.', required),
@@ -42,16 +43,16 @@ export default {
   <form @submit.prevent="onSubmit">
     <div class="bg-white shadow py-5 px-6 rounded-lg">
       <div>
-        <label for="username" class="block text-sm font-medium text-slate-700">Имя пользователя</label>
+        <label for="email" class="block text-sm font-medium text-slate-700">Email пользователя</label>
         <div class="mt-1 relative">
           <span class="absolute inset-y-0 left-0 flex items-center pl-2">
             <UserIcon class="h-5 w-5 fill-slate-300" />
           </span>
-          <input v-model.trim="username" @blur="v$.username.$touch" type="text" name="username" id="username"
-            class="sm:text-sm w-full pl-9 pr-3 py-2" :class="{ 'invalid': v$.username.$error }" />
+          <input v-model.trim="email" @blur="v$.email.$touch" type="text" name="email" id="email"
+            class="sm:text-sm w-full pl-9 pr-3 py-2" :class="{ 'invalid': v$.email.$error }" />
         </div>
-        <div v-if="v$.username.$error" class="text-pink-700 text-xs">
-          <span v-for="error in v$.username.$errors" class="block">{{ error.$message }}</span>
+        <div v-if="v$.email.$error" class="text-pink-700 text-xs">
+          <span v-for="error in v$.email.$errors" class="block">{{ error.$message }}</span>
         </div>
       </div>
 

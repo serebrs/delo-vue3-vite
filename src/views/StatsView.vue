@@ -1,10 +1,5 @@
 <script>
 export default {
-  beforeRouteEnter(to, from, next) {
-    next(vm => {
-      if (from.name === 'login') vm.$showMessage('login');
-    })
-  },
 
 }
 </script>

@@ -23,7 +23,7 @@ export default {
   methods: {
     async saveDoc() {
       try {
-        await console.log(`Сохранение отредактированного документа № ${this.id}: ${JSON.stringify(this.formData)}`); // TODO Сохранять промисом -> then закрывать окно
+        await console.log(`Сохранение отредактированного документа № ${this.id}: ${JSON.stringify(this.formData)}`); // TODO делать Object.assing здесь и передавать в функцию копию объекта
         this.$showMessage('edited');
         this.$router.push({ name: 'docs', query: this.$route.query, replace: true })
         this.filtersStore.timestamp = Date.now();

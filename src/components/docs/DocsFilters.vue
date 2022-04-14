@@ -37,7 +37,7 @@ export default {
         person: this.filtersStore.filters.person || "all",
       }
     },
-    saveFilters: debounce(function (filters) {
+    saveFilters: debounce(function (filters) { // TODO делать Object.assing здесь и передавать в функцию копию объекта
       this.filtersStore.saveFilters(filters);
       // this.$router.push({ name: 'docs', query: this.filters })
     }, 500)

@@ -22,7 +22,7 @@ export default {
   methods: {
     async saveDoc() {
       try {
-        await console.log('Создан новый документ: ' + JSON.stringify(this.formData));
+        await console.log('Создан новый документ: ' + JSON.stringify(this.formData)); // TODO делать Object.assing здесь и передавать в функцию копию объекта
         this.$showMessage('added');
         this.$router.push({ name: 'docs', query: this.$route.query, replace: true });
         this.filtersStore.timestamp = Date.now();
