@@ -36,12 +36,14 @@ export default {
       const isFormCorrect = await this.v$.$validate()
       if (!isFormCorrect) return
 
+      const formData = {
+        email: this.email,
+        password: this.password
+      };
+
       try {
-        const formData = {
-          user: this.user,
-          password: this.password
-        };
-        this.loginStore.login(formData);
+        await this.loginStore.login(formData);
+        console.log('in LoginView');
         this.$router.push('/');
       } catch (e) {
         this.$showMessage('err-no-auth');

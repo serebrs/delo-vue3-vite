@@ -1,4 +1,5 @@
 import { defineStore } from 'pinia'
+import { getAuth, signInWithEmailAndPassword } from "firebase/auth"
 
 export const useLoginStore = defineStore({
   id: 'login',
@@ -9,13 +10,16 @@ export const useLoginStore = defineStore({
   //   doubleCount: (state) => state.counter * 2
   // },
   actions: {
-    login({email, password}) {
+    async login({ email, password }) {
       try {
-        //auth() // TODO 
+        const auth = getAuth();
+        await signInWithEmailAndPassword(auth, email, password);
+        console.log('Successfully logged in!');
         this.isLoggedIn = true;
-      } catch (e) {
+      } catch (error) {
         this.isLoggedIn = false;
-        throw e;
+        console.log(error.code + '  ' + error.message)
+        throw error;
       }
     }
   }

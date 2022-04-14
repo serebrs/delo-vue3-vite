@@ -4,6 +4,8 @@ import { createPinia } from 'pinia'
 import App from './App.vue'
 import router from './router'
 
+import { initializeApp } from "firebase/app";
+
 import messagesPlugin from './plugins/messages.plugin'
 import messages from './plugins/messages'
 import {
@@ -14,6 +16,17 @@ import { LogoutIcon, LoginIcon } from "@heroicons/vue/outline";
 
 import HintBox from "./components/utils/HintBox.vue"
 import "./assets/app.css"
+
+
+const firebaseApp = initializeApp({
+  apiKey: "AIzaSyBW2zMZAqu1eBhYo1j_jNgt2gDQKRKusDE",
+  authDomain: "delo-c0c2e.firebaseapp.com",
+  projectId: "delo-c0c2e",
+  storageBucket: "delo-c0c2e.appspot.com",
+  messagingSenderId: "1060057817341",
+  appId: "1:1060057817341:web:3e6bc9da47ae05368f5e94"
+});
+
 
 const app = createApp(App)
 
