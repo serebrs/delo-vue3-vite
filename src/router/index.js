@@ -1,4 +1,5 @@
 import { createRouter, createWebHistory } from 'vue-router'
+import { useLoginStore } from '@/stores/login'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -89,16 +90,22 @@ const router = createRouter({
   //strict: true
 })
 
+router.beforeEach((to) => {
+  const store = useLoginStore();
+  if (!store.isLoggedIn && to.name !== 'login') {
+    return { name: 'login' }
+  }
+})
 
 // https://router.vuejs.org/guide/advanced/navigation-guards.html#global-before-guards
 // 
 // -----------------------------------------------------------------------------------
-router.beforeEach(async (to, from) => {
-  let isAuthenticated = true; // TODO
-  if ( !isAuthenticated && to.name !== 'login' ) {
-    return { name: 'login' }
-  }
-})
+// router.beforeEach(async (to, from) => {
+//   let isAuthenticated = true; // TODO
+//   if ( !isAuthenticated && to.name !== 'login' ) {
+//     return { name: 'login' }
+//   }
+// })
 // -----------------------------------------------------------------------------------
 // router.beforeEach(async (to, from) => {
 //   const canAccess = await canUserAccess(to)

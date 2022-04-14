@@ -1,11 +1,13 @@
 <script>
 import useVuelidate from '@vuelidate/core'
 import { required, email, minLength, helpers } from '@vuelidate/validators'
+import { useLoginStore } from '@/stores/login'
 
 export default {
   setup() {
     return {
-      v$: useVuelidate()
+      v$: useVuelidate(),
+      loginStore: useLoginStore(),
     }
   },
   data() {
@@ -33,7 +35,17 @@ export default {
     async onSubmit() {
       const isFormCorrect = await this.v$.$validate()
       if (!isFormCorrect) return
-      this.$router.push('/');
+
+      try {
+        const formData = {
+          user: this.user,
+          password: this.password
+        };
+        this.loginStore.login(formData);
+        this.$router.push('/');
+      } catch (e) {
+        this.$showMessage('err-no-auth');
+      }
     }
   }
 }
