@@ -17,6 +17,7 @@ export default {
       try {
         await this.authStore.logout();
         this.$router.push({ name: 'login' });
+        this.$showMessage('logout');
       } catch (e) {
         this.$showMessage('err-no-logout');
       }
