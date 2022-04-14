@@ -33,17 +33,11 @@ export default {
   },
   methods: {
     async onSubmit() {
-      const isFormCorrect = await this.v$.$validate()
-      if (!isFormCorrect) return
-
-      const formData = {
-        email: this.email,
-        password: this.password
-      };
+      const isFormCorrect = await this.v$.$validate();
+      if (!isFormCorrect) return;
 
       try {
-        await this.loginStore.login(formData);
-        console.log('in LoginView');
+        await this.loginStore.login({ email: this.email, password: this.password });
         this.$router.push('/');
       } catch (e) {
         this.$showMessage('err-no-auth');

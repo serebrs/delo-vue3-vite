@@ -14,7 +14,6 @@ export const useLoginStore = defineStore({
       try {
         const auth = getAuth();
         await signInWithEmailAndPassword(auth, email, password);
-        console.log('Successfully logged in!');
         this.isLoggedIn = true;
       } catch (error) {
         this.isLoggedIn = false;
