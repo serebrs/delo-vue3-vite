@@ -37,8 +37,8 @@ export default {
         person: this.filtersStore.filters.person || "all",
       }
     },
-    saveFilters: debounce(function (filters) { // TODO делать Object.assing здесь и передавать в функцию копию объекта
-      this.filtersStore.saveFilters(filters);
+    saveFilters: debounce(async function (filters) { // TODO делать Object.assing здесь и передавать в функцию копию объекта
+      await this.filtersStore.saveFilters(filters);
       // this.$router.push({ name: 'docs', query: this.filters })
     }, 500)
   },
@@ -59,12 +59,6 @@ export default {
       (nv) => this.saveFilters(nv),
       { immediate: true, deep: true }
     );
-
-    // this.$watch( // FIXME фильтры обновляются при изменении query, но начинаются проблемы с внешними ссылками
-    //   () => JSON.stringify(this.$route.query),
-    //   (nv) => this.clearFilters(),
-    //   {  }
-    // );
   }
 }
 </script>
