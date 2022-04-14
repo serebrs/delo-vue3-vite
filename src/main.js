@@ -27,7 +27,6 @@ const firebaseApp = initializeApp({
   appId: "1:1060057817341:web:3e6bc9da47ae05368f5e94"
 });
 
-
 const app = createApp(App)
 
 app.use(createPinia())

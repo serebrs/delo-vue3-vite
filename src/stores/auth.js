@@ -1,8 +1,8 @@
 import { defineStore } from 'pinia'
-import { getAuth, signInWithEmailAndPassword } from "firebase/auth"
+import { getAuth, signInWithEmailAndPassword, signOut } from "firebase/auth"
 
-export const useLoginStore = defineStore({
-  id: 'login',
+export const useAuthStore = defineStore({
+  id: 'auth',
   state: () => ({
     isLoggedIn: false,
   }),
@@ -17,6 +17,16 @@ export const useLoginStore = defineStore({
         this.isLoggedIn = true;
       } catch (error) {
         this.isLoggedIn = false;
+        console.log(error.code + '  ' + error.message)
+        throw error;
+      }
+    },
+    async logout() {
+      try {
+        const auth = getAuth();
+        await signOut(auth);
+        this.isLoggedIn = false;
+      } catch (error) {
         console.log(error.code + '  ' + error.message)
         throw error;
       }

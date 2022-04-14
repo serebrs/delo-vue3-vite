@@ -9,11 +9,6 @@ export default {
   props: {
     title: String
   },
-  methods: {
-    // modalAction(formData) {
-    //   console.log(`returned from modal ${JSON.stringify(formData)}`);
-    // }
-  },
   components: {
     DropdownMenuButton //, ModalBoxButton
   }

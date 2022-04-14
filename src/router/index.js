@@ -1,5 +1,5 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import { useLoginStore } from '@/stores/login'
+import { useAuthStore } from '@/stores/auth'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -91,7 +91,7 @@ const router = createRouter({
 })
 
 router.beforeEach((to) => {
-  const store = useLoginStore();
+  const store = useAuthStore();
   if (!store.isLoggedIn && to.name !== 'login') {
     return { name: 'login' }
   }
