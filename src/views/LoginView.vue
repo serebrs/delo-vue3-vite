@@ -41,7 +41,7 @@ export default {
         this.$router.push('/');
         this.$showMessage('auth/login');
       } catch (e) {
-        this.$showError('auth/login-fail');
+        this.$showError(e.code);
       }
     }
   }

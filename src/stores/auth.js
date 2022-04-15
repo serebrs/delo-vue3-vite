@@ -17,7 +17,6 @@ export const useAuthStore = defineStore({
         this.isLoggedIn = true;
       } catch (error) {
         this.isLoggedIn = false;
-        console.log(error.code + '  ' + error.message)
         throw error;
       }
     },
@@ -27,7 +26,6 @@ export const useAuthStore = defineStore({
         await signOut(auth);
         this.isLoggedIn = false;
       } catch (error) {
-        console.log(error.code + '  ' + error.message)
         throw error;
       }
     }

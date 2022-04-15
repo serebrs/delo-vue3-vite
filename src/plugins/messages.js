@@ -12,6 +12,9 @@ export default {
   errors: {
     'auth/login-fail': 'Не удается авторизоваться в приложении',
     'auth/logout-fail': 'Не удается выйти из приложения',
+    'auth/user-not-found': 'Пользователя с таким именем не существует',
+    'auth/internal-error': 'Ошибка сервера аутентификации',
+    'auth/wrong-password': 'Неверный пароль',
     'docs/delete-fail': 'Документ не был удален',
     'docs/add-fail': 'Документ не был добавлен',
     'docs/edit-fail': 'Документ не был изменен',
