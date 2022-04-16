@@ -21,13 +21,9 @@ export const useAuthStore = defineStore({
       }
     },
     async logout() {
-      try {
-        const auth = getAuth();
-        await signOut(auth);
-        this.isLoggedIn = false;
-      } catch (error) {
-        throw error;
-      }
+      const auth = getAuth();
+      await signOut(auth);
+      this.isLoggedIn = false;
     },
   },
 });

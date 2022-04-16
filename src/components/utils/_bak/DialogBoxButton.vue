@@ -17,7 +17,7 @@ export default {
     },
   },
   watch: {
-    isDialogBoxActive(newVal, oldVal) {
+    isDialogBoxActive(newVal) {
       if (newVal) {
         console.log("show");
         window.addEventListener("keydown", this.keydown);

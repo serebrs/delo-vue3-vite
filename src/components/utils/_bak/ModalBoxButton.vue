@@ -36,7 +36,7 @@ export default {
     },
   },
   watch: {
-    isModalBoxActive(newVal, oldVal) {
+    isModalBoxActive(newVal) {
       if (newVal) {
         console.log("show");
         window.addEventListener("keydown", this.keydown);

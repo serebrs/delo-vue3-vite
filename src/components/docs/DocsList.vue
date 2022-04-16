@@ -27,7 +27,7 @@ export default {
         //   res = await fetch('https://yesno.wtf/api')
         //   answer = (await res.json()).answer
         this.isBlurred = true;
-        await new Promise((res, rej) => setTimeout(res, 500));
+        await new Promise((res) => setTimeout(res, 500));
         this.documents = [
           {
             id: "1",
@@ -254,7 +254,11 @@ export default {
         </template>
 
         <template v-if="isLoadingFirstTime">
-          <tr v-for="index in 15" class="odd:bg-white even:bg-slate-50">
+          <tr
+            v-for="index in 15"
+            :key="index"
+            class="odd:bg-white even:bg-slate-50"
+          >
             <td class="px-3 pl-6 py-5">
               <div class="flex-1">
                 <div

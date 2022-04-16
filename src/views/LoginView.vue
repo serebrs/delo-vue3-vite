@@ -84,9 +84,12 @@ export default {
           />
         </div>
         <div v-if="v$.email.$error" class="text-pink-700 text-xs">
-          <span v-for="error in v$.email.$errors" class="block">{{
-            error.$message
-          }}</span>
+          <span
+            v-for="error in v$.email.$errors"
+            :key="error.$uid"
+            class="block"
+            >{{ error.$message }}</span
+          >
         </div>
       </div>
 
@@ -109,9 +112,12 @@ export default {
           />
         </div>
         <div v-if="v$.password.$error" class="text-pink-700 text-xs">
-          <span v-for="error in v$.password.$errors" class="block">{{
-            error.$message
-          }}</span>
+          <span
+            v-for="error in v$.password.$errors"
+            :key="error.$uid"
+            class="block"
+            >{{ error.$message }}</span
+          >
         </div>
       </div>
 

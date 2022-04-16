@@ -31,7 +31,7 @@ import { LogoutIcon, LoginIcon } from "@heroicons/vue/outline";
 import HintBox from "./components/utils/HintBox.vue";
 import "./assets/app.css";
 
-const firebaseApp = initializeApp({
+initializeApp({
   apiKey: "AIzaSyBW2zMZAqu1eBhYo1j_jNgt2gDQKRKusDE",
   authDomain: "delo-c0c2e.firebaseapp.com",
   projectId: "delo-c0c2e",
