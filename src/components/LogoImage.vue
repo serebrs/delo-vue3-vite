@@ -19,8 +19,8 @@
   filter: blur(10px);
 }
 
-.anim {
-  animation: anim 5s linear infinite alternate;
+/*.anim {
+   animation: anim 5s linear infinite alternate; 
 }
 
 @keyframes anim {
@@ -30,5 +30,5 @@
   100% {
     filter: hue-rotate(30deg);
   }
-}
+}*/
 </style>
