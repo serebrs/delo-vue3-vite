@@ -12,7 +12,8 @@
     @apply rounded-md bg-white border border-gray-300 placeholder-slate-400 shadow-sm focus:outline-none focus:border-sky-300 focus:ring focus:ring-sky-200 focus:ring-opacity-50;
   }
 
-  input.invalid, select.invalid,
+  input.invalid,
+  select.invalid,
   textarea.invalid {
     @apply !ring-pink-200 !border-pink-600 text-pink-600;
   }
@@ -28,17 +29,18 @@
   }
 }
 
-
 .animate-flyin {
   animation: flyin 0.3s;
   animation-fill-mode: forwards;
 }
+
 @keyframes flyin {
   from {
     transform: translateY(-50%);
     opacity: 0;
     animation-timing-function: ease-out;
   }
+
   to {
     transform: translateY(0);
     opacity: 100%;
@@ -50,11 +52,13 @@
   animation: 0.2s flyout;
   animation-fill-mode: forwards;
 }
+
 @keyframes flyout {
   from {
     opacity: 100%;
     animation-timing-function: ease-in;
   }
+
   to {
     transform: translateY(-50%);
     opacity: 0;
