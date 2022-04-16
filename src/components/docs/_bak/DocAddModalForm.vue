@@ -6,21 +6,25 @@ export default {
       formData: {
         type: "in",
         num: "",
-        date: (new Date()).toLocaleDateString('ru-RU').split('.').reverse().join('-'),
+        date: new Date()
+          .toLocaleDateString("ru-RU")
+          .split(".")
+          .reverse()
+          .join("-"),
         title: "",
-        person: []
-      }
-    }
+        person: [],
+      },
+    };
   },
   watch: {
     formData: {
       handler() {
         this.$emit("formUpdate", this.formData);
       },
-      deep: true
-    }
-  }
-}
+      deep: true,
+    },
+  },
+};
 </script>
 
 <template>
@@ -40,7 +44,11 @@ export default {
 
       <label class="w-56 sm:w-full">
         <span class="modal-span-label">Номер</span>
-        <input type="text" v-model.trim="formData.num" class="modal-input-style" />
+        <input
+          type="text"
+          v-model.trim="formData.num"
+          class="modal-input-style"
+        />
       </label>
 
       <label class="w-full">
@@ -51,11 +59,17 @@ export default {
 
     <label class="w-full">
       <span class="modal-span-label">Название</span>
-      <input type="text" v-model.trim="formData.title" class="modal-input-style" />
+      <input
+        type="text"
+        v-model.trim="formData.title"
+        class="modal-input-style"
+      />
     </label>
 
     <label class="w-48">
-      <span class="modal-span-label">Ответственные (можно выбрать несколько)</span>
+      <span class="modal-span-label"
+        >Ответственные (можно выбрать несколько)</span
+      >
       <select multiple v-model="formData.person" class="modal-input-style h-48">
         <option>Иванов И.И.</option>
         <option>Сидоров С.С.</option>

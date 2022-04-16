@@ -1,7 +1,5 @@
 <script>
-export default {
-
-}
+export default {};
 </script>
 
 <template>
@@ -14,27 +12,39 @@ export default {
             <th
               scope="col"
               class="px-3 pl-6 py-3 text-left text-xs font-medium text-slate-900 uppercase"
-            >Тип</th>
+            >
+              Тип
+            </th>
             <th
               scope="col"
               class="px-3 py-3 text-left text-xs font-medium text-slate-900 uppercase"
-            >Номер</th>
+            >
+              Номер
+            </th>
             <th
               scope="col"
               class="px-3 py-3 text-left text-xs font-medium text-slate-900 uppercase"
-            >Дата</th>
+            >
+              Дата
+            </th>
             <th
               scope="col"
               class="px-3 py-3 text-left text-xs font-medium text-slate-900 uppercase w-full"
-            >Содержание</th>
+            >
+              Содержание
+            </th>
             <th
               scope="col"
               class="px-3 py-3 text-left text-xs font-medium text-slate-900 uppercase"
-            >Ответственные</th>
+            >
+              Ответственные
+            </th>
             <th
               scope="col"
               class="px-3 py-3 text-center text-xs font-medium text-slate-900 uppercase"
-            >Операция</th>
+            >
+              Операция
+            </th>
           </tr>
         </thead>
 
@@ -57,11 +67,16 @@ export default {
                 />
               </svg>
             </td>
-            <td class="px-3 py-2 whitespace-nowrap text-sm text-slate-600">№ 1245/45</td>
-            <td class="px-3 py-2 whitespace-nowrap text-sm text-slate-600">15.11.2022</td>
-            <td
-              class="px-3 py-2 whitespace-normal text-sm text-slate-600"
-            >Regional Paradigm Technician Regional Paradigm Technician Regional Paradigm Technician</td>
+            <td class="px-3 py-2 whitespace-nowrap text-sm text-slate-600">
+              № 1245/45
+            </td>
+            <td class="px-3 py-2 whitespace-nowrap text-sm text-slate-600">
+              15.11.2022
+            </td>
+            <td class="px-3 py-2 whitespace-normal text-sm text-slate-600">
+              Regional Paradigm Technician Regional Paradigm Technician Regional
+              Paradigm Technician
+            </td>
             <td class="px-3 py-2 whitespace-nowrap text-xs text-slate-600">
               <div class="flex flex-col items-start justify-center">
                 <span class>Cooper</span>
@@ -71,7 +86,10 @@ export default {
             </td>
             <td class="px-3 py-2 whitespace-nowrap text-sm text-slate-500">
               <div class="flex flex-row justify-between items-center">
-                <a href="#" class="p-1 hover:text-amber-600 hover:bg-amber-200 rounded-md">
+                <a
+                  href="#"
+                  class="p-1 hover:text-amber-600 hover:bg-amber-200 rounded-md"
+                >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     class="h-5 w-5"
@@ -83,7 +101,10 @@ export default {
                     />
                   </svg>
                 </a>
-                <a href="#" class="p-1 hover:text-blue-600 hover:bg-blue-200 rounded-md">
+                <a
+                  href="#"
+                  class="p-1 hover:text-blue-600 hover:bg-blue-200 rounded-md"
+                >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     class="h-5 w-5"
@@ -95,7 +116,10 @@ export default {
                     />
                   </svg>
                 </a>
-                <a href="#" class="p-1 hover:text-red-600 hover:bg-red-200 rounded-md">
+                <a
+                  href="#"
+                  class="p-1 hover:text-red-600 hover:bg-red-200 rounded-md"
+                >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     class="h-5 w-5"

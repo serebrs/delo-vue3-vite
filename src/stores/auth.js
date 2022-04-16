@@ -1,8 +1,8 @@
-import { defineStore } from 'pinia'
-import { getAuth, signInWithEmailAndPassword, signOut } from "firebase/auth"
+import { defineStore } from "pinia";
+import { getAuth, signInWithEmailAndPassword, signOut } from "firebase/auth";
 
 export const useAuthStore = defineStore({
-  id: 'auth',
+  id: "auth",
   state: () => ({
     isLoggedIn: false,
   }),
@@ -28,6 +28,6 @@ export const useAuthStore = defineStore({
       } catch (error) {
         throw error;
       }
-    }
-  }
-})
+    },
+  },
+});

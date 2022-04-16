@@ -1,58 +1,56 @@
 <script>
-import { defineAsyncComponent } from 'vue'
+import { defineAsyncComponent } from "vue";
 
 export default {
-  emits: [
-    'modalResponse'
-  ],
+  emits: ["modalResponse"],
   props: {
     title: String,
     info: String,
     componentPath: {
       type: String,
-      required: true
-    }
+      required: true,
+    },
   },
   data() {
     return {
       isModalBoxActive: false,
-      formData: {}
-    }
+      formData: {},
+    };
   },
   methods: {
-    keydown(e) { // TODO отключить нажатия клавиш под модальным окном
-      if (e.code === 'Escape') this.isModalBoxActive = false;
+    keydown(e) {
+      // TODO отключить нажатия клавиш под модальным окном
+      if (e.code === "Escape") this.isModalBoxActive = false;
     },
     updateFormData(data) {
       this.formData = data;
     },
     sendModalData() {
-      this.isModalBoxActive = false; 
-      this.$emit('modalResponse', this.formData);
-    }
+      this.isModalBoxActive = false;
+      this.$emit("modalResponse", this.formData);
+    },
   },
   computed: {
     innerComponent() {
-      return defineAsyncComponent(() => import(`../${this.componentPath}.vue`))
-    }
+      return defineAsyncComponent(() => import(`../${this.componentPath}.vue`));
+    },
   },
   watch: {
     isModalBoxActive(newVal, oldVal) {
       if (newVal) {
-        console.log('show');
-        window.addEventListener('keydown', this.keydown)
+        console.log("show");
+        window.addEventListener("keydown", this.keydown);
+      } else {
+        console.log("hide");
+        window.removeEventListener("keydown", this.keydown);
       }
-      else {
-        console.log('hide');
-        window.removeEventListener('keydown', this.keydown)
-      }
-    }
+    },
   },
   inheritAttrs: false,
   components: {
     //DocumentsAddForm: defineAsyncComponent(() => import('@/components/documents/DocumentsAddForm.vue')), // можно так, но тогда <component :is="innerComponentName">
-  }
-}
+  },
+};
 </script>
 
 <template>
@@ -87,11 +85,15 @@ export default {
               <button
                 @click="sendModalData"
                 class="p-2 mr-5 mt-5 w-32 text-gray-700 bg-gray-100 hover:bg-gray-200 shadow-sm rounded-md"
-              >Сохранить</button>
+              >
+                Сохранить
+              </button>
               <button
                 @click="isModalBoxActive = false"
                 class="p-2 mr-5 mt-5 w-32 text-gray-700 bg-gray-100 hover:bg-gray-200 shadow-sm rounded-md"
-              >Отмена</button>
+              >
+                Отмена
+              </button>
             </div>
           </div>
         </div>

@@ -8,8 +8,8 @@ export default {
   //     if (from.name === 'login') vm.$showMessage('auth/login');
   //   })
   // },
-  components: { DocsList, DocsFilters }
-}
+  components: { DocsList, DocsFilters },
+};
 </script>
 
 <template>

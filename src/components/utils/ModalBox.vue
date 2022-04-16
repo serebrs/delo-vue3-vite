@@ -1,28 +1,32 @@
 <script>
 export default {
-  emits: ['canceled'],
+  emits: ["canceled"],
   props: {
-    width: String
+    width: String,
   },
   methods: {
-    keydown(e) { // TODO отключить нажатия клавиш под модальным окном
-      if (e.code === 'Escape') this.$emit('canceled');
-    }
+    keydown(e) {
+      // TODO отключить нажатия клавиш под модальным окном
+      if (e.code === "Escape") this.$emit("canceled");
+    },
   },
   computed: {
-    widthClass() { // TODO добавить еще большой размер для просмотра документа
-      return (this.width === 'sm') ? 'w-[32rem]' : 'w-[32rem] sm:w-full sm:max-w-3xl';
-    }
+    widthClass() {
+      // TODO добавить еще большой размер для просмотра документа
+      return this.width === "sm"
+        ? "w-[32rem]"
+        : "w-[32rem] sm:w-full sm:max-w-3xl";
+    },
   },
   mounted() {
-    console.log('Modal addEscListener');
-    window.addEventListener('keydown', this.keydown)
+    console.log("Modal addEscListener");
+    window.addEventListener("keydown", this.keydown);
   },
   unmounted() {
-    console.log('Modal removeEscListener');
-    window.removeEventListener('keydown', this.keydown)
-  }
-}
+    console.log("Modal removeEscListener");
+    window.removeEventListener("keydown", this.keydown);
+  },
+};
 </script>
 
 <template>

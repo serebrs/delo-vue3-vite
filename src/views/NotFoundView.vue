@@ -1,9 +1,13 @@
 <template>
-  <div class="flex flex-col items-center justify-center min-h-screen w-full bg-slate-100">
+  <div
+    class="flex flex-col items-center justify-center min-h-screen w-full bg-slate-100"
+  >
     <div class="flex flex-col items-center space-y-3 text-gray-500">
       <p>Запрошенная страница не существует</p>
       <router-link to="/">
-        <button class="flex items-center px-5 py-3 bg-gray-200 rounded shadow-sm">
+        <button
+          class="flex items-center px-5 py-3 bg-gray-200 rounded shadow-sm"
+        >
           <svg
             xmlns="http://www.w3.org/2000/svg"
             class="h-5 w-5"

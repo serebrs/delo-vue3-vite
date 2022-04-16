@@ -2,10 +2,13 @@
 export default {
   methods: {
     add() {
-      this.$router.push({ path: this.$route.path + '/add', query: this.$route.query })
-    }
-  }
-}
+      this.$router.push({
+        path: this.$route.path + "/add",
+        query: this.$route.query,
+      });
+    },
+  },
+};
 </script>
 <template>
   <button

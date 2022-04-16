@@ -4,12 +4,12 @@ import HintBox from "@/components/utils/HintBox.vue";
 
 export default {
   props: {
-    item: Object
+    item: Object,
   },
   data() {
     return {
       //isDeleteDialogActive: false
-    }
+    };
   },
   computed: {
     itemMeta() {
@@ -27,29 +27,42 @@ export default {
         default:
           return { hintText: "Иной", icon: "DocumentIcon" };
       }
-    }
+    },
   },
   methods: {
     openDocument() {
       // console.log(`Open document ${this.item.id} in popup`)
-      this.$router.push({ name: 'docDetails', params: { id: this.item.id }, query: this.$route.query })
+      this.$router.push({
+        name: "docDetails",
+        params: { id: this.item.id },
+        query: this.$route.query,
+      });
     },
     editDocument() {
       // console.log(`Edit document ${this.item.id} in popup`)
-      this.$router.push({ name: 'docEdit', params: { id: this.item.id }, query: this.$route.query })
+      this.$router.push({
+        name: "docEdit",
+        params: { id: this.item.id },
+        query: this.$route.query,
+      });
     },
-    deleteDocument() { // TODO Может удалять прямо здесь и не выносить в отдельный роут и компонент?
+    deleteDocument() {
+      // TODO Может удалять прямо здесь и не выносить в отдельный роут и компонент?
       // console.log(`Delete document ${this.item.id} from popup`)
-      this.$router.push({ name: 'docDelete', params: { id: this.item.id }, query: this.$route.query })
+      this.$router.push({
+        name: "docDelete",
+        params: { id: this.item.id },
+        query: this.$route.query,
+      });
     },
     extraDocument() {
-      console.log(`Extra document ${this.item.id} from popup`)
-    }
+      console.log(`Extra document ${this.item.id} from popup`);
+    },
   },
   components: {
     HintBox, //DialogBoxButton
-  }
-}
+  },
+};
 </script>
 
 <template>
@@ -62,12 +75,20 @@ export default {
         <component :is="itemMeta.icon" class="h-5 w-5" />
       </HintBox>
     </td>
-    <td class="px-3 py-2 whitespace-nowrap text-sm text-slate-600">{{ item.num }}</td>
-    <td class="px-3 py-2 whitespace-nowrap text-sm text-slate-600">{{ item.date }}</td>
-    <td class="px-3 py-2 whitespace-normal text-sm text-slate-600">{{ item.title }}</td>
+    <td class="px-3 py-2 whitespace-nowrap text-sm text-slate-600">
+      {{ item.num }}
+    </td>
+    <td class="px-3 py-2 whitespace-nowrap text-sm text-slate-600">
+      {{ item.date }}
+    </td>
+    <td class="px-3 py-2 whitespace-normal text-sm text-slate-600">
+      {{ item.title }}
+    </td>
     <td class="px-3 py-2 whitespace-nowrap text-xs text-slate-600">
       <div class="flex flex-col items-start justify-center">
-        <span v-for="(pers, index) in item.person" :key="index">{{ pers }}</span>
+        <span v-for="(pers, index) in item.person" :key="index">{{
+          pers
+        }}</span>
       </div>
     </td>
     <td class="px-3 py-2 whitespace-nowrap text-sm text-slate-500">
@@ -85,7 +106,7 @@ export default {
         >
           <PencilIcon class="h-5 w-5" />
         </button>
-        
+
         <button
           @click.stop="deleteDocument"
           class="p-1 hover:text-red-600 hover:bg-sky-200 rounded-md"

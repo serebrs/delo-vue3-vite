@@ -7,22 +7,39 @@ export default {
   data() {
     return {
       navLinks: [
-        { id: "1", title: "Документы", to: { name: "docs" }, icon: { type: "solid", name: "DocumentTextIcon" } },
-        { id: "2", title: "Задачи", to: { name: "tasks" }, icon: { type: "solid", name: "ClipboardCheckIcon" } },
-        { id: "3", title: "Статистика", to: { name: "stats" }, icon: { type: "solid", name: "ChartSquareBarIcon" } },
+        {
+          id: "1",
+          title: "Документы",
+          to: { name: "docs" },
+          icon: { type: "solid", name: "DocumentTextIcon" },
+        },
+        {
+          id: "2",
+          title: "Задачи",
+          to: { name: "tasks" },
+          icon: { type: "solid", name: "ClipboardCheckIcon" },
+        },
+        {
+          id: "3",
+          title: "Статистика",
+          to: { name: "stats" },
+          icon: { type: "solid", name: "ChartSquareBarIcon" },
+        },
       ],
-      isNavigationActive: false
-    }
+      isNavigationActive: false,
+    };
   },
   computed: {
     title() {
       return this.$route.meta.title || "";
-    }
+    },
   },
   components: {
-    NavigationMenu, HeaderBar, LogoImage
-  }
-}
+    NavigationMenu,
+    HeaderBar,
+    LogoImage,
+  },
+};
 </script>
 
 <template>
@@ -50,7 +67,10 @@ export default {
         >
           <XIcon class="h-5 w-5" />
         </a>
-        <NavigationMenu :navLinks="navLinks" @navMenuClose="isNavigationActive = false" />
+        <NavigationMenu
+          :navLinks="navLinks"
+          @navMenuClose="isNavigationActive = false"
+        />
       </div>
     </Transition>
 

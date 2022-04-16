@@ -1,12 +1,10 @@
 <script>
 export default {
-  emits: [
-    "navMenuClose"
-  ],
+  emits: ["navMenuClose"],
   props: {
-    navLinks: Array
+    navLinks: Array,
   },
-}
+};
 </script>
 
 <template>

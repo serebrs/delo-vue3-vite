@@ -3,20 +3,20 @@
 import DropdownMenuButton from "./utils/DropdownMenuButton.vue";
 
 export default {
-  emits: [
-    "navMenuOpen"
-  ],
+  emits: ["navMenuOpen"],
   props: {
-    title: String
+    title: String,
   },
   components: {
-    DropdownMenuButton //, ModalBoxButton
-  }
-}
+    DropdownMenuButton, //, ModalBoxButton
+  },
+};
 </script>
 
 <template>
-  <header class="w-full mt-1 mb-4 h-16 z-40 flex items-center justify-between px-6">
+  <header
+    class="w-full mt-1 mb-4 h-16 z-40 flex items-center justify-between px-6"
+  >
     <div class="flex mr-6">
       <div class="block lg:hidden mr-6">
         <button
@@ -28,7 +28,12 @@ export default {
       </div>
 
       <Transition name="fade-title">
-        <h1 class="inline-block text-gray-600 text-2xl font-semibold" :key="title">{{ title }}</h1>
+        <h1
+          class="inline-block text-gray-600 text-2xl font-semibold"
+          :key="title"
+        >
+          {{ title }}
+        </h1>
       </Transition>
     </div>
 
@@ -63,7 +68,6 @@ export default {
   </header>
 </template>
 
-
 <style scoped>
 .fade-title-enter-active,
 .fade-title-leave-active {
@@ -75,7 +79,7 @@ export default {
   transform: translateY(-20px); /* 30px */
 }
 .fade-title-leave-to {
-  display:none;
+  display: none;
   transform: translateY(20px); /* -30px */
 }
 </style>

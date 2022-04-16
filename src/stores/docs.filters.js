@@ -1,7 +1,7 @@
-import { defineStore } from 'pinia'
+import { defineStore } from "pinia";
 
 export const useDocsFiltersStore = defineStore({
-  id: 'docFilters',
+  id: "docFilters",
   state: () => ({
     filters: {
       type: null,
@@ -11,7 +11,7 @@ export const useDocsFiltersStore = defineStore({
       person: null,
     },
     touched: false,
-    timestamp: null
+    timestamp: null,
   }),
   // getters: {
   //   doubleCount: (state) => state.counter * 2
@@ -20,6 +20,6 @@ export const useDocsFiltersStore = defineStore({
     saveFilters(filters) {
       Object.assign(this.filters, filters);
       this.touched = true;
-    }
-  }
-})
+    },
+  },
+});

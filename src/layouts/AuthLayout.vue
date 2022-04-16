@@ -8,11 +8,14 @@
               class="block absolute -inset-1 -skew-y-3 bg-slate-600 shadow-sm shadow-gray-400"
               aria-hidden="true"
             ></span>
-            <span class="relative text-white font-semibold font-mono text-2xl px-1">Дело</span>
+            <span
+              class="relative text-white font-semibold font-mono text-2xl px-1"
+              >Дело</span
+            >
           </span>
         </div>
       </div>
-      
+
       <router-view />
     </div>
   </div>
