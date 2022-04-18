@@ -1,11 +1,11 @@
 <script>
-import { useDocsFiltersStore } from "@/stores/docs.filters";
+import { useDocsFiltersCurrentStore } from "@/stores/docs-filters-current";
 import ModalBox from "@/components/utils/ModalBox.vue"; // TODO вынести ModalBox наружу. Как?
 
 export default {
   setup() {
     return {
-      filtersStore: useDocsFiltersStore(),
+      filtersCurrentStore: useDocsFiltersCurrentStore(),
     };
   },
   props: ["id"], // $route.params.id
@@ -19,7 +19,7 @@ export default {
           query: this.$route.query,
           replace: true,
         });
-        this.filtersStore.timestamp = Date.now();
+        this.filtersCurrentStore.timestamp = Date.now();
       } catch (e) {
         this.$showError("docs/delete-fail");
       }

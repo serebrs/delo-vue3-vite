@@ -1,20 +1,23 @@
 <script>
 import debounce from "lodash/debounce";
 
-import { useDocsFiltersStore } from "@/stores/docs.filters";
+import { useDocsFiltersCurrentStore } from "@/stores/docs-filters-current";
+import { useDocsFiltersOptionsStore } from "@/stores/docs-filters-options";
+
 import LoadingScreen from "@/components/utils/LoadingScreen.vue";
 
 export default {
   setup() {
     return {
-      filtersStore: useDocsFiltersStore(),
+      filtersCurrentStore: useDocsFiltersCurrentStore(),
+      filtersOptionsStore: useDocsFiltersOptionsStore(),
     };
   },
   data() {
     return {
       currentFilters: {},
-      typeFilter: [],
-      personFilter: [],
+      // typeFilter: [],
+      // personFilter: [],
       isFiltersLoading: true,
     };
   },
@@ -39,7 +42,7 @@ export default {
     saveFilters: debounce(async function (filters) {
       // TODO делать Object.assing здесь и передавать в функцию копию объекта
       try {
-        await this.filtersStore.saveFilters(filters);
+        await this.filtersCurrentStore.saveFilters(filters);
       } catch (e) {
         this.$showError("");
       }
@@ -47,35 +50,33 @@ export default {
   },
   async created() {
     try {
-      this.currentFilters = await this.filtersStore.getCurrentFilters();
+      this.currentFilters = await this.filtersCurrentStore.getCurrentFilters();
     } catch (e) {
       this.$showError("app/internal-error");
     }
-    try {
-      this.typeFilter = await this.filtersStore.fetchTypeFilter();
-      this.personFilter = await this.filtersStore.fetchPersonFilter();
 
-      // if (Object.keys(this.filtersStore.typeFilter).length === 0) {
-      //   await this.filtersStore.fetchTypeFilter();
-      // }
-      // if (Object.keys(this.filtersStore.personFilter).length === 0) {
-      //   await this.filtersStore.fetchPersonFilter();
-      // }
-      // this.typeFilter = this.filtersStore.typeFilter;
-      // this.personFilter = this.filtersStore.personFilter;
+    try {
+      // this.typeFilter = await this.filtersCurrentStore.fetchTypeFilter();
+      // this.personFilter = await this.filtersCurrentStore.fetchPersonFilter();
+
+      if (Object.keys(this.filtersOptionsStore.typeFilter).length === 0) {
+        await this.filtersOptionsStore.fetchTypeFilter();
+      }
+      if (Object.keys(this.filtersOptionsStore.personFilter).length === 0) {
+        await this.filtersOptionsStore.fetchPersonFilter();
+      }
     } catch (e) {
       this.$showError("docs/filter-fail");
     }
-
-    this.isFiltersLoading = false;
 
     this.$watch(
       () => this.currentFilters,
       (nv) => this.saveFilters(nv),
       { immediate: true, deep: true }
     );
+
+    this.isFiltersLoading = false;
   },
-  mounted() {},
   components: { LoadingScreen },
 };
 </script>
@@ -102,7 +103,7 @@ export default {
           >
             <option value="-1">Все</option>
             <option
-              v-for="option in typeFilter"
+              v-for="option in this.filtersOptionsStore.typeFilter"
               :key="option.id"
               :value="option.id"
             >
@@ -150,7 +151,7 @@ export default {
           >
             <option value="-1">Все</option>
             <option
-              v-for="option in personFilter"
+              v-for="option in this.filtersOptionsStore.personFilter"
               :key="option.id"
               :value="option.id"
             >

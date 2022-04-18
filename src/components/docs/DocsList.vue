@@ -1,12 +1,12 @@
 <script>
-import { useDocsFiltersStore } from "@/stores/docs.filters";
+import { useDocsFiltersCurrentStore } from "@/stores/docs-filters-current";
 import DocumentsListItem from "@/components/docs/DocsListItem.vue";
 import LoadingScreen from "@/components/utils/LoadingScreen.vue";
 
 export default {
   setup() {
     return {
-      filtersStore: useDocsFiltersStore(),
+      filtersCurrentStore: useDocsFiltersCurrentStore(),
     };
   },
   data() {
@@ -169,11 +169,11 @@ export default {
     },
   },
   created() {
-    if (this.filtersStore.touched) {
-      this.fetchData(this.filtersStore.filters);
+    if (this.filtersCurrentStore.touched) {
+      this.fetchData(this.filtersCurrentStore.currentFilters);
     }
-    this.filtersStore.$subscribe((mutation, state) => {
-      this.fetchData(state.filters);
+    this.filtersCurrentStore.$subscribe((mutation, state) => {
+      this.fetchData(state.currentFilters);
     });
   },
   components: { DocumentsListItem, LoadingScreen },
