@@ -19,5 +19,6 @@ export default {
     "docs/add-fail": "Документ не был добавлен",
     "docs/edit-fail": "Документ не был изменен",
     "docs/fetch-failed": "Невозможно загрузить документы",
+    "docs/filter-fail": "Невозможно загрузить фильтры",
   },
 };

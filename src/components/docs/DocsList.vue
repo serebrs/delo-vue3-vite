@@ -1,6 +1,7 @@
 <script>
 import { useDocsFiltersStore } from "@/stores/docs.filters";
 import DocumentsListItem from "@/components/docs/DocsListItem.vue";
+import LoadingScreen from "@/components/utils/LoadingScreen.vue";
 
 export default {
   setup() {
@@ -194,12 +195,19 @@ export default {
   //     { immediate: true }   // загружаются два раза при первой загрузке, см. DocsFilters. Если убрать immediate, то по F5 не будет загрузки, т.к. query не менялся
   //   )
   // },
-  components: { DocumentsListItem },
+  components: { DocumentsListItem, LoadingScreen },
 };
 </script>
 
 <template>
-  <div class="overflow-clip shadow-sm shadow-slate-200 rounded-lg">
+  <div class="relative overflow-clip shadow-sm shadow-slate-200 rounded-lg">
+    <div
+      v-if="isBlurred"
+      class="absolute flex flex-col justify-center items-center top-[-25rem] inset-x-0 bottom-0"
+    >
+      <LoadingScreen class="fixed z-50 text-gray-500" />
+    </div>
+
     <table>
       <thead class="bg-slate-200 sticky top-0 z-20 shadow-sm shadow-slate-300">
         <tr>

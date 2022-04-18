@@ -1,6 +1,9 @@
 <script>
 import debounce from "lodash/debounce";
+// import { nextTick } from "vue";
+
 import { useDocsFiltersStore } from "@/stores/docs.filters";
+import LoadingScreen from "@/components/utils/LoadingScreen.vue";
 
 export default {
   setup() {
@@ -10,13 +13,16 @@ export default {
   },
   data() {
     return {
-      filters: null,
+      filters: {},
+      typeFilter: [],
+      personFilter: [],
+      isFiltersLoading: true,
     };
   },
   methods: {
     clearFilters() {
       this.filters = {
-        type: "all",
+        type: "-1",
         dateFrom: new Date()
           .toLocaleDateString("ru-RU")
           .split(".")
@@ -28,44 +34,32 @@ export default {
           .reverse()
           .join("-"),
         title: "",
-        person: "all",
-      };
-    },
-    loadFilters() {
-      this.filters = {
-        // type: this.$route.query.type || "all",
-        // dateFrom: this.$route.query.dateFrom || (new Date()).toLocaleDateString('ru-RU').split('.').reverse().join('-'),
-        // dateTo: this.$route.query.dateTo || (new Date()).toLocaleDateString('ru-RU').split('.').reverse().join('-'),
-        // title: this.$route.query.title || "",
-        // person: this.$route.query.person || "all",
-        type: this.filtersStore.filters.type || "all",
-        dateFrom:
-          this.filtersStore.filters.dateFrom ||
-          new Date().toLocaleDateString("ru-RU").split(".").reverse().join("-"),
-        dateTo:
-          this.filtersStore.filters.dateTo ||
-          new Date().toLocaleDateString("ru-RU").split(".").reverse().join("-"),
-        title: this.filtersStore.filters.title || "",
-        person: this.filtersStore.filters.person || "all",
+        person: "-1",
       };
     },
     saveFilters: debounce(async function (filters) {
       // TODO делать Object.assing здесь и передавать в функцию копию объекта
-      await this.filtersStore.saveFilters(filters);
-      // this.$router.push({ name: 'docs', query: this.filters })
+      try {
+        await this.filtersStore.saveFilters(filters);
+      } catch (e) {
+        this.$showError("");
+      }
     }, 500),
   },
-  // watch: {
-  //   filters: {
-  //     handler() {
-  //       // this.$emit("filtersUpdate", this.filters);
-  //       this.sendFilters();
-  //     },
-  //     deep: true
-  //   }
-  // },
-  created() {
-    this.loadFilters();
+  async created() {
+    try {
+      this.filters = await this.filtersStore.getFilters();
+    } catch (e) {
+      this.$showError("");
+    }
+    try {
+      this.typeFilter = await this.filtersStore.fetchTypeFilter();
+      this.personFilter = await this.filtersStore.fetchPersonFilter();
+    } catch (e) {
+      this.$showError("docs/filter-fail");
+    }
+
+    this.isFiltersLoading = false;
 
     this.$watch(
       () => this.filters,
@@ -73,80 +67,111 @@ export default {
       { immediate: true, deep: true }
     );
   },
+  components: { LoadingScreen },
 };
 </script>
 
 <template>
   <div
-    class="w-[54rem] flex flex-row justify-start items-center space-x-4 px-4 pt-2 pb-4 mb-6 overflow-hidden shadow-sm shadow-slate-300 bg-slate-200 rounded-lg"
+    class="w-[54rem] h-[5.2rem] mb-6 shadow-sm shadow-slate-300 bg-slate-200 rounded-lg overflow-hidden"
   >
-    <label class="block">
-      <span class="text-gray-600 text-xs font-semibold mb-1">Тип</span>
-      <select
-        class="text-xs leading-5 mt-1 px-3 py-1 pr-7 block w-full rounded-md bg-white border border-gray-300 shadow-sm focus:border-sky-300 focus:ring focus:ring-sky-200 focus:ring-opacity-50"
-        v-model="filters.type"
-      >
-        <option selected value="all">Все</option>
-        <option value="in">Входящий</option>
-        <option value="out">Исходящий</option>
-        <option value="norm">Норм. акт</option>
-        <option value="dogovor">Договор</option>
-        <option value="konkurs">Конкурсная</option>
-        <option value="other">Иной</option>
-      </select>
-    </label>
-
-    <label class="block">
-      <span class="text-gray-600 text-xs font-semibold mb-1">Дата c:</span>
-      <input
-        type="date"
-        class="text-xs leading-5 mt-1 px-3 py-1 block w-full"
-        v-model="filters.dateFrom"
+    <Transition name="fade-loading" mode="out-in">
+      <LoadingScreen
+        v-if="isFiltersLoading"
+        class="flex flex-col h-full justify-center items-center text-gray-500"
       />
-    </label>
 
-    <label class="block">
-      <span class="text-gray-600 text-xs font-semibold mb-1">Дата по:</span>
-      <input
-        type="date"
-        class="text-xs leading-5 mt-1 px-3 py-1 block w-full"
-        v-model="filters.dateTo"
-      />
-    </label>
-
-    <label class="block">
-      <span class="text-gray-600 text-xs font-semibold mb-1">Содержание</span>
-      <input
-        v-model.trim="filters.title"
-        type="text"
-        class="text-xs leading-5 mt-1 px-3 py-1 block w-full"
-      />
-    </label>
-
-    <label class="block">
-      <span class="text-gray-600 text-xs font-semibold mb-1"
-        >Ответственные</span
+      <div
+        v-else
+        class="flex flex-row justify-start items-center space-x-4 px-4 pt-2 pb-4 overflow-hidden"
       >
-      <select
-        class="text-xs leading-5 w-full mt-1 px-3 py-1 pr-7 block"
-        v-model="filters.person"
-      >
-        <option selected value="all">Все</option>
-        <option>Иванов И.И.</option>
-        <option>Сидоров С.С.</option>
-        <option>Васильев В.В.</option>
-        <option>Александров А.А.</option>
-      </select>
-    </label>
+        <label class="block">
+          <span class="text-gray-600 text-xs font-semibold mb-1">Тип</span>
+          <select
+            class="text-xs leading-5 mt-1 px-3 py-1 pr-7 block w-full rounded-md bg-white border border-gray-300 shadow-sm focus:border-sky-300 focus:ring focus:ring-sky-200 focus:ring-opacity-50"
+            v-model="filters.type"
+          >
+            <option value="-1">Все</option>
+            <option
+              v-for="option in typeFilter"
+              :key="option.id"
+              :value="option.id"
+            >
+              {{ option.text }}
+            </option>
+          </select>
+        </label>
 
-    <label class="block self-end">
-      <span class="text-xs mb-1 invisible">&nbsp;</span>
-      <button
-        class="text-xs ml-1 mb-2 border-b border-dashed border-gray-500 text-gray-500"
-        @click="clearFilters"
-      >
-        Очистить фильтры
-      </button>
-    </label>
+        <label class="block">
+          <span class="text-gray-600 text-xs font-semibold mb-1">Дата c:</span>
+          <input
+            type="date"
+            class="text-xs leading-5 mt-1 px-3 py-1 block w-full"
+            v-model="filters.dateFrom"
+          />
+        </label>
+
+        <label class="block">
+          <span class="text-gray-600 text-xs font-semibold mb-1">Дата по:</span>
+          <input
+            type="date"
+            class="text-xs leading-5 mt-1 px-3 py-1 block w-full"
+            v-model="filters.dateTo"
+          />
+        </label>
+
+        <label class="block">
+          <span class="text-gray-600 text-xs font-semibold mb-1"
+            >Содержание</span
+          >
+          <input
+            v-model.trim="filters.title"
+            type="text"
+            class="text-xs leading-5 mt-1 px-3 py-1 block w-full"
+          />
+        </label>
+
+        <label class="block">
+          <span class="text-gray-600 text-xs font-semibold mb-1"
+            >Ответственные</span
+          >
+          <select
+            class="text-xs leading-5 w-full mt-1 px-3 py-1 pr-7 block"
+            v-model="filters.person"
+          >
+            <option value="-1">Все</option>
+            <option
+              v-for="option in personFilter"
+              :key="option.id"
+              :value="option.id"
+            >
+              {{ option.text }}
+            </option>
+          </select>
+        </label>
+
+        <label class="block self-end">
+          <span class="text-xs mb-1 invisible">&nbsp;</span>
+          <button
+            class="text-xs ml-1 mb-2 border-b border-dashed border-gray-500 text-gray-500"
+            @click="clearFilters"
+          >
+            Очистить фильтры
+          </button>
+        </label>
+      </div>
+    </Transition>
   </div>
 </template>
+
+<style scoped>
+.fade-loading-enter-active,
+.fade-loading-leave-active {
+  transition: all 0.15s ease;
+}
+
+.fade-loading-enter-from,
+.fade-loading-leave-to {
+  opacity: 0;
+}
+</style>
