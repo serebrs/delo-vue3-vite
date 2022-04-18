@@ -14,15 +14,15 @@ export default {
   computed: {
     itemMeta() {
       switch (this.item.type) {
-        case "in":
+        case "1":
           return { hintText: "Входящий", icon: "InboxInIcon" };
-        case "out":
+        case "2":
           return { hintText: "Исходящий", icon: "ExternalLinkIcon" };
-        case "norm":
+        case "3":
           return { hintText: "Нормативный", icon: "DocumentTextIcon" };
-        case "konkurs":
+        case "4":
           return { hintText: "Конкурсная", icon: "DocumentDuplicateIcon" };
-        case "dogovor":
+        case "5":
           return { hintText: "Договор", icon: "DocumentDuplicateIcon" };
         default:
           return { hintText: "Иной", icon: "DocumentIcon" };

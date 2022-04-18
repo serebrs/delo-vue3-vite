@@ -1,6 +1,5 @@
 <script>
 import debounce from "lodash/debounce";
-// import { nextTick } from "vue";
 
 import { useDocsFiltersStore } from "@/stores/docs.filters";
 import LoadingScreen from "@/components/utils/LoadingScreen.vue";
@@ -13,7 +12,7 @@ export default {
   },
   data() {
     return {
-      filters: {},
+      currentFilters: {},
       typeFilter: [],
       personFilter: [],
       isFiltersLoading: true,
@@ -21,7 +20,7 @@ export default {
   },
   methods: {
     clearFilters() {
-      this.filters = {
+      this.currentFilters = {
         type: "-1",
         dateFrom: new Date()
           .toLocaleDateString("ru-RU")
@@ -48,13 +47,22 @@ export default {
   },
   async created() {
     try {
-      this.filters = await this.filtersStore.getFilters();
+      this.currentFilters = await this.filtersStore.getCurrentFilters();
     } catch (e) {
-      this.$showError("");
+      this.$showError("app/internal-error");
     }
     try {
       this.typeFilter = await this.filtersStore.fetchTypeFilter();
       this.personFilter = await this.filtersStore.fetchPersonFilter();
+
+      // if (Object.keys(this.filtersStore.typeFilter).length === 0) {
+      //   await this.filtersStore.fetchTypeFilter();
+      // }
+      // if (Object.keys(this.filtersStore.personFilter).length === 0) {
+      //   await this.filtersStore.fetchPersonFilter();
+      // }
+      // this.typeFilter = this.filtersStore.typeFilter;
+      // this.personFilter = this.filtersStore.personFilter;
     } catch (e) {
       this.$showError("docs/filter-fail");
     }
@@ -62,11 +70,12 @@ export default {
     this.isFiltersLoading = false;
 
     this.$watch(
-      () => this.filters,
+      () => this.currentFilters,
       (nv) => this.saveFilters(nv),
       { immediate: true, deep: true }
     );
   },
+  mounted() {},
   components: { LoadingScreen },
 };
 </script>
@@ -89,7 +98,7 @@ export default {
           <span class="text-gray-600 text-xs font-semibold mb-1">Тип</span>
           <select
             class="text-xs leading-5 mt-1 px-3 py-1 pr-7 block w-full rounded-md bg-white border border-gray-300 shadow-sm focus:border-sky-300 focus:ring focus:ring-sky-200 focus:ring-opacity-50"
-            v-model="filters.type"
+            v-model="currentFilters.type"
           >
             <option value="-1">Все</option>
             <option
@@ -107,7 +116,7 @@ export default {
           <input
             type="date"
             class="text-xs leading-5 mt-1 px-3 py-1 block w-full"
-            v-model="filters.dateFrom"
+            v-model="currentFilters.dateFrom"
           />
         </label>
 
@@ -116,7 +125,7 @@ export default {
           <input
             type="date"
             class="text-xs leading-5 mt-1 px-3 py-1 block w-full"
-            v-model="filters.dateTo"
+            v-model="currentFilters.dateTo"
           />
         </label>
 
@@ -125,7 +134,7 @@ export default {
             >Содержание</span
           >
           <input
-            v-model.trim="filters.title"
+            v-model.trim="currentFilters.title"
             type="text"
             class="text-xs leading-5 mt-1 px-3 py-1 block w-full"
           />
@@ -137,7 +146,7 @@ export default {
           >
           <select
             class="text-xs leading-5 w-full mt-1 px-3 py-1 pr-7 block"
-            v-model="filters.person"
+            v-model="currentFilters.person"
           >
             <option value="-1">Все</option>
             <option

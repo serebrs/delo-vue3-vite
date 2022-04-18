@@ -10,6 +10,7 @@ export default {
     "docs/edit-canceled": "Редактирование документа отменено",
   },
   errors: {
+    "app/internal-error": "Внутренняя ошибка",
     "auth/login-fail": "Не удается авторизоваться в приложении",
     "auth/logout-fail": "Не удается выйти из приложения",
     "auth/user-not-found": "Пользователя с таким именем не существует",
@@ -19,6 +20,6 @@ export default {
     "docs/add-fail": "Документ не был добавлен",
     "docs/edit-fail": "Документ не был изменен",
     "docs/fetch-failed": "Невозможно загрузить документы",
-    "docs/filter-fail": "Невозможно загрузить фильтры",
+    "docs/filter-fail": "Невозможно загрузить фильтры из БД",
   },
 };

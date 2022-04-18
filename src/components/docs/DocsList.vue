@@ -17,11 +17,6 @@ export default {
       isLoadingFirstTime: true,
     };
   },
-  computed: {
-    // filtersQuery() {
-    //   return JSON.stringify(this.$route.query);
-    // }
-  },
   methods: {
     async fetchData(filters) {
       try {
@@ -32,7 +27,7 @@ export default {
         this.documents = [
           {
             id: "1",
-            type: "in",
+            type: "1",
             num: Math.floor(Math.random() * 10000),
             date: "15.11.2021",
             title:
@@ -41,7 +36,7 @@ export default {
           },
           {
             id: "2",
-            type: "out",
+            type: "2",
             num: Math.floor(Math.random() * 10000),
             date: "16.11.2021",
             title:
@@ -50,7 +45,7 @@ export default {
           },
           {
             id: "3",
-            type: "norm",
+            type: "3",
             num: Math.floor(Math.random() * 10000),
             date: "17.11.2021",
             title:
@@ -59,7 +54,7 @@ export default {
           },
           {
             id: "4",
-            type: "konkurs",
+            type: "4",
             num: Math.floor(Math.random() * 10000),
             date: "19.11.2021",
             title:
@@ -68,7 +63,7 @@ export default {
           },
           {
             id: "5",
-            type: "dogovor",
+            type: "5",
             num: Math.floor(Math.random() * 10000),
             date: "05.12.2021",
             title: "Install all dependencies, including the dev dependencies",
@@ -76,7 +71,7 @@ export default {
           },
           {
             id: "6",
-            type: "in",
+            type: "2",
             num: Math.floor(Math.random() * 10000),
             date: "15.11.2021",
             title:
@@ -85,7 +80,7 @@ export default {
           },
           {
             id: "7",
-            type: "out",
+            type: "1",
             num: Math.floor(Math.random() * 10000),
             date: "16.11.2021",
             title:
@@ -94,7 +89,7 @@ export default {
           },
           {
             id: "8",
-            type: "norm",
+            type: "2",
             num: Math.floor(Math.random() * 10000),
             date: "17.11.2021",
             title:
@@ -103,7 +98,7 @@ export default {
           },
           {
             id: "9",
-            type: "konkurs",
+            type: "3",
             num: Math.floor(Math.random() * 10000),
             date: "19.11.2021",
             title:
@@ -112,7 +107,7 @@ export default {
           },
           {
             id: "10",
-            type: "dogovor",
+            type: "4",
             num: Math.floor(Math.random() * 10000),
             date: "05.12.2021",
             title: "Install all dependencies, including the dev dependencies",
@@ -120,7 +115,7 @@ export default {
           },
           {
             id: "11",
-            type: "in",
+            type: "5",
             num: Math.floor(Math.random() * 10000),
             date: "15.11.2021",
             title:
@@ -129,7 +124,7 @@ export default {
           },
           {
             id: "12",
-            type: "out",
+            type: "3",
             num: Math.floor(Math.random() * 10000),
             date: "16.11.2021",
             title:
@@ -138,7 +133,7 @@ export default {
           },
           {
             id: "13",
-            type: "norm",
+            type: "1",
             num: Math.floor(Math.random() * 10000),
             date: "17.11.2021",
             title:
@@ -147,7 +142,7 @@ export default {
           },
           {
             id: "14",
-            type: "konkurs",
+            type: "2",
             num: Math.floor(Math.random() * 10000),
             date: "19.11.2021",
             title:
@@ -156,7 +151,7 @@ export default {
           },
           {
             id: "15",
-            type: "dogovor",
+            type: "3",
             num: Math.floor(Math.random() * 10000),
             date: "05.12.2021",
             title: "Install all dependencies, including the dev dependencies",
@@ -181,20 +176,6 @@ export default {
       this.fetchData(state.filters);
     });
   },
-  // async created() {
-  //   this.$watch(
-  //     () => this.filtersQuery,
-  //     (nv) => {
-  //       console.log('query changed ' + nv);
-  //       // if (this.$route.query.message) {
-  //       //   this.$showMessage(this.$route.query.message);
-  //       //   delete this.$route.query.message;
-  //       // }
-  //       this.fetchData();
-  //     },
-  //     { immediate: true }   // загружаются два раза при первой загрузке, см. DocsFilters. Если убрать immediate, то по F5 не будет загрузки, т.к. query не менялся
-  //   )
-  // },
   components: { DocumentsListItem, LoadingScreen },
 };
 </script>
