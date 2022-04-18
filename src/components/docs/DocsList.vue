@@ -170,6 +170,7 @@ export default {
   },
   created() {
     if (this.filtersCurrentStore.touched) {
+      // TODO может вместо .touched использовать .timestamp?
       this.fetchData(this.filtersCurrentStore.currentFilters);
     }
     this.filtersCurrentStore.$subscribe((mutation, state) => {

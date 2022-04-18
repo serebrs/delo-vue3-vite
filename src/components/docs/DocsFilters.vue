@@ -38,7 +38,6 @@ export default {
       };
     },
     saveFilters: debounce(async function (filters) {
-      // TODO делать Object.assing здесь и передавать в функцию копию объекта
       try {
         await this.filtersCurrentStore.saveFilters(filters);
       } catch (e) {
@@ -67,7 +66,7 @@ export default {
     this.$watch(
       () => this.currentFilters,
       (nv) => this.saveFilters(nv),
-      { immediate: true, deep: true }
+      { immediate: true, deep: true } // TODO навеное deep не нужен?
     );
 
     this.isFiltersLoading = false;

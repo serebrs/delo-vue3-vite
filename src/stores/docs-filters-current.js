@@ -3,13 +3,7 @@ import { defineStore } from "pinia";
 export const useDocsFiltersCurrentStore = defineStore({
   id: "docFiltersCurrent",
   state: () => ({
-    currentFilters: {
-      type: null,
-      dateFrom: null,
-      dateTo: null,
-      title: null,
-      person: null,
-    },
+    currentFilters: {},
     touched: false,
     timestamp: null,
   }),
