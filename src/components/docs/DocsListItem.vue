@@ -1,8 +1,15 @@
 <script>
 import HintBox from "@/components/utils/HintBox.vue";
+import { useDocsFiltersOptionsStore } from "@/stores/docs-filters-options";
+
 //import DialogBoxButton from "@/components/utils/DialogBoxButton.vue";
 
 export default {
+  setup() {
+    return {
+      filtersOptionsStore: useDocsFiltersOptionsStore(),
+    };
+  },
   props: {
     item: Object,
   },
@@ -13,25 +20,18 @@ export default {
   },
   computed: {
     itemMeta() {
-      switch (this.item.type) {
-        case "1":
-          return { hintText: "Входящий", icon: "InboxInIcon" };
-        case "2":
-          return { hintText: "Исходящий", icon: "ExternalLinkIcon" };
-        case "3":
-          return { hintText: "Нормативный", icon: "DocumentTextIcon" };
-        case "4":
-          return { hintText: "Конкурсная", icon: "DocumentDuplicateIcon" };
-        case "5":
-          return { hintText: "Договор", icon: "DocumentDuplicateIcon" };
-        default:
-          return { hintText: "Иной", icon: "DocumentIcon" };
+      if (this.filtersOptionsStore.typeFilter.length === 0) {
+        return { hintText: "Документ", icon: "DocumentIcon" };
       }
+
+      const res = this.filtersOptionsStore.typeFilter.find(
+        (item) => item.id === this.item.type
+      );
+      return { hintText: res.hintText, icon: res.icon };
     },
   },
   methods: {
     openDocument() {
-      // console.log(`Open document ${this.item.id} in popup`)
       this.$router.push({
         name: "docDetails",
         params: { id: this.item.id },
@@ -39,7 +39,6 @@ export default {
       });
     },
     editDocument() {
-      // console.log(`Edit document ${this.item.id} in popup`)
       this.$router.push({
         name: "docEdit",
         params: { id: this.item.id },
@@ -47,8 +46,6 @@ export default {
       });
     },
     deleteDocument() {
-      // TODO Может удалять прямо здесь и не выносить в отдельный роут и компонент?
-      // console.log(`Delete document ${this.item.id} from popup`)
       this.$router.push({
         name: "docDelete",
         params: { id: this.item.id },

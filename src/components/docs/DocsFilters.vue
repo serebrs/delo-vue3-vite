@@ -16,8 +16,6 @@ export default {
   data() {
     return {
       currentFilters: {},
-      // typeFilter: [],
-      // personFilter: [],
       isFiltersLoading: true,
     };
   },
@@ -56,13 +54,10 @@ export default {
     }
 
     try {
-      // this.typeFilter = await this.filtersCurrentStore.fetchTypeFilter();
-      // this.personFilter = await this.filtersCurrentStore.fetchPersonFilter();
-
-      if (Object.keys(this.filtersOptionsStore.typeFilter).length === 0) {
+      if (this.filtersOptionsStore.typeFilter.length === 0) {
         await this.filtersOptionsStore.fetchTypeFilter();
       }
-      if (Object.keys(this.filtersOptionsStore.personFilter).length === 0) {
+      if (this.filtersOptionsStore.personFilter.length === 0) {
         await this.filtersOptionsStore.fetchPersonFilter();
       }
     } catch (e) {

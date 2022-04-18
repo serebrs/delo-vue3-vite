@@ -3,8 +3,8 @@ import { defineStore } from "pinia";
 export const useDocsFiltersOptionsStore = defineStore({
   id: "docFiltersOptions",
   state: () => ({
-    typeFilter: {},
-    personFilter: {},
+    typeFilter: [],
+    personFilter: [],
   }),
   actions: {
     async fetchTypeFilter() {
@@ -37,9 +37,8 @@ export const useDocsFiltersOptionsStore = defineStore({
         },
         { id: 6, text: "Иной", hintText: "Иной", icon: "DocumentIcon" },
       ];
-      // Object.assign(this.typeFilter, res);
-      // this.typeFilter = Object.assign({}, res);
-      this.typeFilter = { ...res };
+      // this.typeFilter = [...res];
+      this.typeFilter = res;
     },
     async fetchPersonFilter() {
       await new Promise((res) => setTimeout(res, 100));
@@ -50,8 +49,8 @@ export const useDocsFiltersOptionsStore = defineStore({
         { id: 4, text: "Васильев В.В." },
         { id: 5, text: "Петров П.П." },
       ];
-      // Object.assign(this.personFilter, res);
-      this.personFilter = { ...res };
+      // this.personFilter = [...res];
+      this.personFilter = res;
     },
   },
 });

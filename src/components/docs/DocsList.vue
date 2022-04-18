@@ -27,7 +27,7 @@ export default {
         this.documents = [
           {
             id: "1",
-            type: "1",
+            type: 1,
             num: Math.floor(Math.random() * 10000),
             date: "15.11.2021",
             title:
@@ -36,7 +36,7 @@ export default {
           },
           {
             id: "2",
-            type: "2",
+            type: 2,
             num: Math.floor(Math.random() * 10000),
             date: "16.11.2021",
             title:
@@ -45,7 +45,7 @@ export default {
           },
           {
             id: "3",
-            type: "3",
+            type: 3,
             num: Math.floor(Math.random() * 10000),
             date: "17.11.2021",
             title:
@@ -54,7 +54,7 @@ export default {
           },
           {
             id: "4",
-            type: "4",
+            type: 4,
             num: Math.floor(Math.random() * 10000),
             date: "19.11.2021",
             title:
@@ -63,7 +63,7 @@ export default {
           },
           {
             id: "5",
-            type: "5",
+            type: 5,
             num: Math.floor(Math.random() * 10000),
             date: "05.12.2021",
             title: "Install all dependencies, including the dev dependencies",
@@ -71,7 +71,7 @@ export default {
           },
           {
             id: "6",
-            type: "2",
+            type: 6,
             num: Math.floor(Math.random() * 10000),
             date: "15.11.2021",
             title:
@@ -80,7 +80,7 @@ export default {
           },
           {
             id: "7",
-            type: "1",
+            type: 1,
             num: Math.floor(Math.random() * 10000),
             date: "16.11.2021",
             title:
@@ -89,7 +89,7 @@ export default {
           },
           {
             id: "8",
-            type: "2",
+            type: 2,
             num: Math.floor(Math.random() * 10000),
             date: "17.11.2021",
             title:
@@ -98,7 +98,7 @@ export default {
           },
           {
             id: "9",
-            type: "3",
+            type: 3,
             num: Math.floor(Math.random() * 10000),
             date: "19.11.2021",
             title:
@@ -107,7 +107,7 @@ export default {
           },
           {
             id: "10",
-            type: "4",
+            type: 4,
             num: Math.floor(Math.random() * 10000),
             date: "05.12.2021",
             title: "Install all dependencies, including the dev dependencies",
@@ -115,7 +115,7 @@ export default {
           },
           {
             id: "11",
-            type: "5",
+            type: 5,
             num: Math.floor(Math.random() * 10000),
             date: "15.11.2021",
             title:
@@ -124,7 +124,7 @@ export default {
           },
           {
             id: "12",
-            type: "3",
+            type: 6,
             num: Math.floor(Math.random() * 10000),
             date: "16.11.2021",
             title:
@@ -133,7 +133,7 @@ export default {
           },
           {
             id: "13",
-            type: "1",
+            type: 1,
             num: Math.floor(Math.random() * 10000),
             date: "17.11.2021",
             title:
@@ -142,7 +142,7 @@ export default {
           },
           {
             id: "14",
-            type: "2",
+            type: 2,
             num: Math.floor(Math.random() * 10000),
             date: "19.11.2021",
             title:
@@ -151,7 +151,7 @@ export default {
           },
           {
             id: "15",
-            type: "3",
+            type: 3,
             num: Math.floor(Math.random() * 10000),
             date: "05.12.2021",
             title: "Install all dependencies, including the dev dependencies",
