@@ -123,6 +123,7 @@ export default {
 
       <div class="mt-7 mb-2">
         <button
+          v-hint="`Войти`"
           class="w-full flex items-center justify-center text-white transition duration-200 bg-sky-500 hover:bg-sky-600 hover:shadow-md active:bg-sky-700 focus:outline-none focus:ring focus:ring-sky-300 px-5 py-2.5 text-sm leading-5 rounded-lg font-semibold"
           type="submit"
         >

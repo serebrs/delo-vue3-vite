@@ -22,7 +22,7 @@ export default {
 <template>
   <div
     class="relative"
-    @mouseover="isActive = true"
+    @mouseenter="isActive = true"
     @mouseleave="isActive = false"
   >
     <slot />

@@ -1,13 +1,14 @@
 import { createApp } from "vue";
 import { createPinia } from "pinia";
+import router from "./router";
 //import { defineAsyncComponent } from 'vue'
 import App from "./App.vue";
-import router from "./router";
-
 import { initializeApp } from "firebase/app";
 
 import messagesPlugin from "./plugins/messages.plugin";
 import messages from "./plugins/messages";
+import hintDirective from "./directives/hint.directive";
+
 import {
   MenuIcon,
   PlusIcon,
@@ -43,6 +44,8 @@ initializeApp({
 const app = createApp(App);
 
 app.use(createPinia()).use(router).use(messagesPlugin, messages);
+
+app.directive("hint", hintDirective);
 
 app
   .component("HintBox", HintBox)
