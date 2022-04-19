@@ -13,7 +13,7 @@ export default {
       setTimeout(() => {
         div2.classList.remove("animate-flyin");
         div2.classList.add("animate-flyout");
-        setTimeout(() => div.remove(), 500);
+        setTimeout(() => div.remove(), 500); // TODO делать remove не по таймауту, а по onanimationend
       }, 2000);
     };
 
