@@ -66,7 +66,7 @@ export default {
     this.$watch(
       () => this.currentFilters,
       (nv) => this.saveFilters(nv),
-      { immediate: true, deep: true } // TODO навеное deep не нужен?
+      { immediate: true, deep: true } // TODO наверное deep не нужен?
     );
 
     this.isFiltersLoading = false;

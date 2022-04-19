@@ -170,7 +170,7 @@ export default {
   },
   created() {
     if (this.filtersCurrentStore.touched) {
-      // TODO может вместо .touched использовать .timestamp?
+      // При переходе с других страниц фильтры не меняются, поэтому принудительно обновляем список документов
       this.fetchData(this.filtersCurrentStore.currentFilters);
     }
     this.filtersCurrentStore.$subscribe((mutation, state) => {
