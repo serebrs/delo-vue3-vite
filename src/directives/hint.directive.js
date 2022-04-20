@@ -1,12 +1,15 @@
+let divsId = [];
+
 export default {
   mounted(el, binding) {
     let div;
 
     function showHint(el, text) {
       div = document.createElement("div");
+      div.id = `hint-directive-${Date.now()}`;
+      divsId.push(div.id);
       div.className =
         "absolute z-30 w-fit py-1 px-2 text-[0.75rem] text-center whitespace-normal leading-3 text-white bg-gray-600 shadow-md rounded-md animate-hint-flyin";
-      console.log(el.getBoundingClientRect().top + window.pageYOffset + "px");
       div.style.top =
         el.getBoundingClientRect().top + window.pageYOffset - 25 + "px";
       div.style.left =
@@ -42,14 +45,11 @@ export default {
       closeHint(el, binding.value);
     };
   },
+  beforeUnmount() {
+    divsId.forEach((divId) => {
+      let div = document.getElementById(divId);
+      if (div) div.remove();
+    });
+    divsId.length = 0;
+  },
 };
-
-// div.onanimationend = () => {
-//   el.onmouseenter = function () {
-//     showHint(el, text);
-//   };
-//   el.onmouseleave = async function () {
-//     closeHint(el, text);
-//   };
-//   div.remove();
-// };
