@@ -29,12 +29,12 @@
   }
 }
 
-.animate-flyin {
-  animation: flyin 0.3s;
+.animate-message-flyin {
+  animation: message-flyin 0.3s;
   animation-fill-mode: forwards;
 }
 
-@keyframes flyin {
+@keyframes message-flyin {
   from {
     transform: translateY(-50%);
     opacity: 0;
@@ -48,12 +48,12 @@
   }
 }
 
-.animate-flyout {
-  animation: 0.2s flyout;
+.animate-message-flyout {
+  animation: 0.2s message-flyout;
   animation-fill-mode: forwards;
 }
 
-@keyframes flyout {
+@keyframes message-flyout {
   from {
     opacity: 100%;
     animation-timing-function: ease-in;
@@ -61,6 +61,43 @@
 
   to {
     transform: translateY(-50%);
+    opacity: 0;
+    animation-timing-function: ease-out;
+  }
+}
+
+.animate-hint-flyin {
+  animation: hint-flyin 0.2s;
+  animation-fill-mode: forwards;
+}
+
+@keyframes hint-flyin {
+  from {
+    transform: translateY(20%);
+    opacity: 0;
+    animation-timing-function: ease-out;
+  }
+
+  to {
+    transform: translateY(0);
+    opacity: 100%;
+    animation-timing-function: ease-in;
+  }
+}
+
+.animate-hint-flyout {
+  animation: 0.2s hint-flyout;
+  animation-fill-mode: forwards;
+}
+
+@keyframes hint-flyout {
+  from {
+    opacity: 100%;
+    animation-timing-function: ease-in;
+  }
+
+  to {
+    transform: translateY(20%);
     opacity: 0;
     animation-timing-function: ease-out;
   }

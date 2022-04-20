@@ -5,22 +5,22 @@ export default {
       let div2 = document.createElement("div");
       div.className = "fixed z-50 w-full flex justify-center my-4";
       div2.className =
-        "w-64 px-4 py-3 text-sm text-white bg-gray-600 rounded-md shadow-md animate-flyin";
+        "w-64 px-4 py-3 text-sm text-white bg-gray-600 rounded-md shadow-md animate-message-flyin";
       div2.innerHTML = `<p>${options.messages[message] || ""}</p>`;
       div.prepend(div2);
       document.body.prepend(div);
 
       setTimeout(() => {
-        div2.classList.remove("animate-flyin");
-        div2.classList.add("animate-flyout");
+        div2.classList.remove("animate-message-flyin");
+        div2.classList.add("animate-message-flyout");
         setTimeout(() => div.remove(), 500); // TODO делать remove не по таймауту, а по onanimationend
       }, 2000);
     };
 
     app.config.globalProperties.$showError = (error) => {
       function close() {
-        div2.classList.remove("animate-flyin");
-        div2.classList.add("animate-flyout");
+        div2.classList.remove("animate-message-flyin");
+        div2.classList.add("animate-message-flyout");
         setTimeout(() => {
           div3.removeEventListener("click", close);
           div1.remove();
@@ -33,7 +33,7 @@ export default {
 
       div1.className = "fixed z-50 w-full flex justify-center my-4";
       div2.className =
-        "w-64 relative px-4 py-3 text-sm text-white bg-red-600 rounded-md shadow-md animate-flyin";
+        "w-64 relative px-4 py-3 text-sm text-white bg-red-600 rounded-md shadow-md animate-message-flyin";
       div3.className = "absolute top-1 right-1";
       div2.innerHTML = `<p>[ОШИБКА]: ${
         options.errors[error] || "Неизвестная ошибка"
