@@ -5,5 +5,5 @@ export default {
 };
 </script>
 <template>
-  <BaseButton v-focus> <slot /> </BaseButton>
+  <BaseButton class="bg-red-300"> <slot /> </BaseButton>
 </template>

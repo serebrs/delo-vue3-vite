@@ -8,6 +8,7 @@ import { initializeApp } from "firebase/app";
 import messagesPlugin from "./plugins/messages.plugin";
 import messages from "./plugins/messages";
 import hintDirective from "./directives/hint.directive";
+import focusDirective from "./directives/focus.directive";
 
 import {
   MenuIcon,
@@ -46,6 +47,7 @@ const app = createApp(App);
 app.use(createPinia()).use(router).use(messagesPlugin, messages);
 
 app.directive("hint", hintDirective);
+app.directive("focus", focusDirective);
 
 app
   .component("HintBox", HintBox)

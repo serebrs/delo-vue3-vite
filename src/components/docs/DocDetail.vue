@@ -1,5 +1,6 @@
 <script>
-import ModalBox from "@/components/utils/ModalBox.vue"; // TODO вынести ModalBox наружу. Как?
+import ModalBox from "@/components/utils/ModalBox.vue";
+import CancelButton from "@/components/buttons/modal/CancelButton.vue"; // TODO вынести ModalBox наружу. Как?
 
 export default {
   props: ["id"], // $route.params.id
@@ -12,21 +13,16 @@ export default {
       });
     },
   },
-  components: { ModalBox }, // TODO вынести ModalBox наружу. Как?
+  components: { ModalBox, CancelButton }, // TODO вынести ModalBox наружу. Как?
 };
 </script>
 
 <template>
   <ModalBox @canceled="closeModal">
     <h1 class="text-2xl text-slate-800 font-semibold">Просмотр документа</h1>
-    <p>Id: {{ id }}</p>
+    <p>Просмотр документа: {{ id }}</p>
     <div>
-      <button
-        @click="closeModal"
-        class="p-2 mr-5 mt-5 w-32 text-gray-700 bg-gray-100 hover:bg-gray-200 shadow-sm rounded-md"
-      >
-        Закрыть
-      </button>
+      <CancelButton @click="closeModal" class="mr-5 mt-5">Закрыть</CancelButton>
     </div>
   </ModalBox>
 </template>

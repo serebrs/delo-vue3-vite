@@ -1,6 +1,8 @@
 <script>
 import { useDocsFiltersCurrentStore } from "@/stores/docs-filters-current";
 import ModalBox from "@/components/utils/ModalBox.vue"; // TODO вынести ModalBox наружу. Как?
+import AlertButton from "@/components/buttons/modal/AlertButton.vue";
+import CancelButton from "@/components/buttons/modal/CancelButton.vue";
 
 export default {
   setup() {
@@ -33,28 +35,18 @@ export default {
       });
     },
   },
-  components: { ModalBox }, // TODO вынести ModalBox наружу. Как?
+  components: { ModalBox, AlertButton, CancelButton }, // TODO вынести ModalBox наружу. Как?
 };
 </script>
 
 <template>
   <ModalBox width="sm" @canceled="closeModal">
     <h1 class="text-2xl text-slate-800 font-semibold">Удаление документа</h1>
-    <p>Id: {{ id }}</p>
+    <p>Вы действительно хотите удалить документ: {{ id }}?</p>
 
     <div>
-      <button
-        @click="deleteDoc"
-        class="p-2 mr-5 mt-5 w-32 text-gray-700 bg-gray-100 hover:bg-gray-200 shadow-sm rounded-md"
-      >
-        Удалить
-      </button>
-      <button
-        @click="closeModal"
-        class="p-2 mr-5 mt-5 w-32 text-gray-700 bg-gray-100 hover:bg-gray-200 shadow-sm rounded-md"
-      >
-        Отмена
-      </button>
+      <AlertButton @click="deleteDoc" class="mr-5 mt-5">Удалить</AlertButton>
+      <CancelButton @click="closeModal" class="mr-5 mt-5">Отмена</CancelButton>
     </div>
   </ModalBox>
 </template>

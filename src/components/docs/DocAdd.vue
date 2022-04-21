@@ -1,6 +1,8 @@
 <script>
 import { useDocsFiltersCurrentStore } from "@/stores/docs-filters-current";
 import ModalBox from "@/components/utils/ModalBox.vue"; // TODO вынести ModalBox наружу. Как?
+import ActionButton from "@/components/buttons/modal/ActionButton.vue";
+import CancelButton from "@/components/buttons/modal/CancelButton.vue";
 
 export default {
   setup() {
@@ -49,7 +51,7 @@ export default {
       });
     },
   },
-  components: { ModalBox }, // TODO вынести ModalBox наружу. Как?
+  components: { ModalBox, ActionButton, CancelButton }, // TODO вынести ModalBox наружу. Как?
 };
 </script>
 
@@ -119,18 +121,8 @@ export default {
     </div>
 
     <div>
-      <button
-        @click="saveDoc"
-        class="p-2 mr-5 mt-5 w-32 text-gray-700 bg-gray-100 hover:bg-gray-200 shadow-sm rounded-md"
-      >
-        Сохранить
-      </button>
-      <button
-        @click="closeModal"
-        class="p-2 mr-5 mt-5 w-32 text-gray-700 bg-gray-100 hover:bg-gray-200 shadow-sm rounded-md"
-      >
-        Отмена
-      </button>
+      <ActionButton @click="saveDoc" class="mr-5 mt-5">Сохранить</ActionButton>
+      <CancelButton @click="closeModal" class="mr-5 mt-5">Отмена</CancelButton>
     </div>
   </ModalBox>
 </template>

@@ -93,7 +93,7 @@ const router = createRouter({
 router.beforeEach((to) => {
   const store = useAuthStore();
   if (!store.isLoggedIn && to.name !== "login") {
-    return { name: "login" };
+    return { name: "login" }; // TODO добавить message в query. Или сделать в store общую шину сообщений / ошибок
   }
 });
 
