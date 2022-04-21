@@ -190,42 +190,42 @@ export default {
       <LoadingScreen class="fixed z-50 text-gray-500" />
     </div>
 
-    <table>
+    <table class="w-full">
       <thead class="bg-slate-200 sticky top-0 z-20 shadow-sm shadow-slate-300">
         <tr>
           <th
             scope="col"
-            class="px-3 pl-6 py-3 text-left text-xs font-medium text-slate-900 uppercase"
+            class="px-3 pl-6 py-3 text-left text-xs font-medium w-16 text-slate-900 uppercase"
           >
             Тип
           </th>
           <th
             scope="col"
-            class="px-3 py-3 text-left text-xs font-medium text-slate-900 uppercase"
+            class="px-3 py-3 text-left text-xs font-medium w-20 text-slate-900 uppercase"
           >
             Номер
           </th>
           <th
             scope="col"
-            class="px-3 py-3 text-left text-xs font-medium text-slate-900 uppercase"
+            class="px-3 py-3 text-left text-xs font-medium w-24 text-slate-900 uppercase"
           >
             Дата
           </th>
           <th
             scope="col"
-            class="px-3 py-3 text-left text-xs font-medium text-slate-900 uppercase w-full"
+            class="px-3 py-3 text-left text-xs font-medium w-auto text-slate-900 uppercase"
           >
             Содержание
           </th>
           <th
             scope="col"
-            class="px-3 py-3 text-left text-xs font-medium text-slate-900 uppercase"
+            class="px-3 py-3 text-left text-xs font-medium w-32 text-slate-900 uppercase"
           >
             Ответственные
           </th>
           <th
             scope="col"
-            class="px-3 py-3 text-center text-xs font-medium text-slate-900 uppercase"
+            class="px-3 py-3 text-center text-xs font-medium w-28 text-slate-900 uppercase"
           >
             Операция
           </th>
@@ -266,7 +266,7 @@ export default {
                 ></div>
               </div>
             </td>
-            <td class="w-1/12 px-3 py-5">
+            <td class="px-3 py-5">
               <div class="flex-1">
                 <div
                   class="h-2 bg-slate-200 rounded animate-pulse"
@@ -274,7 +274,7 @@ export default {
                 ></div>
               </div>
             </td>
-            <td class="w-9/12 px-3 py-5">
+            <td class="px-3 py-5">
               <div class="flex-1">
                 <div
                   class="h-2 bg-slate-200 rounded animate-pulse"
@@ -291,7 +291,7 @@ export default {
                 ></div>
               </div>
             </td>
-            <td class="w-2/12 px-3 py-5">
+            <td class="px-3 py-5">
               <div class="flex-1">
                 <div
                   class="w-20 h-2 bg-slate-200 rounded animate-pulse"
