@@ -5,9 +5,30 @@ export default {
     width: String,
   },
   methods: {
-    keydown(e) {
-      // TODO отключить нажатия клавиш под модальным окном
+    pressedEsc(e) {
       if (e.code === "Escape") this.$emit("canceled");
+    },
+    trapFocus(e) {
+      if (e.code === "Tab") {
+        const focusable = document
+          .querySelector("#modal")
+          .querySelectorAll("input,button,select,textarea");
+        if (focusable.length) {
+          let first = focusable[0];
+          let last = focusable[focusable.length - 1];
+          if (e.shiftKey) {
+            if (e.target === first) {
+              last.focus();
+              e.preventDefault();
+            }
+          } else {
+            if (e.target === last) {
+              first.focus();
+              e.preventDefault();
+            }
+          }
+        }
+      }
     },
   },
   computed: {
@@ -20,11 +41,13 @@ export default {
   },
   mounted() {
     console.log("Modal addEscListener");
-    window.addEventListener("keydown", this.keydown);
+    window.addEventListener("keydown", this.pressedEsc);
+    window.addEventListener("keydown", this.trapFocus);
   },
   unmounted() {
     console.log("Modal removeEscListener");
-    window.removeEventListener("keydown", this.keydown);
+    window.removeEventListener("keydown", this.pressedEsc);
+    window.removeEventListener("keydown", this.trapFocus);
   },
 };
 </script>
@@ -35,6 +58,8 @@ export default {
     class="absolute overflow-hidden overflow-y-auto z-40 inset-y-0 inset-x-0 flex flex-col justify-start items-center space-x-0 space-y-0 h-screen bg-slate-700 bg-opacity-50 backdrop-blur-sm"
   >
     <div
+      id="modal"
+      role="dialog"
       class="relative p-5 sm:p-10 rounded-md my-10 shadow-md bg-white border border-gray-100"
       :class="widthClass"
     >
