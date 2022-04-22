@@ -6,11 +6,7 @@ export default {
       formData: {
         type: "in",
         num: "",
-        date: new Date()
-          .toLocaleDateString("ru-RU")
-          .split(".")
-          .reverse()
-          .join("-"),
+        date: this.$formatDate(new Date()),
         title: "",
         person: [],
       },

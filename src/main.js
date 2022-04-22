@@ -7,6 +7,7 @@ import { initializeApp } from "firebase/app";
 
 import messagesPlugin from "./plugins/messages.plugin";
 import messages from "./plugins/messages";
+import dateFormatPlugin from "./plugins/date-format.plugin";
 import hintDirective from "./directives/hint.directive";
 import focusDirective from "./directives/focus.directive";
 
@@ -44,7 +45,11 @@ initializeApp({
 
 const app = createApp(App);
 
-app.use(createPinia()).use(router).use(messagesPlugin, messages);
+app
+  .use(createPinia())
+  .use(router)
+  .use(messagesPlugin, messages)
+  .use(dateFormatPlugin);
 
 app.directive("hint", hintDirective);
 app.directive("focus", focusDirective);

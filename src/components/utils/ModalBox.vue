@@ -21,11 +21,9 @@ export default {
               last.focus();
               e.preventDefault();
             }
-          } else {
-            if (e.target === last) {
-              first.focus();
-              e.preventDefault();
-            }
+          } else if (e.target === last) {
+            first.focus();
+            e.preventDefault();
           }
         }
       }

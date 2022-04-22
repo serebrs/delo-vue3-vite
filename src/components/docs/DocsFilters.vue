@@ -23,16 +23,8 @@ export default {
     clearFilters() {
       this.currentFilters = {
         type: "-1",
-        dateFrom: new Date()
-          .toLocaleDateString("ru-RU")
-          .split(".")
-          .reverse()
-          .join("-"),
-        dateTo: new Date()
-          .toLocaleDateString("ru-RU")
-          .split(".")
-          .reverse()
-          .join("-"),
+        dateFrom: this.$formatDate(new Date()),
+        dateTo: this.$formatDate(new Date()),
         title: "",
         person: "-1",
       };
