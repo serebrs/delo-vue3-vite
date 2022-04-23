@@ -39,7 +39,10 @@ export default {
   },
   async created() {
     try {
-      this.currentFilters = await this.filtersCurrentStore.getCurrentFilters();
+      // this.currentFilters = await this.filtersCurrentStore.getCurrentFilters();
+      if (Object.keys(this.filtersCurrentStore.currentFilters).length === 0) {
+        this.clearFilters();
+      } else this.currentFilters = this.filtersCurrentStore.currentFilters;
     } catch (e) {
       this.$showError("app/internal-error");
     }

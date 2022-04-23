@@ -75,6 +75,7 @@ export default {
           </span>
           <input
             v-model.trim="email"
+            autocomplete="email"
             @blur="v$.email.$touch"
             type="text"
             name="email"
@@ -103,6 +104,7 @@ export default {
           </span>
           <input
             v-model="password"
+            autocomplete="current-password"
             @blur="v$.password.$touch"
             type="password"
             name="password"

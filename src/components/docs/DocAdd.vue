@@ -1,5 +1,6 @@
 <script>
 import { useDocsFiltersCurrentStore } from "@/stores/docs-filters-current";
+import { useDocsFiltersOptionsStore } from "@/stores/docs-filters-options";
 import ModalBox from "@/components/utils/ModalBox.vue"; // TODO вынести ModalBox наружу. Как?
 import ActionButton from "@/components/buttons/modal/ActionButton.vue";
 import CancelButton from "@/components/buttons/modal/CancelButton.vue";
@@ -8,12 +9,13 @@ export default {
   setup() {
     return {
       filtersCurrentStore: useDocsFiltersCurrentStore(),
+      filtersOptionsStore: useDocsFiltersOptionsStore(),
     };
   },
   data() {
     return {
       formData: {
-        type: "in",
+        type: 1,
         num: "",
         date: this.$formatDate(new Date()),
         title: "",
@@ -24,9 +26,17 @@ export default {
   methods: {
     async saveDoc() {
       try {
-        await console.log(
-          "Создан новый документ: " + JSON.stringify(this.formData)
-        ); // TODO делать Object.assing здесь и передавать в функцию копию объекта
+        // await new Promise((res) => setTimeout(res, 500)); // TODO убрать эту задержку
+        const data = Object.assign({}, this.formData);
+        const res = await fetch("http://localhost:3030/api/docs/add", {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(data),
+        });
+        const json = await res.json();
+        console.log("Создан новый документ: " + JSON.stringify(json));
         this.$showMessage("docs/added");
         this.$router.push({
           name: "docs",
@@ -62,12 +72,13 @@ export default {
         <label class="w-96 sm:w-full">
           <span class="modal-span-label">Тип</span>
           <select v-model="formData.type" class="modal-input-style">
-            <option value="in">Входящий</option>
-            <option value="out">Исходящий</option>
-            <option value="norm">Норм. акт</option>
-            <option value="dogovor">Договор</option>
-            <option value="konkurs">Конкурсная</option>
-            <option value="other">Иной</option>
+            <option
+              v-for="option in this.filtersOptionsStore.typeFilter"
+              :key="option.id"
+              :value="option.id"
+            >
+              {{ option.text }}
+            </option>
           </select>
         </label>
 
