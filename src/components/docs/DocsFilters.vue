@@ -23,8 +23,8 @@ export default {
     clearFilters() {
       this.currentFilters = {
         type: "-1",
-        dateFrom: this.$formatDate(new Date()),
-        dateTo: this.$formatDate(new Date()),
+        dateFrom: this.$formatDateToIso(new Date()),
+        dateTo: this.$formatDateToIso(new Date()),
         title: "",
         person: "-1",
       };

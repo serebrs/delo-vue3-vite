@@ -6,7 +6,7 @@ export default {
       formData: {
         type: "in",
         num: "",
-        date: this.$formatDate(new Date()),
+        date: this.$formatDateToIso(new Date()),
         title: "",
         person: [],
       },

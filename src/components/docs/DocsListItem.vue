@@ -81,7 +81,7 @@ export default {
       {{ item.num }}
     </td>
     <td class="px-3 py-2 whitespace-nowrap text-sm text-slate-600">
-      {{ item.date }}
+      {{ $formatDateToRu(item.date) }}
     </td>
     <td class="px-3 py-2 whitespace-normal text-sm text-slate-600">
       {{ item.title }}

@@ -21,7 +21,7 @@ export default {
     async fetchData(filters) {
       try {
         this.isBlurred = true;
-        await new Promise((res) => setTimeout(res, 500)); // TODO убрать эту задержку
+        // await new Promise((res) => setTimeout(res, 500));
         const res = await fetch("http://localhost:3030/api/docs");
         this.documents = await res.json();
         // this.documents = [

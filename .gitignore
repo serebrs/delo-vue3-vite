@@ -30,3 +30,4 @@ coverage
 /_bak
 *.bat
 todo
+.env
