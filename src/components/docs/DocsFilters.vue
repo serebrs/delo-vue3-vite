@@ -30,6 +30,7 @@ export default {
       };
     },
     saveFilters: debounce(async function (filters) {
+      console.log("in SaveFilters");
       try {
         await this.filtersCurrentStore.saveFilters(filters);
       } catch (e) {
@@ -39,10 +40,16 @@ export default {
   },
   async created() {
     try {
-      // this.currentFilters = await this.filtersCurrentStore.getCurrentFilters();
       if (Object.keys(this.filtersCurrentStore.currentFilters).length === 0) {
-        this.clearFilters();
-      } else this.currentFilters = this.filtersCurrentStore.currentFilters;
+        await this.clearFilters();
+      } else {
+        this.currentFilters = Object.assign(
+          {},
+          this.filtersCurrentStore.currentFilters
+        );
+      }
+      const { ...currentFilters } = this.currentFilters;
+      this.saveFilters(currentFilters);
     } catch (e) {
       this.$showError("app/internal-error");
     }
@@ -60,8 +67,12 @@ export default {
 
     this.$watch(
       () => this.currentFilters,
-      (nv) => this.saveFilters(nv), // const { ...nvSend } = nv;
-      { immediate: true, deep: true } // TODO наверное deep не нужен?
+      (nv) => {
+        const { ...nvSend } = nv;
+        this.saveFilters(nvSend);
+        console.log("in Watcher");
+      },
+      { deep: true }
     );
 
     this.isFiltersLoading = false;

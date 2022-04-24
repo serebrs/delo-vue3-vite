@@ -169,10 +169,6 @@ export default {
     },
   },
   created() {
-    if (this.filtersCurrentStore.touched) {
-      // При переходе с других страниц фильтры не меняются, поэтому принудительно обновляем список документов
-      this.fetchData(this.filtersCurrentStore.currentFilters);
-    }
     this.filtersCurrentStore.$subscribe((mutation, state) => {
       this.fetchData(state.currentFilters);
     });
