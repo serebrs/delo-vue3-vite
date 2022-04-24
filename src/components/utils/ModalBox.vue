@@ -3,6 +3,7 @@ export default {
   emits: ["canceled"],
   props: {
     width: String,
+    height: String,
   },
   methods: {
     pressedEsc(e) {
@@ -31,10 +32,22 @@ export default {
   },
   computed: {
     widthClass() {
-      // TODO добавить еще большой размер для просмотра документа
-      return this.width === "sm"
-        ? "w-[32rem]"
-        : "w-[32rem] sm:w-full sm:max-w-3xl";
+      switch (this.width) {
+        case "sm":
+          return "w-[32rem]";
+        case "lg":
+          return "w-[58rem]";
+        default:
+          return "w-[32rem] sm:w-full sm:max-w-3xl";
+      }
+    },
+    heightClass() {
+      switch (this.height) {
+        case "lg":
+          return "h-auto";
+        default:
+          return "";
+      }
     },
   },
   mounted() {
@@ -59,7 +72,7 @@ export default {
       id="modal"
       role="dialog"
       class="relative p-5 sm:p-10 rounded-md my-10 shadow-md bg-white border border-gray-100"
-      :class="widthClass"
+      :class="[widthClass, heightClass]"
     >
       <button
         @click="$emit('canceled')"
