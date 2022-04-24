@@ -14,7 +14,12 @@ export default {
   methods: {
     async deleteDoc() {
       try {
-        await console.log(`Удаление документа № ${this.id}`);
+        const res = await fetch(`http://localhost:3030/api/docs/${this.id}`, {
+          method: "DELETE",
+        });
+        const json = await res.json();
+
+        console.log(`Удаление документа № ${this.id} | ${json.message}`);
         this.$showMessage("docs/deleted");
         this.$router.push({
           name: "docs",

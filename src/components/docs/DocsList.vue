@@ -201,7 +201,7 @@ export default {
           </th>
           <th
             scope="col"
-            class="px-3 py-3 text-left text-xs font-medium w-20 text-slate-900 uppercase"
+            class="px-3 py-3 text-left text-xs font-medium w-24 text-slate-900 uppercase"
           >
             Номер
           </th>
