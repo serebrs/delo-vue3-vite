@@ -60,7 +60,7 @@ export default {
 
     this.$watch(
       () => this.currentFilters,
-      (nv) => this.saveFilters(nv),
+      (nv) => this.saveFilters(nv), // const { ...nvSend } = nv;
       { immediate: true, deep: true } // TODO наверное deep не нужен?
     );
 

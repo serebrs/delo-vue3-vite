@@ -25,6 +25,10 @@ export const useDocsFiltersCurrentStore = defineStore({
     saveFilters(filters) {
       Object.assign(this.currentFilters, filters);
       this.touched = true;
+      // this.$patch({
+      //   currentFilters: filters,
+      //   touched: true,
+      // });
     },
   },
 });
