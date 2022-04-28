@@ -27,9 +27,10 @@ export default {
     async saveDoc() {
       try {
         // await new Promise((res) => setTimeout(res, 500)); // TODO убрать эту задержку
-        const data = Object.assign({}, this.formData);
-        const res = await fetch("http://localhost:3030/api/docs/add", {
-          method: "PUT",
+        // const data = Object.assign({}, this.formData);
+        const { ...data } = this.formData;
+        const res = await fetch("http://localhost:3030/api/docs", {
+          method: "POST",
           headers: {
             "Content-Type": "application/json",
           },
