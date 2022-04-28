@@ -36,7 +36,14 @@ export default {
           },
           body: JSON.stringify(data),
         });
+
         const json = await res.json();
+
+        if (res.status !== 201) {
+          json.errors.forEach((err) => console.error(err.msg));
+          throw new Error();
+        }
+
         console.log("Создан новый документ: " + JSON.stringify(json));
         this.$showMessage("docs/added");
         this.$router.push({
