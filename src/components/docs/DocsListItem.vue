@@ -20,13 +20,14 @@ export default {
   },
   computed: {
     itemMeta() {
-      if (this.filtersOptionsStore.typeFilter.length === 0) {
-        return { hintText: "Документ", icon: "DocumentIcon" };
-      }
-
       const res = this.filtersOptionsStore.typeFilter.find(
         (item) => item.id === this.item.type
       );
+
+      if (this.filtersOptionsStore.typeFilter.length === 0 || !res) {
+        return { hintText: "Иной", icon: "DocumentIcon" };
+      }
+
       return { hintText: res.hintText, icon: res.icon };
     },
   },
