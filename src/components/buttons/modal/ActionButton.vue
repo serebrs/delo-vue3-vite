@@ -5,5 +5,7 @@ export default {
 };
 </script>
 <template>
-  <BaseButton class="bg-green-300"> <slot /> </BaseButton>
+  <BaseButton class="!text-white bg-green-500 hover:bg-green-600">
+    <slot />
+  </BaseButton>
 </template>
