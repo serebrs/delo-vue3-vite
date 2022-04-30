@@ -51,12 +51,10 @@ export default {
     },
   },
   mounted() {
-    console.log("Modal addEscListener");
     window.addEventListener("keydown", this.pressedEsc);
     window.addEventListener("keydown", this.trapFocus);
   },
   unmounted() {
-    console.log("Modal removeEscListener");
     window.removeEventListener("keydown", this.pressedEsc);
     window.removeEventListener("keydown", this.trapFocus);
   },
