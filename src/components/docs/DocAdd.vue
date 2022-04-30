@@ -2,11 +2,11 @@
 import useVuelidate from "@vuelidate/core";
 import { required, minLength, helpers } from "@vuelidate/validators";
 import axios from "axios";
-import { useDocsFiltersCurrentStore } from "@/stores/docs-filters-current";
-import { useDocsFiltersOptionsStore } from "@/stores/docs-filters-options";
-import ModalBox from "@/components/utils/ModalBox.vue"; // TODO вынести ModalBox наружу. Как?
-import ActionButton from "@/components/buttons/modal/ActionButton.vue";
-import CancelButton from "@/components/buttons/modal/CancelButton.vue";
+import { useDocsFiltersCurrentStore } from "../../stores/docs-filters-current";
+import { useDocsFiltersOptionsStore } from "../../stores/docs-filters-options";
+import ModalBox from "../../components/utils/ModalBox.vue"; // TODO вынести ModalBox наружу. Как?
+import ActionButton from "../../components/buttons/modal/ActionButton.vue";
+import CancelButton from "../../components/buttons/modal/CancelButton.vue";
 
 export default {
   setup() {

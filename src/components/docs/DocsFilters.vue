@@ -1,10 +1,10 @@
 <script>
 import debounce from "lodash/debounce";
 
-import { useDocsFiltersCurrentStore } from "@/stores/docs-filters-current";
-import { useDocsFiltersOptionsStore } from "@/stores/docs-filters-options";
+import { useDocsFiltersCurrentStore } from "../../stores/docs-filters-current";
+import { useDocsFiltersOptionsStore } from "../../stores/docs-filters-options";
 
-import LoadingScreen from "@/components/utils/LoadingScreen.vue";
+import LoadingScreen from "../../components/utils/LoadingScreen.vue";
 
 export default {
   setup() {
@@ -30,7 +30,6 @@ export default {
       };
     },
     saveFilters: debounce(async function (filters) {
-      console.log("in SaveFilters");
       try {
         await this.filtersCurrentStore.saveFilters(filters);
       } catch (e) {
@@ -70,7 +69,6 @@ export default {
       (nv) => {
         const { ...nvSend } = nv;
         this.saveFilters(nvSend);
-        console.log("in Watcher");
       },
       { deep: true }
     );

@@ -1,6 +1,6 @@
 <script>
-import HintBox from "@/components/utils/HintBox.vue";
-import { useDocsFiltersOptionsStore } from "@/stores/docs-filters-options";
+import HintBox from "../../components/utils/HintBox.vue";
+import { useDocsFiltersOptionsStore } from "../../stores/docs-filters-options";
 
 //import DialogBoxButton from "@/components/utils/DialogBoxButton.vue";
 

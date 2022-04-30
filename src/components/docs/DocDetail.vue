@@ -1,6 +1,6 @@
 <script>
-import ModalBox from "@/components/utils/ModalBox.vue";
-import CancelButton from "@/components/buttons/modal/CancelButton.vue"; // TODO вынести ModalBox наружу. Как?
+import ModalBox from "../../components/utils/ModalBox.vue";
+import CancelButton from "../../components/buttons/modal/CancelButton.vue"; // TODO вынести ModalBox наружу. Как?
 
 export default {
   props: ["id"], // $route.params.id

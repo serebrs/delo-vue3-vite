@@ -1,7 +1,7 @@
 <script>
-import { useDocsFiltersCurrentStore } from "@/stores/docs-filters-current";
-import DocumentsListItem from "@/components/docs/DocsListItem.vue";
-import LoadingScreen from "@/components/utils/LoadingScreen.vue";
+import { useDocsFiltersCurrentStore } from "../../stores/docs-filters-current";
+import DocumentsListItem from "../../components/docs/DocsListItem.vue";
+import LoadingScreen from "../../components/utils/LoadingScreen.vue";
 
 export default {
   setup() {

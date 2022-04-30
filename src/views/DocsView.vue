@@ -1,6 +1,6 @@
 <script>
-import DocsList from "@/components/docs/DocsList.vue";
-import DocsFilters from "@/components/docs/DocsFilters.vue";
+import DocsList from "../components/docs/DocsList.vue";
+import DocsFilters from "../components/docs/DocsFilters.vue";
 
 export default {
   // beforeRouteEnter(to, from, next) {

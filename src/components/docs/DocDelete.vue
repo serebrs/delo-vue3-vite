@@ -1,8 +1,8 @@
 <script>
-import { useDocsFiltersCurrentStore } from "@/stores/docs-filters-current";
-import ModalBox from "@/components/utils/ModalBox.vue"; // TODO вынести ModalBox наружу. Как?
-import AlertButton from "@/components/buttons/modal/AlertButton.vue";
-import CancelButton from "@/components/buttons/modal/CancelButton.vue";
+import { useDocsFiltersCurrentStore } from "../../stores/docs-filters-current";
+import ModalBox from "../../components/utils/ModalBox.vue"; // TODO вынести ModalBox наружу. Как?
+import AlertButton from "../../components/buttons/modal/AlertButton.vue";
+import CancelButton from "../../components/buttons/modal/CancelButton.vue";
 
 export default {
   setup() {
