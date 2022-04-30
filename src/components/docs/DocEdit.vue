@@ -1,8 +1,8 @@
 <script>
+import axios from "axios";
 import { useDocsFiltersCurrentStore } from "../../stores/docs-filters-current";
-import ModalBox from "../../components/utils/ModalBox.vue";
-import ActionButton from "../../components/buttons/modal/ActionButton.vue";
-import CancelButton from "../../components/buttons/modal/CancelButton.vue"; // TODO вынести ModalBox наружу. Как?
+import ModalBox from "../../components/utils/ModalBox.vue"; // TODO вынести ModalBox наружу. Как?
+import DocsAddEditForm from "./DocsAddEditForm.vue";
 
 export default {
   setup() {
@@ -10,39 +10,40 @@ export default {
       filtersCurrentStore: useDocsFiltersCurrentStore(),
     };
   },
-  props: ["id"], // $route.params.id
-  data() {
-    return {
-      formData: {
-        type: "in",
-        num: "",
-        date: this.$formatDateToIso(new Date()),
-        title: "",
-        person: [],
-      },
-    };
-  },
   methods: {
-    async saveDoc() {
-      try {
-        await console.log(
-          `Сохранение отредактированного документа № ${
-            this.id
-          }: ${JSON.stringify(this.formData)}`
-        ); // TODO делать Object.assing здесь и передавать в функцию копию объекта
-        this.$showMessage("docs/edited");
-        this.$router.push({
-          name: "docs",
-          query: this.$route.query,
-          replace: true,
-        });
-        this.filtersCurrentStore.timestamp = Date.now();
-      } catch (e) {
-        this.$showError("docs/edit-fail");
+    async updateDoc(formData) {
+      const data = new FormData();
+      for (const name in formData) {
+        if (name === "person")
+          formData.person.forEach((pers) => data.append("person[]", pers));
+        else data.append(name, formData[name]);
       }
+
+      try {
+        const res = await axios.post("http://localhost:3030/api/docs", data, {
+          headers: { "Content-Type": "multipart/form-data" },
+          timeout: 1000,
+        });
+        console.log("Создан новый документ: " + JSON.stringify(res.data));
+      } catch (e) {
+        this.$showError("docs/add-fail");
+        if (e.response?.data?.errors) {
+          e.response.data.errors.forEach((err) =>
+            console.error(err.param + ": " + err.msg)
+          );
+          return;
+        } else throw e;
+      }
+      this.$showMessage("docs/added");
+      this.filtersCurrentStore.timestamp = Date.now();
+      this.$router.push({
+        name: "docs",
+        query: this.$route.query,
+        replace: true,
+      });
     },
     closeModal() {
-      this.$showMessage("docs/edit-canceled");
+      this.$showMessage("docs/add-canceled");
       this.$router.push({
         name: "docs",
         query: this.$route.query,
@@ -50,7 +51,7 @@ export default {
       });
     },
   },
-  components: { ModalBox, ActionButton, CancelButton }, // TODO вынести ModalBox наружу. Как?
+  components: { ModalBox, DocsAddEditForm }, // TODO вынести ModalBox наружу. Как?
 };
 </script>
 
@@ -59,11 +60,7 @@ export default {
     <h1 class="text-2xl text-slate-800 font-semibold">
       Редактирование документа
     </h1>
-    <p>Id: {{ id }}</p>
 
-    <div>
-      <ActionButton @click="saveDoc" class="mr-5 mt-5">Сохранить</ActionButton>
-      <CancelButton @click="closeModal" class="mr-5 mt-5">Отмена</CancelButton>
-    </div>
+    <DocsAddEditForm @close="closeModal" @save="updateDoc" />
   </ModalBox>
 </template>

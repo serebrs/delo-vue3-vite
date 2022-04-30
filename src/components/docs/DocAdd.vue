@@ -79,42 +79,39 @@ export default {
       this.formData.file = this.$refs.file.files[0];
     },
     async saveDoc() {
-      // const isFormCorrect = await this.v$.$validate();
-      // if (!isFormCorrect) return;
+      const isFormCorrect = await this.v$.$validate();
+      if (!isFormCorrect) return;
+
+      const data = new FormData();
+      for (const name in this.formData) {
+        if (name === "person")
+          this.formData.person.forEach((pers) => data.append("person[]", pers));
+        else data.append(name, this.formData[name]);
+      }
 
       try {
         // await new Promise((res) => setTimeout(res, 500));
-
-        const data = new FormData();
-        for (const name in this.formData) {
-          if (name === "person")
-            this.formData.person.forEach((pers) =>
-              data.append("person[]", pers)
-            );
-          else data.append(name, this.formData[name]);
-        }
-
         const res = await axios.post("http://localhost:3030/api/docs", data, {
           headers: { "Content-Type": "multipart/form-data" },
           timeout: 1000,
         });
         console.log("Создан новый документ: " + JSON.stringify(res.data));
-
-        this.$showMessage("docs/added");
-        this.$router.push({
-          name: "docs",
-          query: this.$route.query,
-          replace: true,
-        });
-        this.filtersCurrentStore.timestamp = Date.now();
       } catch (e) {
-        if (e.response.data.errors) {
+        this.$showError("docs/add-fail");
+        if (e.response?.data?.errors) {
           e.response.data.errors.forEach((err) =>
             console.error(err.param + ": " + err.msg)
           );
-        }
-        this.$showError("docs/add-fail");
+          return;
+        } else throw e;
       }
+      this.$showMessage("docs/added");
+      this.filtersCurrentStore.timestamp = Date.now();
+      this.$router.push({
+        name: "docs",
+        query: this.$route.query,
+        replace: true,
+      });
     },
     closeModal() {
       this.$showMessage("docs/add-canceled");
