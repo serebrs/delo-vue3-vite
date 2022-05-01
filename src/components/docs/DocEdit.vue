@@ -1,32 +1,105 @@
 <script>
+import useVuelidate from "@vuelidate/core";
+import { required, minLength, helpers } from "@vuelidate/validators";
 import axios from "axios";
 import { useDocsFiltersCurrentStore } from "../../stores/docs-filters-current";
+import { useDocsFiltersOptionsStore } from "../../stores/docs-filters-options";
 import ModalBox from "../../components/utils/ModalBox.vue"; // TODO вынести ModalBox наружу. Как?
-import DocsAddEditForm from "./DocsAddEditForm.vue";
+import ActionButton from "../../components/buttons/modal/ActionButton.vue";
+import CancelButton from "../../components/buttons/modal/CancelButton.vue";
 
 export default {
+  props: ["id"],
   setup() {
     return {
+      v$: useVuelidate(),
       filtersCurrentStore: useDocsFiltersCurrentStore(),
+      filtersOptionsStore: useDocsFiltersOptionsStore(),
+    };
+  },
+  data() {
+    return {
+      formData: {
+        id: null,
+        type: 1,
+        num: "",
+        date: this.$formatDateToIso(new Date()),
+        title: "",
+        person: [],
+        file: "",
+      },
+      currentFilename: "",
+    };
+  },
+  validations() {
+    return {
+      formData: {
+        type: {
+          required: helpers.withMessage(
+            "Это поле не может быть пустым",
+            required
+          ),
+        },
+        num: {
+          required: helpers.withMessage(
+            "Это поле не может быть пустым",
+            required
+          ),
+        },
+        date: {
+          required: helpers.withMessage(
+            "Это поле не может быть пустым",
+            required
+          ),
+        },
+        title: {
+          required: helpers.withMessage(
+            "Это поле не может быть пустым",
+            required
+          ),
+          minLength: helpers.withMessage(
+            "Это поле должно содержать не менее 5 символов",
+            minLength(5)
+          ),
+          alphaNum: helpers.withMessage(
+            "Это поле дожно быть буквенно-цифровым",
+            helpers.regex(/[а-яА-ЯёЁa-zA-Z0-9!@()"".,\-?:;]+$/)
+          ),
+        },
+        person: {},
+        file: {},
+      },
+      $autoDirty: true,
     };
   },
   methods: {
-    async updateDoc(formData) {
+    handleFileUpload() {
+      this.formData.file = this.$refs.file.files[0];
+    },
+    async saveDoc() {
+      const isFormCorrect = await this.v$.$validate();
+      if (!isFormCorrect) return;
+
       const data = new FormData();
-      for (const name in formData) {
+      for (const name in this.formData) {
         if (name === "person")
-          formData.person.forEach((pers) => data.append("person[]", pers));
-        else data.append(name, formData[name]);
+          this.formData.person.forEach((pers) => data.append("person[]", pers));
+        else data.append(name, this.formData[name]);
       }
 
       try {
-        const res = await axios.post("http://localhost:3030/api/docs", data, {
-          headers: { "Content-Type": "multipart/form-data" },
-          timeout: 1000,
-        });
-        console.log("Создан новый документ: " + JSON.stringify(res.data));
+        const res = await axios.put(
+          `http://localhost:3030/api/docs/${this.id}`,
+          data,
+          {
+            headers: { "Content-Type": "multipart/form-data" },
+            timeout: 1000,
+          }
+        );
+
+        console.log("Документ изменен: " + JSON.stringify(res.data));
       } catch (e) {
-        this.$showError("docs/add-fail");
+        this.$showError("docs/modify-fail");
         if (e.response?.data?.errors) {
           e.response.data.errors.forEach((err) =>
             console.error(err.param + ": " + err.msg)
@@ -34,7 +107,7 @@ export default {
           return;
         } else throw e;
       }
-      this.$showMessage("docs/added");
+      this.$showMessage("docs/modified");
       this.filtersCurrentStore.timestamp = Date.now();
       this.$router.push({
         name: "docs",
@@ -51,7 +124,20 @@ export default {
       });
     },
   },
-  components: { ModalBox, DocsAddEditForm }, // TODO вынести ModalBox наружу. Как?
+  async mounted() {
+    try {
+      const res = await fetch(`http://localhost:3030/api/docs/${this.id}`);
+      if (res.status !== 200) {
+        throw new Error();
+      }
+      this.formData = await res.json();
+      this.currentFilename = this.formData.file;
+      console.log(`Просмотр документа № ${this.id}`);
+    } catch (err) {
+      this.$showError("docs/details-fail");
+    }
+  },
+  components: { ModalBox, ActionButton, CancelButton }, // TODO вынести ModalBox наружу. Как?
 };
 </script>
 
@@ -61,6 +147,156 @@ export default {
       Редактирование документа
     </h1>
 
-    <DocsAddEditForm @close="closeModal" @save="updateDoc" />
+    <div class="flex flex-col space-y-6 w-full bg-gray-100 rounded-md p-5">
+      <div class="flex flex-row space-x-3 sm:space-x-8">
+        <label class="w-96 sm:w-full">
+          <span class="modal-span-label">Тип</span>
+          <select
+            v-model="formData.type"
+            @blur="v$.formData.type.$touch"
+            class="modal-input-style"
+            :class="{ invalid: v$.formData.type.$error }"
+          >
+            <option
+              v-for="option in this.filtersOptionsStore.typeFilter"
+              :key="option.id"
+              :value="option.id"
+            >
+              {{ option.text }}
+            </option>
+          </select>
+          <div v-if="v$.formData.type.$error" class="text-pink-700 text-xs">
+            <span
+              v-for="error in v$.formData.type.$errors"
+              :key="error.$uid"
+              class="block"
+              >{{ error.$message }}</span
+            >
+          </div>
+        </label>
+
+        <label class="w-56 sm:w-full">
+          <span class="modal-span-label">Номер</span>
+          <input
+            type="text"
+            v-model.trim="formData.num"
+            @blur="v$.formData.num.$touch"
+            class="modal-input-style"
+            :class="{ invalid: v$.formData.num.$error }"
+          />
+          <div v-if="v$.formData.num.$error" class="text-pink-700 text-xs">
+            <span
+              v-for="error in v$.formData.num.$errors"
+              :key="error.$uid"
+              class="block"
+              >{{ error.$message }}</span
+            >
+          </div>
+        </label>
+
+        <label class="w-full">
+          <span class="modal-span-label">Дата</span>
+          <input
+            type="date"
+            @blur="v$.formData.date.$touch"
+            v-model="formData.date"
+            class="modal-input-style"
+            :class="{ invalid: v$.formData.date.$error }"
+          />
+          <div v-if="v$.formData.date.$error" class="text-pink-700 text-xs">
+            <span
+              v-for="error in v$.formData.date.$errors"
+              :key="error.$uid"
+              class="block"
+              >{{ error.$message }}</span
+            >
+          </div>
+        </label>
+      </div>
+
+      <label class="w-full">
+        <span class="modal-span-label">Название</span>
+        <input
+          type="text"
+          v-model.trim="formData.title"
+          @blur="v$.formData.title.$touch"
+          class="modal-input-style"
+          :class="{ invalid: v$.formData.title.$error }"
+        />
+        <div v-if="v$.formData.title.$error" class="text-pink-700 text-xs">
+          <span
+            v-for="error in v$.formData.title.$errors"
+            :key="error.$uid"
+            class="block"
+            >{{ error.$message }}</span
+          >
+        </div>
+      </label>
+
+      <div class="flex justify-start space-x-7 w-full bg-gray-100 rounded-md">
+        <label class="w-1/3">
+          <span class="modal-span-label">Ответственные (несколько)</span>
+          <select
+            multiple
+            v-model="formData.person"
+            @blur="v$.formData.person.$touch"
+            class="modal-input-style h-48"
+            :class="{ invalid: v$.formData.person.$error }"
+          >
+            <option>Иванов И.И.</option>
+            <option>Сидоров С.С.</option>
+            <option>Васильев В.В.</option>
+            <option>Александров А.А.</option>
+          </select>
+          <div v-if="v$.formData.person.$error" class="text-pink-700 text-xs">
+            <span
+              v-for="error in v$.formData.person.$errors"
+              :key="error.$uid"
+              class="block"
+              >{{ error.$message }}</span
+            >
+          </div>
+        </label>
+
+        <div class="w-2/3 flex flex-col space-y-5">
+          <label>
+            <span class="modal-span-label">Текущий прикрепленный файл</span>
+            <input
+              type="text"
+              class="modal-input-style"
+              disabled
+              :value="currentFilename"
+            />
+          </label>
+
+          <label>
+            <span class="modal-span-label"
+              >Загрузите новый файл для замены (если необходимо)</span
+            >
+            <input
+              type="file"
+              ref="file"
+              @change="handleFileUpload"
+              @blur="v$.formData.file.$touch"
+              class="modal-input-style"
+              :class="{ invalid: v$.formData.file.$error }"
+            />
+            <div v-if="v$.formData.file.$error" class="text-pink-700 text-xs">
+              <span
+                v-for="error in v$.formData.file.$errors"
+                :key="error.$uid"
+                class="block"
+                >{{ error.$message }}</span
+              >
+            </div>
+          </label>
+        </div>
+      </div>
+    </div>
+
+    <div>
+      <ActionButton @click="saveDoc" class="mr-5 mt-5">Сохранить</ActionButton>
+      <CancelButton @click="closeModal" class="mr-5 mt-5">Отмена</CancelButton>
+    </div>
   </ModalBox>
 </template>

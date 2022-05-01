@@ -20,7 +20,7 @@ export default {
   },
   computed: {
     docPath() {
-      return `http://localhost:3030/api/docs/${this.id}`;
+      return `http://localhost:3030/api/docs/${this.id}/download`;
     },
   },
   async mounted() {
@@ -33,7 +33,7 @@ export default {
       this.iframeActive = true;
       console.log(`Просмотр документа № ${this.id}`);
     } catch (err) {
-      this.$showError("docs/view-fail");
+      this.$showError("docs/download-fail");
     }
   },
   components: { ModalBox, CancelButton }, // TODO вынести ModalBox наружу. Как?
