@@ -1,36 +1,16 @@
 <script>
 import HintBox from "../../components/utils/HintBox.vue";
-import { useDocsFiltersOptionsStore } from "../../stores/docs-filters-options";
-
 //import DialogBoxButton from "@/components/utils/DialogBoxButton.vue";
 
 export default {
-  setup() {
-    return {
-      filtersOptionsStore: useDocsFiltersOptionsStore(),
-    };
-  },
   props: {
     item: Object,
   },
-  data() {
-    return {
-      //isDeleteDialogActive: false
-    };
-  },
-  computed: {
-    itemMeta() {
-      const res = this.filtersOptionsStore.typeFilter.find(
-        (item) => item.id === this.item.doctypeId
-      );
-
-      if (this.filtersOptionsStore.typeFilter.length === 0 || !res) {
-        return { hintText: "Иной", iconName: "DocumentIcon" };
-      }
-
-      return { hintText: res.hintText, iconName: res.iconName };
-    },
-  },
+  // data() {
+  //   return {
+  //     //isDeleteDialogActive: false
+  //   };
+  // },
   methods: {
     openDocument() {
       this.$router.push({
@@ -73,8 +53,8 @@ export default {
         <component :is="itemMeta.icon" class="h-5 w-5" />
       </HintBox> -->
       <component
-        v-hint="itemMeta.hintText"
-        :is="itemMeta.iconName"
+        v-hint="item.doctype.hintText"
+        :is="item.doctype.iconName"
         class="h-5 w-5"
       />
     </td>
@@ -89,8 +69,8 @@ export default {
     </td>
     <td class="px-3 py-2 whitespace-nowrap text-xs text-slate-600">
       <div class="flex flex-col items-start justify-center">
-        <span v-for="(pers, index) in item.person" :key="index">{{
-          pers
+        <span v-for="(item, index) in item.employees" :key="index">{{
+          item.fio
         }}</span>
       </div>
     </td>
