@@ -21,11 +21,11 @@ export default {
     return {
       formData: {
         id: null,
-        type: 1,
+        doctypeId: 1,
         num: "",
         date: this.$formatDateToIso(new Date()),
         title: "",
-        person: [],
+        employees: [],
         file: "",
       },
       currentFilename: "",
@@ -34,7 +34,7 @@ export default {
   validations() {
     return {
       formData: {
-        type: {
+        doctypeId: {
           required: helpers.withMessage(
             "Это поле не может быть пустым",
             required
@@ -66,7 +66,7 @@ export default {
             helpers.regex(/[а-яА-ЯёЁa-zA-Z0-9!@()"".,\-?:;]+$/)
           ),
         },
-        person: {},
+        employees: {},
         file: {},
       },
       $autoDirty: true,
@@ -130,7 +130,10 @@ export default {
       if (res.status !== 200) {
         throw new Error();
       }
-      this.formData = await res.json();
+      let json = await res.json();
+      json.employees = json.employees.map((el) => +el.id);
+      this.formData = json;
+      console.log(this.formData);
       this.currentFilename = this.formData.file;
       console.log(`Просмотр документа № ${this.id}`);
     } catch (err) {
@@ -152,10 +155,10 @@ export default {
         <label class="w-96 sm:w-full">
           <span class="modal-span-label">Тип</span>
           <select
-            v-model="formData.type"
-            @blur="v$.formData.type.$touch"
+            v-model="formData.doctypeId"
+            @blur="v$.formData.doctypeId.$touch"
             class="modal-input-style"
-            :class="{ invalid: v$.formData.type.$error }"
+            :class="{ invalid: v$.formData.doctypeId.$error }"
           >
             <option
               v-for="option in this.filtersOptionsStore.typeFilter"
@@ -165,9 +168,12 @@ export default {
               {{ option.text }}
             </option>
           </select>
-          <div v-if="v$.formData.type.$error" class="text-pink-700 text-xs">
+          <div
+            v-if="v$.formData.doctypeId.$error"
+            class="text-pink-700 text-xs"
+          >
             <span
-              v-for="error in v$.formData.type.$errors"
+              v-for="error in v$.formData.doctypeId.$errors"
               :key="error.$uid"
               class="block"
               >{{ error.$message }}</span
@@ -238,19 +244,25 @@ export default {
           <span class="modal-span-label">Ответственные (несколько)</span>
           <select
             multiple
-            v-model="formData.person"
-            @blur="v$.formData.person.$touch"
+            v-model="formData.employees"
+            @blur="v$.formData.employees.$touch"
             class="modal-input-style h-48"
-            :class="{ invalid: v$.formData.person.$error }"
+            :class="{ invalid: v$.formData.employees.$error }"
           >
-            <option>Иванов И.И.</option>
-            <option>Сидоров С.С.</option>
-            <option>Васильев В.В.</option>
-            <option>Александров А.А.</option>
+            <option
+              v-for="option in this.filtersOptionsStore.personFilter"
+              :key="option.id"
+              :value="option.id"
+            >
+              {{ option.fio }}
+            </option>
           </select>
-          <div v-if="v$.formData.person.$error" class="text-pink-700 text-xs">
+          <div
+            v-if="v$.formData.employees.$error"
+            class="text-pink-700 text-xs"
+          >
             <span
-              v-for="error in v$.formData.person.$errors"
+              v-for="error in v$.formData.employees.$errors"
               :key="error.$uid"
               class="block"
               >{{ error.$message }}</span
