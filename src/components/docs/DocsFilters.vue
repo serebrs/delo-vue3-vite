@@ -153,7 +153,7 @@ export default {
               :key="option.id"
               :value="option.id"
             >
-              {{ option.text }}
+              {{ option.fio }}
             </option>
           </select>
         </label>

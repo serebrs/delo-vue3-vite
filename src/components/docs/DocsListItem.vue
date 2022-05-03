@@ -21,14 +21,14 @@ export default {
   computed: {
     itemMeta() {
       const res = this.filtersOptionsStore.typeFilter.find(
-        (item) => item.id === this.item.type
+        (item) => item.id === this.item.doctypeId
       );
 
       if (this.filtersOptionsStore.typeFilter.length === 0 || !res) {
-        return { hintText: "Иной", icon: "DocumentIcon" };
+        return { hintText: "Иной", iconName: "DocumentIcon" };
       }
 
-      return { hintText: res.hintText, icon: res.icon };
+      return { hintText: res.hintText, iconName: res.iconName };
     },
   },
   methods: {
@@ -74,7 +74,7 @@ export default {
       </HintBox> -->
       <component
         v-hint="itemMeta.hintText"
-        :is="itemMeta.icon"
+        :is="itemMeta.iconName"
         class="h-5 w-5"
       />
     </td>

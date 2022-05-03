@@ -8,49 +8,26 @@ export const useDocsFiltersOptionsStore = defineStore({
   }),
   actions: {
     async fetchTypeFilter() {
-      await new Promise((res) => setTimeout(res, 100));
-      const res = [
-        { id: 1, text: "Входящий", hintText: "Входящий", icon: "InboxInIcon" },
-        {
-          id: 2,
-          text: "Исходящий",
-          hintText: "Исходящий",
-          icon: "ExternalLinkIcon",
-        },
-        {
-          id: 3,
-          text: "Норм. акт",
-          hintText: "Нормативный",
-          icon: "DocumentTextIcon",
-        },
-        {
-          id: 4,
-          text: "Договор",
-          hintText: "Договор",
-          icon: "DocumentDuplicateIcon",
-        },
-        {
-          id: 5,
-          text: "Конкурсная",
-          hintText: "Конкурсная",
-          icon: "DocumentDuplicateIcon",
-        },
-        { id: 6, text: "Иной", hintText: "Иной", icon: "DocumentIcon" },
-      ];
-      // this.typeFilter = [...res];
-      this.typeFilter = res;
+      // await new Promise((res) => setTimeout(res, 100));
+      try {
+        const res = await fetch("http://localhost:3030/api/doctypes");
+        this.typeFilter = await res.json();
+        console.log("Тип:" + JSON.stringify(this.typeFilter));
+      } catch (e) {
+        console.error("Ошибка при загрузке типов документов");
+        throw e;
+      }
     },
     async fetchPersonFilter() {
-      await new Promise((res) => setTimeout(res, 100));
-      const res = [
-        { id: 1, text: "Иванов И.И." },
-        { id: 2, text: "Сидоров С.С." },
-        { id: 3, text: "Александров А.А." },
-        { id: 4, text: "Васильев В.В." },
-        { id: 5, text: "Петров П.П." },
-      ];
-      // this.personFilter = [...res];
-      this.personFilter = res;
+      // await new Promise((res) => setTimeout(res, 100));
+      try {
+        const res = await fetch("http://localhost:3030/api/employees");
+        this.personFilter = await res.json();
+        console.log("Персонал:" + JSON.stringify(this.personFilter));
+      } catch (e) {
+        console.error("Ошибка при загрузке персонала");
+        throw e;
+      }
     },
   },
 });
