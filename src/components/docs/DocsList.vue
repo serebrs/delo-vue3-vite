@@ -22,10 +22,12 @@ export default {
       try {
         this.isBlurred = true;
         await new Promise((res) => setTimeout(res, 200));
-        const res = await fetch("http://localhost:3030/api/docs");
+        const res = await fetch(
+          `http://localhost:3030/api/docs?${new URLSearchParams(filters)}`
+        );
         this.documents = await res.json();
-        console.log("Data fetched with filters: " + JSON.stringify(filters));
-        console.log("Data fetched: " + JSON.stringify(this.documents));
+        // console.log("Data fetched with filters: " + JSON.stringify(filters));
+        // console.log("Data fetched: " + JSON.stringify(this.documents));
         this.dataReceived = true;
         this.isBlurred = false;
         this.isLoadingFirstTime = false;
