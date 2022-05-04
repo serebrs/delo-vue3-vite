@@ -22,11 +22,11 @@ export default {
   methods: {
     clearFilters() {
       this.currentFilters = {
-        type: "-1",
+        doctypeId: "-1",
         dateFrom: this.$formatDateToIso(new Date()),
         dateTo: this.$formatDateToIso(new Date()),
         title: "",
-        person: "-1",
+        employees: "-1",
       };
     },
     saveFilters: debounce(async function (filters) {
@@ -97,7 +97,7 @@ export default {
           <span class="text-gray-600 text-xs font-semibold mb-1">Тип</span>
           <select
             class="text-xs leading-5 mt-1 px-3 py-1 pr-7 block w-full rounded-md bg-white border border-gray-300 shadow-sm focus:border-sky-300 focus:ring focus:ring-sky-200 focus:ring-opacity-50"
-            v-model="currentFilters.type"
+            v-model="currentFilters.doctypeId"
           >
             <option value="-1">Все</option>
             <option
@@ -145,7 +145,7 @@ export default {
           >
           <select
             class="text-xs leading-5 w-full mt-1 px-3 py-1 pr-7 block"
-            v-model="currentFilters.person"
+            v-model="currentFilters.employees"
           >
             <option value="-1">Все</option>
             <option
