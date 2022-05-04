@@ -82,8 +82,10 @@ export default {
 
       const data = new FormData();
       for (const name in this.formData) {
-        if (name === "person")
-          this.formData.person.forEach((pers) => data.append("person[]", pers));
+        if (name === "employees")
+          this.formData.employees.forEach((employee) =>
+            data.append("employees[]", employee)
+          );
         else data.append(name, this.formData[name]);
       }
 
@@ -96,7 +98,6 @@ export default {
             timeout: 1000,
           }
         );
-
         console.log("Документ изменен: " + JSON.stringify(res.data));
       } catch (e) {
         this.$showError("docs/modify-fail");
