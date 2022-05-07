@@ -42,6 +42,10 @@ export default {
             "Это поле не может быть пустым",
             required
           ),
+          alphaNum: helpers.withMessage(
+            "Это поле дожно быть буквенно-цифровым",
+            helpers.regex(/[а-яА-ЯёЁa-zA-Z0-9№()/-]+$/)
+          ),
         },
         date: {
           required: helpers.withMessage(
@@ -60,7 +64,7 @@ export default {
           ),
           alphaNum: helpers.withMessage(
             "Это поле дожно быть буквенно-цифровым",
-            helpers.regex(/[а-яА-ЯёЁa-zA-Z0-9!@()"".,\-?:;]+$/)
+            helpers.regex(/[а-яА-ЯёЁa-zA-Z0-9№!?@()"'.,/:;-]+$/)
           ),
         },
         employees: {},
@@ -92,18 +96,15 @@ export default {
       }
 
       try {
-        // await new Promise((res) => setTimeout(res, 500));
         const res = await axios.post("http://localhost:3030/api/docs", data, {
           headers: { "Content-Type": "multipart/form-data" },
           timeout: 1000,
         });
-        console.log("Создан новый документ: " + JSON.stringify(res.data));
+        console.log(res.data.message);
       } catch (e) {
         this.$showError("docs/add-fail");
-        if (e.response?.data?.errors) {
-          e.response.data.errors.forEach((err) =>
-            console.error(err.param + ": " + err.msg)
-          );
+        if (e.response?.data?.message) {
+          console.error(e.response.data.message);
           return;
         } else throw e;
       }

@@ -45,6 +45,10 @@ export default {
             "Это поле не может быть пустым",
             required
           ),
+          alphaNum: helpers.withMessage(
+            "Это поле дожно быть буквенно-цифровым",
+            helpers.regex(/[а-яА-ЯёЁa-zA-Z0-9№()/-]+$/)
+          ),
         },
         date: {
           required: helpers.withMessage(
@@ -63,7 +67,7 @@ export default {
           ),
           alphaNum: helpers.withMessage(
             "Это поле дожно быть буквенно-цифровым",
-            helpers.regex(/[а-яА-ЯёЁa-zA-Z0-9!@()"".,\-?:;]+$/)
+            helpers.regex(/[а-яА-ЯёЁa-zA-Z0-9№!?@()"'.,/:;-]+$/)
           ),
         },
         employees: {},
