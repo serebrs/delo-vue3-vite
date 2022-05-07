@@ -102,13 +102,11 @@ export default {
             timeout: 1000,
           }
         );
-        console.log("Документ изменен: " + JSON.stringify(res.data));
+        console.log(res.data.message);
       } catch (e) {
         this.$showError("docs/modify-fail");
-        if (e.response?.data?.errors) {
-          e.response.data.errors.forEach((err) =>
-            console.error(err.param + ": " + err.msg)
-          );
+        if (e.response?.data?.message) {
+          console.error(e.response.data.message);
           return;
         } else throw e;
       }
