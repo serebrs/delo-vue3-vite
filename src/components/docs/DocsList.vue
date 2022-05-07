@@ -25,13 +25,16 @@ export default {
         const res = await fetch(
           `http://localhost:3030/api/docs?${new URLSearchParams(filters)}`
         );
-        this.documents = await res.json();
+        const json = await res.json();
+        this.documents = json.data;
+        if (res.status != 200) throw new Error(json.message);
         // console.log("Data fetched with filters: " + JSON.stringify(filters));
         // console.log("Data fetched: " + JSON.stringify(this.documents));
         this.dataReceived = true;
         this.isBlurred = false;
         this.isLoadingFirstTime = false;
-      } catch (error) {
+      } catch (e) {
+        console.error(e.message);
         this.$showError("docs/fetch-failed");
         this.dataReceived = false;
       }

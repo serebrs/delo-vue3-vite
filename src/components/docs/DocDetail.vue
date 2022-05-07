@@ -26,13 +26,14 @@ export default {
   async mounted() {
     try {
       const res = await fetch(this.docPath);
-      if (res.status !== 200) {
+      if (res.status != 200) {
         this.iframeActive = false;
-        throw new Error();
+        const json = await res.json();
+        throw new Error(json.message);
       }
       this.iframeActive = true;
-      console.log(`Просмотр документа № ${this.id}`);
-    } catch (err) {
+    } catch (e) {
+      console.error(e.message);
       this.$showError("docs/download-fail");
     }
   },

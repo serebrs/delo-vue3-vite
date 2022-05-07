@@ -130,16 +130,13 @@ export default {
   async mounted() {
     try {
       const res = await fetch(`http://localhost:3030/api/docs/${this.id}`);
-      if (res.status !== 200) {
-        throw new Error();
-      }
       let json = await res.json();
-      json.employees = json.employees.map((el) => +el.id);
-      this.formData = json;
-      console.log(this.formData);
+      if (res.status != 200) throw new Error(json.message);
+      json.data.employees = json.data.employees.map((el) => +el.id);
+      this.formData = json.data;
       this.currentFilename = this.formData.file;
-      console.log(`Просмотр документа № ${this.id}`);
-    } catch (err) {
+    } catch (e) {
+      console.error(e.message);
       this.$showError("docs/details-fail");
     }
   },
