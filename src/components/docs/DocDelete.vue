@@ -18,8 +18,8 @@ export default {
           method: "DELETE",
         });
         const json = await res.json();
-
-        console.log(`Удаление документа № ${this.id} | ${json.message}`);
+        if (res.status != 200) throw new Error(json.message);
+        console.log(json.message);
         this.$showMessage("docs/deleted");
         this.$router.push({
           name: "docs",
@@ -28,6 +28,7 @@ export default {
         });
         this.filtersCurrentStore.timestamp = Date.now();
       } catch (e) {
+        console.error(e.message);
         this.$showError("docs/delete-fail");
       }
     },
