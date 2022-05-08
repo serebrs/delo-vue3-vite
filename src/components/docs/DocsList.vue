@@ -26,8 +26,8 @@ export default {
           `http://localhost:3030/api/docs?${new URLSearchParams(filters)}`
         );
         const json = await res.json();
-        this.documents = json.data;
         if (res.status != 200) throw new Error(json.message);
+        this.documents = json.data;
         // console.log("Data fetched with filters: " + JSON.stringify(filters));
         // console.log("Data fetched: " + JSON.stringify(this.documents));
         this.dataReceived = true;
