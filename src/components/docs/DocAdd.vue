@@ -1,5 +1,6 @@
 <script>
 import useVuelidate from "@vuelidate/core";
+import moment from "moment";
 import { required, minLength, helpers } from "@vuelidate/validators";
 import axios from "axios";
 import { useDocsFiltersCurrentStore } from "../../stores/docs-filters-current";
@@ -44,7 +45,7 @@ export default {
           ),
           alphaNum: helpers.withMessage(
             "Это поле дожно быть буквенно-цифровым",
-            helpers.regex(/[а-яА-ЯёЁa-zA-Z0-9№()/-]+$/)
+            helpers.regex(/^[а-яА-ЯёЁa-zA-Z0-9 №()/-]+$/i)
           ),
         },
         date: {
@@ -52,6 +53,7 @@ export default {
             "Это поле не может быть пустым",
             required
           ),
+          isDate: (value) => moment(value, "YYYY-MM-DD", true).isValid(),
         },
         title: {
           required: helpers.withMessage(
@@ -64,7 +66,7 @@ export default {
           ),
           alphaNum: helpers.withMessage(
             "Это поле дожно быть буквенно-цифровым",
-            helpers.regex(/[а-яА-ЯёЁa-zA-Z0-9№!?@()"'.,/:;-]+$/)
+            helpers.regex(/^[а-яА-ЯёЁa-zA-Z0-9 №!?@()"'.,/:;-]+$/i)
           ),
         },
         employees: {},
@@ -103,10 +105,8 @@ export default {
         console.log(res.data.message);
       } catch (e) {
         this.$showError("docs/add-fail");
-        if (e.response?.data?.message) {
-          console.error(e.response.data.message);
-          return;
-        } else throw e;
+        console.error(e.response?.data?.message || e.message);
+        return;
       }
       this.$showMessage("docs/added");
       this.filtersCurrentStore.timestamp = Date.now();
