@@ -1,5 +1,8 @@
 <script>
 import debounce from "lodash/debounce";
+import moment from "moment";
+import useVuelidate from "@vuelidate/core";
+import { required, helpers } from "@vuelidate/validators";
 
 import { useDocsFiltersCurrentStore } from "../../stores/docs-filters-current";
 import { useDocsFiltersOptionsStore } from "../../stores/docs-filters-options";
@@ -9,6 +12,7 @@ import LoadingScreen from "../../components/utils/LoadingScreen.vue";
 export default {
   setup() {
     return {
+      v$: useVuelidate(),
       filtersCurrentStore: useDocsFiltersCurrentStore(),
       filtersOptionsStore: useDocsFiltersOptionsStore(),
     };
@@ -17,6 +21,22 @@ export default {
     return {
       currentFilters: {},
       isFiltersLoading: true,
+    };
+  },
+  validations() {
+    return {
+      currentFilters: {
+        dateFrom: {
+          required,
+          isDate: (value) => moment(value, "YYYY-MM-DD", true).isValid(),
+        },
+        dateTo: {
+          required,
+          isDate: (value) => moment(value, "YYYY-MM-DD", true).isValid(),
+        },
+        title: { alphaNum: helpers.regex(/^[а-яА-ЯёЁa-zA-Z0-9 №-]*$/i) },
+      },
+      $autoDirty: true,
     };
   },
   methods: {
@@ -30,6 +50,9 @@ export default {
       };
     },
     saveFilters: debounce(async function (filters) {
+      const isFormCorrect = await this.v$.$validate();
+      if (!isFormCorrect) return;
+
       try {
         await this.filtersCurrentStore.saveFilters(filters);
       } catch (e) {
@@ -98,6 +121,8 @@ export default {
           <select
             class="text-xs leading-5 mt-1 px-3 py-1 pr-7 block w-full rounded-md bg-white border border-gray-300 shadow-sm focus:border-sky-300 focus:ring focus:ring-sky-200 focus:ring-opacity-50"
             v-model="currentFilters.doctypeId"
+            @blur="v$.currentFilters.doctypeId.$touch"
+            :class="{ invalid: v$.currentFilters.doctypeId.$error }"
           >
             <option value="-1">Все</option>
             <option
@@ -116,6 +141,8 @@ export default {
             type="date"
             class="text-xs leading-5 mt-1 px-3 py-1 block w-full"
             v-model="currentFilters.dateFrom"
+            @blur="v$.currentFilters.dateFrom.$touch"
+            :class="{ invalid: v$.currentFilters.dateFrom.$error }"
           />
         </label>
 
@@ -125,6 +152,8 @@ export default {
             type="date"
             class="text-xs leading-5 mt-1 px-3 py-1 block w-full"
             v-model="currentFilters.dateTo"
+            @blur="v$.currentFilters.dateTo.$touch"
+            :class="{ invalid: v$.currentFilters.dateTo.$error }"
           />
         </label>
 
@@ -134,8 +163,10 @@ export default {
           >
           <input
             v-model.trim="currentFilters.title"
+            @blur="v$.currentFilters.title.$touch"
             type="text"
             class="text-xs leading-5 mt-1 px-3 py-1 block w-full"
+            :class="{ invalid: v$.currentFilters.title.$error }"
           />
         </label>
 
@@ -146,6 +177,8 @@ export default {
           <select
             class="text-xs leading-5 w-full mt-1 px-3 py-1 pr-7 block"
             v-model="currentFilters.employees"
+            @blur="v$.currentFilters.employees.$touch"
+            :class="{ invalid: v$.currentFilters.employees.$error }"
           >
             <option value="-1">Все</option>
             <option
