@@ -121,8 +121,6 @@ export default {
           <select
             class="text-xs leading-5 mt-1 px-3 py-1 pr-7 block w-full rounded-md bg-white border border-gray-300 shadow-sm focus:border-sky-300 focus:ring focus:ring-sky-200 focus:ring-opacity-50"
             v-model="currentFilters.doctypeId"
-            @blur="v$.currentFilters.doctypeId.$touch"
-            :class="{ invalid: v$.currentFilters.doctypeId.$error }"
           >
             <option value="-1">Все</option>
             <option
@@ -177,8 +175,6 @@ export default {
           <select
             class="text-xs leading-5 w-full mt-1 px-3 py-1 pr-7 block"
             v-model="currentFilters.employees"
-            @blur="v$.currentFilters.employees.$touch"
-            :class="{ invalid: v$.currentFilters.employees.$error }"
           >
             <option value="-1">Все</option>
             <option
