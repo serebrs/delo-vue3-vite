@@ -19,7 +19,6 @@ export default {
         });
         const json = await res.json();
         if (res.status != 200) throw new Error(json.message);
-        console.log(json.message);
         this.$showMessage("docs/deleted");
         this.$router.push({
           name: "docs",
